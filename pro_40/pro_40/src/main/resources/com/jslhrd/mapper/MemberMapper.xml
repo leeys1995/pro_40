@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jslhrd.mapper.MemberMapper">	
+	
+	<!-- 전체 게시물 카운트 -->
+	<select id="memCount" resultType="int">
+		select count(*) from usertbl	
+	</select>
+	
+	<!-- 검색조건에 맞는 게시물 카운트 -->
+	<select id="noticeSearchCount" resultType="int">
+		select count(*) from usertbl
+		<choose>
+			<when test="search=='name'">
+				name like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+		<choose>
+			<when test="search=='userid'">
+				userid like '%' || #{key} || '%'  
+			</when>			
+		</choose>		
+		<choose>
+			<when test="search=='c_code'">
+				c_code like '%' || #{key} || '%'  
+			</when>			
+		</choose>		
+	</select>
+
+	<!-- 게시물 전체 목록 검색 페이지처리-->
+	<select id="memList" resultType="com.jslhrd.domain.MemberVO">
+		<![CDATA[
+			select X.* from (select rownum as rnum, A.* from(select * from usertbl order by idx desc) A
+			where rownum <= #{endpage}) X where X.rnum >= #{startpage}	
+		]]>
+	</select>
+
+	<!-- 게시물 조건 맞는 전체검색 -->
+	<select id="memListSearch" resultType="com.jslhrd.domain.MemberVO">
+		select X.* from(select rownum as rnum, A.* from(
+		select * from usertbl order by idx desc) A where
+		
+		<choose>
+			<when test="search=='name'">
+				name like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+		<choose>
+			<when test="search=='userid'">
+				userid like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+		<choose>
+			<when test="search=='c_code'">
+				c_code like '%' || #{key} || '%'  
+			</when>			
+		</choose>		
+		<trim prefix="AND">
+			<![CDATA[
+				rownum <= #{endpage}) X where 
+			]]>		
+		</trim>
+			
+		<choose>
+			<when test="search=='subject'">
+				subject like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+		<choose>
+			<when test="search=='contents'">
+				contents like '%' || #{key} || '%'  
+			</when>			
+		</choose>	
+			<trim prefix="AND">
+			<![CDATA[
+				rnum >= #{startpage} 
+			]]>		
+		</trim>
+	</select>
+
+<!-- 특정회원 검색 검색(View)-->
+<select id="memSelect" resultType="com.jslhrd.domain.MemberVO">
+	select * from usertbl where idx=#{idx}
+</select>
+	
+<!-- 회원가입  -->
+	<insert id="memInsert">
+		insert into usertbl(idx,userid,name,tel,email,userpw,c_code) 
+		values(user_seq_idx.nextval,#{userid},#{name},#{tel},#{email},#{passwd},#{c_code})	
+	</insert>
+	
+<!-- id중복화인 -->	
+	<select id="memIdchk" resultType="com.jslhrd.domain.MemberVO">
+		select * from usertbl where userid=#{userid}
+	</select>
+
+<!-- 로그인 -->	
+	<select id="memLogin" resultType="com.jslhrd.domain.MemberVO">
+		select * from usertbl where userid=#{userid} and userpw=#{passwd}
+	</select>
+	
+<!-- 회원정보 수정 -->	
+	<update id="memModify">
+		update usertbl set name=#{name},tel=#{tel},email=#{email} where userid=#{userid} and userpw=#{passwd}
+	</update>
+	
+<!-- 회원정보 수정 -->	
+	<update id="admo">
+		update usertbl set name=#{name},tel=#{tel},email=#{email},rank=#{rank} where userid=#{userid} 
+	</update>
+
+<!-- 마지막 날자 업데이트 -->
+	<update id="lastTimeUpdate">
+		update usertbl set user_last=sysdate where userid=#{userid}
+	</update>	
+	
+<!-- 아이디 검색 -->
+	<select id="idsearch" resultType="com.jslhrd.domain.MemberVO">
+		select * from usertbl where name=#{name} and tel =#{tel}
+	</select>
+	
+<!-- PW 변경전 개인정보 검색 -->
+	<select id="pwchange" resultType="com.jslhrd.domain.MemberVO">
+		select * from usertbl where userid =#{userid} and name=#{name} and email=#{email}
+	</select>
+
+<!-- pw_code 업데이트 -->
+	<update id="pwcodeupdate">
+		update usertbl set pw_code=#{pw_code} where userid=#{userid}
+	</update>
+</mapper>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.jslhrd.mapper.CorpMapper">
+
+<!-- 전체 리스트 카운트 -->
+	<select id="corpCount" resultType="int">
+		select count(*) from corp
+	</select>
+
+	<!-- 검색 조건에 맞는 리스트 카운트 -->
+	<select id="corpSearchCount" resultType="int">
+		select count(*) from corp where
+		<choose>
+			<when test="search=='c_name'">
+				c_name like '%' || #{key} || '%'
+			</when>
+			<when test="search=='c_addr1'">
+				c_addr1 like '%' || #{key} || '%'
+			</when>
+			<when test="search=='p_mager'">
+				p_mager like '%' || #{key} || '%'
+			</when>
+		</choose>
+	</select>
+
+	<!-- 게시물 전체 목록 페이지 처리 -->
+	<select id="corpList" resultType="com.jslhrd.domain.CorpVO">
+		<![CDATA[			
+			select X.* from (select rownum as rnum, A.* from(select * from corp order by idx desc) A
+			where rownum <= #{endpage}) X where X.rnum >= #{startpage}	
+		]]>
+	</select>
+	
+	<!-- 게시물 조건 맞는 전체검색 -->
+	<select id="corpListSearch" resultType="com.jslhrd.domain.CorpVO">
+		select X.* from(select rownum as rnum, A.* from(
+		select * from corp order by idx desc) A where
+		<choose>
+			<when test="search=='c_name'">
+				c_name like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+		<choose>
+			<when test="search=='c_addr1'">
+				c_addr1 like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+		<choose>
+			<when test="search=='p_mager'">
+				p_mager like '%' || #{key} || '%'  
+			</when>			
+		</choose>		
+		<trim prefix="AND">
+			<![CDATA[
+				rownum <= #{endpage}) X where 
+			]]>		
+		</trim>
+		<choose>
+			<when test="search=='c_name'">
+				c_name like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+		<choose>
+			<when test="search=='c_addr1'">
+				c_addr1 like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+		<choose>
+			<when test="search=='p_mager'">
+				p_mager like '%' || #{key} || '%'  
+			</when>			
+		</choose>		
+			<trim prefix="AND">
+			<![CDATA[
+				rnum >= #{startpage} 
+			]]>		
+		</trim>
+	</select>
+	
+	<!-- 병원 게시판 글쓰기 -->
+	<insert id="corpWrite">
+		insert into
+		corp(idx,c_code,c_name,c_addr1,c_addr2,c_tel,p_intro,p_mager,c_video,c_banner,c_photo,c_history,c_come,p_photo)
+		values(corp_seq_idx.nextval,#{c_code},#{c_name},#{c_addr1},#{c_addr2},#{c_tel},#{p_intro},#{p_mager},#{c_video},
+		#{c_banner},#{c_photo},#{c_history},#{c_come},#{p_photo})
+	</insert>
+
+	<!-- View -->
+	<select id="corpView" resultType="com.jslhrd.domain.CorpVO">
+		select * from corp where idx=#{idx}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="corpHits">
+		update corp set c_readcnt = c_readcnt+1 where idx= #{idx}
+	</update>
+	
+	<!-- 수정 -->
+	<update id="corpModify">
+	    update corp set c_code = #{c_code},c_name=#{c_name},c_addr1=#{c_addr1},c_addr2=#{c_addr2},
+	    c_tel=#{c_tel},p_intro=#{p_intro},p_mager=#{p_mager},c_video=#{c_video},c_banner=#{c_banner},
+	    c_photo=#{c_photo},c_history=#{c_history},c_come=#{c_come},p_photo=#{p_photo} where idx=#{idx}		
+	</update>
+	
+	<!-- 삭제 -->
+	
+	<!-- 파일 불러오기 -->
+	
+	<!-- 공지사항 불러오기 -->
+	<select id="corpboardList" resultType="com.jslhrd.domain.CorpBoardVO">
+		select * from corp_bo where idx2 = #{idx}
+	</select>
+</mapper>

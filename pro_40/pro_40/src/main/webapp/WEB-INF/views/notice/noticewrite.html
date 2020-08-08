@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>장수하늘소</title>
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+	<link href="./css/common.css" rel="stylesheet">
+	<link href="./css/mystyle.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+  <script>
+    $(function(){
+    	
+      $('.slider').bxSlider({
+    	  mode: 'fade',
+    	  captions: true
+      });
+      
+      $(".sitemap").click(function() {
+			$(".sitewrap").slideDown();
+		})
+	  $("#close").click(function() {
+			$(".sitewrap").slideUp();
+		})
+		
+	  $(".nav > nav > .navi > li").hover(function() {
+		  $(this).children(".navi2").stop().slideDown();
+	  }, function() {
+		  $(this).children(".navi2").stop().slideUp();
+	  });
+		
+    });
+  </script>
+
+</head>
+<body>
+	<div class="header">
+		<header>
+			<div class="topnav">
+				<ul>
+					<li><a href="login.do">로그인</a></li>
+					<li><a href="member.do">회원가입</a></li>
+					<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+				</ul>
+			</div>
+			<div class="navigation">
+				<h1 class="logo"><a href="index.do">LOGO</a></h1>
+				<div class="nav">
+					<nav>
+						<ul class="navi">
+							<li><a href="about.do">내소개</a>
+								<ul class="navi2">
+									<li><a href="#">이력서</a></li>
+									<li><a href="#">자기소개서</a></li>
+									<li><a href="#">자격증</a></li>
+								</ul>
+							</li>
+							<li><a href="gallery.do">갤러리</a>
+								<ul class="navi2">
+									<li><a href="#">포토샵</a></li>
+									<li><a href="#">일러스트</a></li>
+									<li><a href="#">개인작품</a></li>
+									<li><a href="#">웹갤러리</a></li>
+								</ul>
+							</li>
+							<li><a href="portfolio.do">포트폴리오</a>
+								<ul class="navi2">
+									<li><a href="#">앱개발</a></li>
+									<li><a href="#">웹개발</a></li>
+									<li><a href="#">UI디자인</a></li>
+								</ul>
+							</li>
+							<li><a href="qa.do">질문답변</a>
+								<ul class="navi2">
+									<li><a href="#">JAVA</a></li>
+									<li><a href="#">DB</a></li>
+									<li><a href="#">JSP</a></li>
+									<li><a href="#">PHP</a></li>
+								</ul>
+							</li>
+							<li><a href="notice.do">공지사항</a></li>
+							<li><a href="shop.do">쇼핑몰</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</header>
+	</div>
+	
+	<div class="line"></div>
+	
+	<div class="sitewrap">
+		<span class="fa fa-close" id="close" style="cursor:pointer"></span>
+		<div class="inner">
+			<span class="map">내소개</span>
+			<span class="map">갤러리</span>
+			<span class="map">포트폴리오</span>
+			<span class="map">질문답변</span>
+			<span class="map">공지사항</span>
+			<span class="map">쇼핑몰</span>
+		</div>
+	</div>
+
+<div class="contain">
+	<div class="sub-topcontent">
+		<h2 class="sub-title">장수하늘소 공지사항</h2>
+	</div>
+	
+	<div class="write-form">
+	<form name="my" method="post" action="portfolioinsert.do" enctype="multipart/form-data" onsubmit="return formcheck();">
+		<table>
+			<caption class="readonly">공지사항 입력폼</caption>			
+			<colgroup>
+				<col class="w20">
+				<col class="w80">
+			</colgroup>
+			<tbody>
+
+					<tr>
+						<th>제목</th>
+						<td><input type="text" name="title"></td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td><textarea name="content"></textarea></td>
+					</tr>
+					<tr>
+						<th>작성자</th>
+						<td><input type="text" name="writer"></td>
+					</tr>
+					<tr>
+						<th>첨부</th>
+						<td><input type="file" name="appfile"></td>
+					</tr>
+					<tr>
+						<th>비밀번호</th>
+						<td><input type="password" name="pass"></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input type="submit" value="전송" class="btn-write">
+							<input type="button" value="목록"  class="btn-reset" onclick="javascript:location.href='portfolio.do'">
+						</td>
+					</tr>
+				
+			</tbody>
+		</table>
+	</form>
+	</div>
+		
+</div>
+
+<script>
+	function formcheck() {
+		if(my.title.value=="") {
+			alert("제목입력하세요");
+			my.title.focus();
+			return false;
+		}
+		if(my.content.value=="") {
+			alert("내용입력하세요");
+			my.contnet.focus();
+			return false;
+		}
+		return true;
+	}
+</script>
+
+<div class="footer">
+		<footer>
+			<p>&copy; JANGSU. All &nbsp;&nbsp;&nbsp;Rights Reserved.</p>
+		</footer>
+		<!-- &copy; &nbsp; &gt; > &lt;< -->
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>장수하늘소</title>
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
+	<link href="css/mystyle.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      $('.slider').bxSlider({
+    	  mode: 'fade',
+    	  captions: true
+      });
+    });
+  </script>
+  <script>
+  	$(function() {
+  		$(".sitemap").click(function() {
+  			$(".sitewrap").slideDown();
+  		})
+  		$("#close").click(function() {
+  			$(".sitewrap").slideUp();
+  		})
+  	});
+  </script>
+</head>
+<body>
+	<!-- skip navigation -->
+	<dl id="access">
+		<dt class="readonly">바로가기 및 건너띄기 링크</dt>
+		<dd class="readonly"><a href="#contentstart">본문바로가기</a></dd>
+		<dd class="readonly"><a href="#navigation">주메뉴바로가기</a></dd>
+	</dl>
+	
+	<div class="header">
+		<header>
+			<div class="topnav">
+				<ul>
+					<li><a href="login.do">로그인</a></li>
+					<li><a href="member.do">회원가입</a></li>
+					<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+				</ul>
+			</div>
+			<div class="navigation">
+				<h1 class="logo"><a href="index.do">LOGO</a></h1>
+				<div class="nav" id="navigation">
+					<nav>
+						<ul class="navi">
+							<li><a href="about.do">내소개</a></li>
+							<li><a href="gallery.do">갤러리</a></li>
+							<li><a href="portfolio.do">포트폴리오</a></li>
+							<li><a href="qa.do">질문답변</a></li>
+							<li><a href="notice.do">공지사항</a></li>
+							<li><a href="shop.do">쇼핑몰</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</header>
+	</div>
+	
+	<div class="line"></div>
+	
+	<div class="sitewrap">
+		<span class="fa fa-close" id="close" style="cursor:pointer"></span>
+		<div class="inner">
+			<span class="map">내소개</span>
+			<span class="map">갤러리</span>
+			<span class="map">포트폴리오</span>
+			<span class="map">질문답변</span>
+			<span class="map">공지사항</span>
+			<span class="map">쇼핑몰</span>
+		</div>
+	</div>
+
+	
+	<div class="slider">
+	    <div><img src="images/a1.png" alt="" title="아름다운"></div>
+	    <div><img src="images/a2.png" alt="" title="당신은"></div>
+	    <div><img src="images/a3.png" alt="" title="청춘입니다"></div>
+  	</div>
+	
+	<div class="indexgallery" id="contentstart">
+			<div class="indextitle">
+				<h2>장수하늘소<br>갤러리</h2>
+				<span><a href="gallery.do">MORE</a></span>
+			</div>
+			<ul>
+				<li><a href=""><img src="images/shop1.jpg" alt=""></a></li>
+				<li><a href=""><img src="images/shop2.jpg" alt=""></a></li>
+				<li><a href=""><img src="images/shop3.jpg" alt=""></a></li>
+			</ul>
+	</div>
+	
+	
+	<div class="bbs_wrap">
+		<div class="bbs_left">
+			<h2 class="title">공지시항</h2>
+			<ul>
+				<li><a href="#">화면구현은 어떻게 하는가</a></li>
+				<li><a href="#">홈페이지 혼자 만들어보기</a></li>
+				<li><a href="#">지구여행 얼마 남았는가</a> </li>
+				<li><a href="#">일본취업 나도 해보자</a></li>
+				<li><a href="#">하다보면 할수 있다</a></li>
+			</ul>
+			<a href="notice.do"><span class="fa fa-plus plus"></span></a>
+		</div>
+		<div class="bbs_right">
+			<h2 class="title">질문답변</h2>
+			<ul>
+				<li><a href="#">이클립스 다운로드</a></li>
+				<li><a href="#">JSP강좌 PDF</a></li>
+				<li><a href="#">JAVA 환경설정 파일 설명서</a> </li>
+				<li><a href="#">동영상 강좌 자료실</a></li>
+				<li><a href="#">스프링 강좌 자료 다운</a></li>
+			</ul>
+			<a href="qa.do"><span class="fa fa-plus plus"></span></a>
+		</div>
+	</div>
+	
+<div class="footer">
+		<footer>
+			<p>&copy; JANGSU. All &nbsp;&nbsp;&nbsp;Rights Reserved.</p>
+		</footer>
+		<!-- &copy; &nbsp; &gt; > &lt;< -->
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

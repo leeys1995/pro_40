@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jslhrd.mapper.NoticeMapper">
+
+	<!-- 전체 리스트 카운트 -->
+	<select id="noticeCount" resultType="int">
+		select count(*) from notice
+	</select>
+		<!-- 
+
+		<select id="hospboardCount" resultType="int">
+		select count(*) from hosp_bo where idx2=#{idx2} 
+		
+		<if test="search != null">
+    		AND ${search} like '%' || #{key} || '%'
+  		</if>
+	</select>
+	
+	 -->
+	<!-- 검색 조건에 맞는 리스트 카운트 -->
+	<select id="noticeSearchCount" resultType="int">
+		select count(*) from notice where
+		<choose>
+			<when test="search=='subject'">
+				subject like '%' || #{key} || '%'
+			</when>
+			<when test="search=='contents'">
+				contents like '%' || #{key} || '%'
+			</when>
+		</choose>
+	
+	</select>
+
+	<!-- 게시물 전체 목록 페이지 처리 -->
+	<select id="noticeList" resultType="com.jslhrd.domain.NoticeVO">
+		<![CDATA[			
+			select X.* from (select rownum as rnum, A.* from(select * from notice order by idx desc) A
+			where rownum <= #{endpage}) X where X.rnum >= #{startpage}	
+		]]>
+	</select>
+	
+	<!-- 게시물 조건 맞는 전체검색 -->
+	<select id="noticeListSearch" resultType="com.jslhrd.domain.NoticeVO">
+		select X.* from(select rownum as rnum, A.* from(
+		select * from notice order by idx desc) A where
+		<choose>
+			<when test="search=='subject'">
+				subject like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+		<choose>
+			<when test="search=='contents'">
+				contents like '%' || #{key} || '%' 
+			</when>			
+		</choose>		
+		<trim prefix="AND">
+			<![CDATA[
+				rownum <= #{endpage}) X where 
+			]]>		
+		</trim>
+		<choose>
+			<when test="search=='subject'">
+				subject like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+		<choose>
+			<when test="search=='contents'">
+				contents like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+			<trim prefix="AND">
+			<![CDATA[
+				rnum >= #{startpage} 
+			]]>		
+		</trim>
+	</select>
+	
+	<!-- 병원 게시판 글쓰기 -->
+	<insert id="noticeWrite">
+		insert into
+		notice(idx,subject,contents,filename,regdate)
+		values(notice_seq_idx.nextval,#{subject},#{contents},#{filename},sysdate)
+	</insert>
+
+	<!-- View -->
+	<select id="noticeView" resultType="com.jslhrd.domain.NoticeVO">
+		select * from notice where idx=#{idx}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="noticeHits">
+		update notice set readcnt = readcnt+1 where idx= #{idx}
+	</update>
+	
+	<!-- 수정 -->
+	<update id="noticeModify">
+		update notice set subject=#{subject}, contents=#{contents}, filename=#{filename}, regdate=sysdate
+		where idx=#{idx}	
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="noticedelete">
+		delete from notice where idx=#{idx}
+	</delete>
+	
+	<!-- 파일 불러오기 -->
+	<select id="noticeFile" resultType="string">
+		select filename from notice where idx=#{idx}
+	</select>
+</mapper>

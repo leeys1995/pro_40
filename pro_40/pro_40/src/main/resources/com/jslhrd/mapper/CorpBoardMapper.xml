@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.jslhrd.mapper.CorpBoardMapper">
+
+<!-- 전체 리스트 카운트 -->
+	<select id="corpboardCount" resultType="int">
+		select count(*) from corp_bo where idx2=#{idx}
+	</select>
+		<!-- 
+
+		<select id="hospboardCount" resultType="int">
+		select count(*) from hosp_bo where idx2=#{idx2} 
+		
+		<if test="search != null">
+    		AND ${search} like '%' || #{key} || '%'
+  		</if>
+	</select>
+	
+	 -->
+	<!-- 검색 조건에 맞는 리스트 카운트 -->
+	<select id="corpboardSearchCount" resultType="int">
+		select count(*) from corp_bo where idx2=#{idx2} and
+		<choose>
+			<when test="search=='subject'">
+				search like '%' || #{key} || '%'
+			</when>
+			<when test="search=='contents'">
+				contents like '%' || #{key} || '%'
+			</when>
+		</choose>
+	
+	</select>
+
+	<!-- 게시물 전체 목록 페이지 처리 -->
+	<select id="corpboardList" resultType="com.jslhrd.domain.CorpBoardVO">
+		<![CDATA[			
+			select X.* from (select rownum as rnum, A.* from(select * from corp_bo where idx2=#{idx2} order by idx desc) A
+			where rownum <= #{endpage}) X where X.rnum >= #{startpage}	
+		]]>
+	</select>
+	
+	<!-- 게시물 조건 맞는 전체검색 -->
+	<select id="corpboardListSearch" resultType="com.jslhrd.domain.CorpBoardVO">
+		select X.* from(select rownum as rnum, A.* from(
+		select * from corp_bo where idx2=#{idx2} order by idx desc) A where
+		<choose>
+			<when test="search=='subject'">
+				subject like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+		<choose>
+			<when test="search=='contents'">
+				contents like '%' || #{key} || '%' 
+			</when>			
+		</choose>		
+		<trim prefix="AND">
+			<![CDATA[
+				rownum <= #{endpage}) X where 
+			]]>		
+		</trim>
+		<choose>
+			<when test="search=='subject'">
+				subject like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+		<choose>
+			<when test="search=='contents'">
+				contents like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+			<trim prefix="AND">
+			<![CDATA[
+				rnum >= #{startpage} 
+			]]>		
+		</trim>
+	</select>
+	
+	<!-- 병원 게시판 글쓰기 -->
+	<insert id="corpboardWrite">
+		insert into
+		corp_bo(idx,subject,contents,filename,regdate,idx2)
+		values(corp_bo_seq_idx.nextval,#{subject},#{contents},#{filename},sysdate,#{idx2})
+	</insert>
+
+	<!-- View -->
+	<select id="corpboardView" resultType="com.jslhrd.domain.CorpBoardVO">
+		select * from corp_bo where idx=#{idx}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="corpboardHits">
+		update corp_bo set readcnt = readcnt+1 where idx= #{idx}
+	</update>
+	
+	<!-- 수정 -->
+	
+	<!-- 삭제 -->
+	
+	<!-- 파일 불러오기 -->
+	
+	<!-- 병원이름 가져오기 -->
+	<select id="corpName" resultType="String">
+		select c_name from corp where idx=#{idx}
+	</select>
+	
+	<!-- 병원 배너 가져오기 -->
+	<select id="corpBanner" resultType="String">
+		select c_banner from corp where idx=#{idx}
+	</select>
+
+</mapper>	

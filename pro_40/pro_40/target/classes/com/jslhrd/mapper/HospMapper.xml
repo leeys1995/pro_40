@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jslhrd.mapper.HospMapper">
+
+	<!-- 전체 리스트 카운트 -->
+	<select id="hospCount" resultType="int">
+		select count(*) from hosp
+	</select>
+
+	<!-- 검색 조건에 맞는 리스트 카운트 -->
+	<select id="hospSearchCount" resultType="int">
+		select count(*) from hosp where
+		<choose>
+			<when test="search=='h_name'">
+				h_name like '%' || #{key} || '%'
+			</when>
+			<when test="search=='h_addr1'">
+				h_addr1 like '%' || #{key} || '%'
+			</when>
+			<when test="search=='d_mager'">
+				d_mager like '%' || #{key} || '%'
+			</when>
+		</choose>
+	</select>
+
+	<!-- 게시물 전체 목록 페이지 처리 -->
+	<select id="hospList" resultType="com.jslhrd.domain.HospVO">
+		<![CDATA[			
+			select X.* from (select rownum as rnum, A.* from(select * from hosp order by idx desc) A
+			where rownum <= #{endpage}) X where X.rnum >= #{startpage}	
+		]]>
+	</select>
+	
+	<!-- 게시물 조건 맞는 전체검색 -->
+	<select id="hospListSearch" resultType="com.jslhrd.domain.HospVO">
+		select X.* from(select rownum as rnum, A.* from(
+		select * from hosp order by idx desc) A where
+		<choose>
+			<when test="search=='h_name'">
+				h_name like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+		<choose>
+			<when test="search=='h_addr1'">
+				h_addr1 like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+		<choose>
+			<when test="search=='d_mager'">
+				d_mager like '%' || #{key} || '%'  
+			</when>			
+		</choose>		
+		<trim prefix="AND">
+			<![CDATA[
+				rownum <= #{endpage}) X where 
+			]]>		
+		</trim>
+		<choose>
+			<when test="search=='h_name'">
+				h_name like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+		<choose>
+			<when test="search=='h_addr1'">
+				h_addr1 like '%' || #{key} || '%'  
+			</when>			
+		</choose>
+		<choose>
+			<when test="search=='d_mager'">
+				d_mager like '%' || #{key} || '%'  
+			</when>			
+		</choose>		
+			<trim prefix="AND">
+			<![CDATA[
+				rnum >= #{startpage} 
+			]]>		
+		</trim>
+	</select>
+	
+	<!-- 병원 게시판 글쓰기 -->
+	<insert id="hospWrite">
+		insert into
+		hosp(idx,h_code,h_name,h_addr1,h_addr2,h_tel,d_medical,d_mager,h_video,h_banner,h_photo,h_history,h_come,d_photo)
+		values(hosp_seq_idx.nextval,#{h_code},#{h_name},#{h_addr1},#{h_addr2},#{h_tel},#{d_medical},#{d_mager},#{h_video},#{h_banner},#{h_photo},#{h_history},#{h_come},#{d_photo})
+	</insert>
+
+	<!-- View -->
+	<select id="hospView" resultType="com.jslhrd.domain.HospVO">
+		select * from hosp where idx=#{idx}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="hospHits">
+		update hosp set h_readcnt = h_readcnt+1 where idx= #{idx}
+	</update>
+	
+	<!-- 수정 -->
+	<update id="hospModify">
+	    update hosp set h_code = #{h_code},h_name=#{h_name},h_addr1=#{h_addr1},h_addr2=#{h_addr2},
+	    h_tel=#{h_tel},d_medical=#{d_medical},d_mager=#{d_mager},h_video=#{h_video},h_banner=#{h_banner},
+	    h_photo=#{h_photo},h_history=#{h_history},h_come=#{h_come},d_photo=#{d_photo} where idx=#{idx}		
+	</update>
+	
+	<!-- 삭제 -->
+	
+	<!-- 파일 불러오기 -->
+	
+	<!-- 공지사항 불러오기 -->
+	<select id="hospboardList" resultType="com.jslhrd.domain.HospBoardVO">
+		select * from hosp_bo where idx2 = #{idx}
+	</select>
+		
+</mapper>
