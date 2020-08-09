@@ -8,7 +8,9 @@
 <%
 	int idx2 = Integer.parseInt(request.getParameter("idx2"));
 	int idx = Integer.parseInt(request.getParameter("idx"));
+	
 %>
+
 <div class="contain">
 	<div class="sub-topcontent">
 		<h2 class="sub-title">장수하늘소 갤러리</h2>
