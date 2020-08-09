@@ -78,7 +78,7 @@
 							<li><a href="about.do">기업소개</a></li>
 							<li><a href="about.do">제품소개</a></li>
 							<li><a href="/corparation_board/corparation_board?idx=${corp.idx }&page=1">공지</a></li>
-							<li><a href="/corparation/corparation">제품문의</a></li>							
+							<li><a href="/corparation_board/product?idx=${corp.idx }&page=1">제품문의</a></li>							
 							<li><a href="corparation_modify?idx=${corp.idx }">홈페이지 <br> 수정</a></li>
 
 						</ul>

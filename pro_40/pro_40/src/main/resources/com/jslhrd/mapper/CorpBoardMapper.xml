@@ -2,83 +2,79 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+
 <mapper namespace="com.jslhrd.mapper.CorpBoardMapper">
 
-<!-- 전체 리스트 카운트 -->
+	<!-- 전체 리스트 카운트 -->
 	<select id="corpboardCount" resultType="int">
-		select count(*) from corp_bo where idx2=#{idx}
+		select count(*) from
+		corp_bo where idx2=#{idx}
 	</select>
-		<!-- 
-
-		<select id="hospboardCount" resultType="int">
-		select count(*) from hosp_bo where idx2=#{idx2} 
-		
-		<if test="search != null">
-    		AND ${search} like '%' || #{key} || '%'
-  		</if>
-	</select>
-	
-	 -->
+	<!-- <select id="hospboardCount" resultType="int"> select count(*) from 
+		hosp_bo where idx2=#{idx2} <if test="search != null"> AND ${search} like 
+		'%' || #{key} || '%' </if> </select> -->
 	<!-- 검색 조건에 맞는 리스트 카운트 -->
 	<select id="corpboardSearchCount" resultType="int">
 		select count(*) from corp_bo where idx2=#{idx2} and
 		<choose>
 			<when test="search=='subject'">
-				search like '%' || #{key} || '%'
+				subject like '%' || #{key} || '%'
 			</when>
 			<when test="search=='contents'">
 				contents like '%' || #{key} || '%'
 			</when>
 		</choose>
-	
+
 	</select>
 
 	<!-- 게시물 전체 목록 페이지 처리 -->
-	<select id="corpboardList" resultType="com.jslhrd.domain.CorpBoardVO">
+	<select id="corpboardList"
+		resultType="com.jslhrd.domain.CorpBoardVO">
 		<![CDATA[			
 			select X.* from (select rownum as rnum, A.* from(select * from corp_bo where idx2=#{idx2} order by idx desc) A
 			where rownum <= #{endpage}) X where X.rnum >= #{startpage}	
 		]]>
 	</select>
-	
+
 	<!-- 게시물 조건 맞는 전체검색 -->
-	<select id="corpboardListSearch" resultType="com.jslhrd.domain.CorpBoardVO">
+	<select id="corpboardListSearch"
+		resultType="com.jslhrd.domain.CorpBoardVO">
 		select X.* from(select rownum as rnum, A.* from(
-		select * from corp_bo where idx2=#{idx2} order by idx desc) A where
+		select * from corp_bo
+		where idx2=#{idx2} order by idx desc) A where
 		<choose>
 			<when test="search=='subject'">
-				subject like '%' || #{key} || '%'  
-			</when>			
+				subject like '%' || #{key} || '%'
+			</when>
 		</choose>
 		<choose>
 			<when test="search=='contents'">
-				contents like '%' || #{key} || '%' 
-			</when>			
-		</choose>		
+				contents like '%' || #{key} || '%'
+			</when>
+		</choose>
 		<trim prefix="AND">
 			<![CDATA[
 				rownum <= #{endpage}) X where 
-			]]>		
+			]]>
 		</trim>
 		<choose>
 			<when test="search=='subject'">
-				subject like '%' || #{key} || '%'  
-			</when>			
+				subject like '%' || #{key} || '%'
+			</when>
 		</choose>
 		<choose>
 			<when test="search=='contents'">
-				contents like '%' || #{key} || '%'  
-			</when>			
+				contents like '%' || #{key} || '%'
+			</when>
 		</choose>
-			<trim prefix="AND">
+		<trim prefix="AND">
 			<![CDATA[
 				rnum >= #{startpage} 
-			]]>		
+			]]>
 		</trim>
 	</select>
-	
-	<!-- 병원 게시판 글쓰기 -->
+
+	<!-- 기업 게시판 글쓰기 -->
 	<insert id="corpboardWrite">
 		insert into
 		corp_bo(idx,subject,contents,filename,regdate,idx2)
@@ -86,29 +82,142 @@
 	</insert>
 
 	<!-- View -->
-	<select id="corpboardView" resultType="com.jslhrd.domain.CorpBoardVO">
+	<select id="corpboardView"
+		resultType="com.jslhrd.domain.CorpBoardVO">
 		select * from corp_bo where idx=#{idx}
 	</select>
-	
+
 	<!-- 조회수 증가 -->
 	<update id="corpboardHits">
-		update corp_bo set readcnt = readcnt+1 where idx= #{idx}
+		update corp_bo set readcnt = readcnt+1 where idx=
+		#{idx}
 	</update>
-	
+
 	<!-- 수정 -->
-	
+	<update id="corpboardModify">
+		update corp_bo set
+		subject=#{subject},contents=#{contents},filename=#{filename},regdate=sysdate
+		where idx=#{idx}
+	</update>
+
 	<!-- 삭제 -->
-	
+	<delete id="corpboardDelete">
+		delete from corp_bo where idx=#{idx}
+	</delete>
+
 	<!-- 파일 불러오기 -->
-	
-	<!-- 병원이름 가져오기 -->
-	<select id="corpName" resultType="String">
-		select c_name from corp where idx=#{idx}
+	<select id="corpboardFile" resultType="string">
+		select filename from
+		corp_bo where idx=#{idx}
 	</select>
 	
-	<!-- 병원 배너 가져오기 -->
-	<select id="corpBanner" resultType="String">
-		select c_banner from corp where idx=#{idx}
+	<!-- 기업이름 가져오기 -->
+	<select id="corpName" resultType="String">
+		select c_name from corp where
+		idx=#{idx}
 	</select>
 
+	<!-- 기업 배너 가져오기 -->
+	<select id="corpBanner" resultType="String">
+		select c_banner from corp
+		where idx=#{idx}
+	</select>
+
+	<!-- Product 관련 시작 -->
+	
+	<!-- 전체 리스트 카운트 -->
+	<select id="productCount" resultType="int">
+		select count(*) from
+		product where idx2=#{idx}
+	</select>
+	
+	<!-- 검색 조건에 맞는 리스트 카운트 -->
+	<select id="productSearchCount" resultType="int">
+		select count(*) from product where idx2=#{idx2} and
+		<choose>
+			<when test="search=='subject'">
+				subject like '%' || #{key} || '%'
+			</when>
+			<when test="search=='contents'">
+				contents like '%' || #{key} || '%'
+			</when>
+		</choose>
+
+	</select>
+
+	<!-- 게시물 전체 목록 페이지 처리 -->
+	<select id="productList"
+		resultType="com.jslhrd.domain.ProductVO">
+		<![CDATA[			
+			select X.* from (select rownum as rnum, A.* from(select * from product where idx2=#{idx2} order by idx desc) A
+			where rownum <= #{endpage}) X where X.rnum >= #{startpage}	
+		]]>
+	</select>
+
+	<!-- 게시물 조건 맞는 전체검색 -->
+	<select id="productListSearch"
+		resultType="com.jslhrd.domain.ProductVO">
+		select X.* from(select rownum as rnum, A.* from(
+		select * from product
+		where idx2=#{idx2} order by idx desc) A where
+		<choose>
+			<when test="search=='subject'">
+				subject like '%' || #{key} || '%'
+			</when>
+		</choose>
+		<choose>
+			<when test="search=='contents'">
+				contents like '%' || #{key} || '%'
+			</when>
+		</choose>
+		<trim prefix="AND">
+			<![CDATA[
+				rownum <= #{endpage}) X where 
+			]]>
+		</trim>
+		<choose>
+			<when test="search=='subject'">
+				subject like '%' || #{key} || '%'
+			</when>
+		</choose>
+		<choose>
+			<when test="search=='contents'">
+				contents like '%' || #{key} || '%'
+			</when>
+		</choose>
+		<trim prefix="AND">
+			<![CDATA[
+				rnum >= #{startpage} 
+			]]>
+		</trim>
+	</select>
+
+	<!-- 제품문의 게시판 글쓰기 -->
+	<insert id="productWrite">
+		insert into
+		product(idx,p_subject,p_contents,p_name,p_pass,regdate,idx2)
+		values(product_seq_idx.nextval,#{p_subject},#{p_contents},#{p_name},#{p_pass},sysdate,#{idx2})
+	</insert>
+
+	<!-- view 전 패스워드  -->
+	<select id="productPass" resultType="String">
+		select p_pass from product where idx=#{idx} and idx2=#{idx2}
+	</select>
+	
+	<!-- View -->
+	<select id="productView"
+		resultType="com.jslhrd.domain.ProductVO">
+		select * from product where idx=#{idx}
+	</select>
+
+
+	<!-- 삭제 -->
+	<delete id="productDelete">
+		delete from product where idx=#{idx}
+	</delete>
+	
+	<!-- reply 답글달기 -->
+	
+	
+	
 </mapper>	

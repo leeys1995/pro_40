@@ -23,10 +23,10 @@
 		<div class="nav">
 			<nav>
 				<ul class="navi">
-					<li><a href="about.do">병원소개</a></li>
-					<li><a href="about.do">진료안내</a></li>
+					<li><a href="about.do">기업소개</a></li>
+					<li><a href="about.do">제품소개</a></li>
 					<li><a href="corparation_board?idx=${idx }&page=1">공지</a></li>
-					<li><a href="/corparation/corparation">예약</a></li>
+					<li><a href="/corparation_board/product?idx=${corp.idx }&page=1">제품문의</a></li>		
 
 
 				</ul>
