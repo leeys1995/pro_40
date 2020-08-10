@@ -41,6 +41,8 @@
 	
 	<context:component-scan base-package="com.jslhrd.controller" />
 	
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+	<beans:bean id="naverLoginBO" class="com.jslhrd.controller.NaverLoginBO" />
 	
 	
 </beans:beans>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jslhrd.mapper.AboutMapper">
+
+	<update id="aboutInsert">
+		update about set main_about=#{main_about}
+	</update>
+	
+	<select id="aboutSearch" resultType="String">
+		select main_about from about
+	</select>
+	
+</mapper>
