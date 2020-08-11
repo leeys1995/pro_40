@@ -526,6 +526,9 @@ public class CorpBoardController {
 			model.addAttribute("c_banner", c_banner);
 			vo.setP_contents(SqlMark.lineBreak(vo.getP_contents()));
 
+			String c_name = service.corpName(idx2);
+			
+			model.addAttribute("c_name", c_name);
 			model.addAttribute("idx2", idx2);
 			model.addAttribute("idx", idx);
 			model.addAttribute("product", vo);
@@ -554,5 +557,16 @@ public class CorpBoardController {
 		
 		//답글달기
 		
+		@PostMapping("reply")
+		public String productReply(@RequestParam("idx") int idx, @RequestParam("idx2") int idx2,ProductVO vo) {
+			
+			log.info("reply");
+	
+			service.productReply(vo);
+			
+			return "redirect:/corparation_board/product_view?idx="+idx+"&idx2="+idx2;
+			
+			
+		}
 	
 }

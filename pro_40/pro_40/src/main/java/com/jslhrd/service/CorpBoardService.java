@@ -75,4 +75,7 @@ public interface CorpBoardService {
 	// 패스워드 찾기
 	public String productPass(ProductVO vo);
 
+	// 답글달기
+	public void productReply(ProductVO vo);
+
 }
