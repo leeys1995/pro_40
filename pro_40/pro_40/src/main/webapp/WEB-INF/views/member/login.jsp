@@ -68,8 +68,11 @@
 			<fieldset>
 				<legend class="readonly">로그인그룹</legend>
 				<div style="width:70%; float:left;">
+				<br>
 					<label for="userid" class="readonly">아이디</label>
 					<input type="text" name="userid" id="userid" placeholder="아이디">
+				<br>
+				<br>
 					<label for="pw" class="readonly">패스워드</label>
 					<input type="password" name="passwd" id="passwd" placeholder="패스워드">
 				</div>
@@ -104,7 +107,6 @@
 <br>
     <div><span id="kakaoIdentity"></span></div>
     <div><span id="kakaoNickName"></span></div>
-    <div><img id="kakaoProfileImg" src=""/></div>
     <!-- <div><img id="kakaoThumbnailImg" src=""/></div> -->
 
 <a href="javascript:logout()">logout</a>

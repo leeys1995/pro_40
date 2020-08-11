@@ -16,6 +16,8 @@
 				<div style="width:70%; float:left;">
 					<label for="name" class="readonly">PW</label>
 					<input type="text" name="passwd" id="passwd" placeholder="비밀번호"> 
+					<br>
+					<br>
 					<input type="text" name="passwdchk" id="passwdchk" placeholder="비밀번호 확인"> 
 					<label for="tel" class="readonly">인증번호</label>
 					<br>
@@ -27,7 +29,13 @@
 					style="background: #FF4000; color:#fff;
 					width:100%; height:100%; border:0 none; cursor:pointer;">
 				</div>
-
+				
+				<div style="width:28%; float:right;padding:15px;
+				height:70px; margin-top:-5px;">
+				<a href="/member/login"><input type="button" value="뒤로가기" alt="뒤로가기" 
+				style="background: #FF4000; color:#fff;
+				width:100%; height:100%; border:0 none; cursor:pointer;"></a>
+				</div>
 			</fieldset>
 		</form>	
 	</div>
