@@ -1,34 +1,15 @@
 package com.jslhrd.controller;
 
-import java.io.IOException;
 
-import java.util.Properties;
-import java.util.Random;
 
-import javax.servlet.http.HttpSession;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import javax.inject.Inject;
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -41,7 +22,6 @@ import com.jslhrd.util.PageIndex;
 import com.jslhrd.util.SHA256Util;
 
 import lombok.AllArgsConstructor;
-import com.github.scribejava.core.model.OAuth2AccessToken;
 
 @AllArgsConstructor
 @Controller
@@ -51,6 +31,19 @@ public class MemberController {
 	private static final Logger log = LoggerFactory.getLogger(MemberController.class);
 	
 	private MemberService service;
+	
+	//kakao login
+	@PostMapping("kakao_login")
+	public String kakao_login(MemberVO vo,HttpServletRequest request) {
+		log.info("kakao login....");
+		log.info("name===>" + vo);
+		
+		request.getSession().setAttribute("user", vo);
+		request.getSession().setMaxInactiveInterval(1800);
+		
+		return "redirect:/";
+	}
+	
 	
 	//회원가입 페이지
 	@GetMapping("/insert")
@@ -124,10 +117,14 @@ public class MemberController {
 		log.info("getmemlogin()*****");
 	}
 	
+	
 	@PostMapping("/login")
 	public String memlogin(Model model, HttpServletRequest request,MemberVO vo,RedirectAttributes rttr)
 	{
 		log.info("postmemlogin()*****");
+		
+		
+		
 		MemberVO vo1= service.memIdchk(vo);//BD값
 		log.info("vo1:"+vo1);
 		log.info(vo.getPasswd());

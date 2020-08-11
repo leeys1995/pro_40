@@ -72,7 +72,7 @@
 				<div class="nav">
 					<nav>
 						<ul class="navi">
-							<li><a href="about.do">사이트소개</a></li>
+							<li><a href="/about/about">사이트소개</a></li>
 							<li><a href="/notice/notice?page=1">공지사항</a></li>
 							<li><a href="/hospital/hospital?page=1">병원</a></li>
 							<li><a href="/corparation/corparation?page=1">기업</a></li>

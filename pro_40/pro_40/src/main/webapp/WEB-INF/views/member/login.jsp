@@ -19,20 +19,25 @@
               container : "#kakao-login-btn"
             , success : function( authObj ) {
                 // console.log( authObj );
-          alert(JSON.stringify(authObj))
+          //alert(JSON.stringify(authObj)) <---토큰값
                 Kakao.API.request({
                      url: '/v2/user/me'
                     , success : function( res ) {
+						$(document).ready(function() {
+							$('#userid').val(res.id);
+							$('#name').val(res.properties.nickname);
+							kakao.method="post";
+							kakao.action="kakao_login";
+							kakao.submit();
+						});
+						
                         // console.log( res );
                         // @breif 아이디
-                        document.getElementById( "kakaoIdentity" ).innerHTML = res.id;
-                        alert(res.id)
+                        //document.getElementById( "kakaoIdentity" ).innerHTML = res.id;
+                        //alert(res.id) <--유저 id
                         // @breif 닉네임
-                        document.getElementById( "kakaoNickName" ).innerHTML = res.properties.nickname;
-                        // @breif 프로필 이미지
-                        document.getElementById( "kakaoProfileImg" ).src = res.properties.profile_image;
-                        // @breif 썸네일 이미지
-                        //document.getElementById( "kakaoThumbnailImg" ).src = res.properties.thumbnail_image;
+                        //document.getElementById( "kakaoNickName" ).innerHTML = res.properties.nickname;
+                        
                     }, fail : function( error ) {
                         alert( JSON.stringify( error ) );
                     }
@@ -62,8 +67,13 @@
 	<div class="sub-topcontent">
 		<h2 class="sub-title">장수하늘소 로그인</h2>
 	</div>
-	
 	<div class="write-form" style="width:50%; margin:0 auto; border:1px solid #ccc; padding:20px;">
+	
+		<form name="kakao">
+			<input id="userid" name="userid" type="hidden" />
+			<input id="name"  name="name" type="hidden" />
+		</form>
+	
 		<form name="my" method="post" action="login" onsubmit="return formcheck();">
 			<fieldset>
 				<legend class="readonly">로그인그룹</legend>
@@ -80,20 +90,21 @@
 					width:100%; height:100%; border:0 none; cursor:pointer;">
 				</div>
 				<p style="clear:both;padding-top:20px; text-align:center;"><a href="/member/idsearch">아이디찾기</a> | <a href="/member/pwchange">패스워드찾기</a> | <a href="/member/insert">회원가입</a></p>
-			</fieldset>
+				
+				    <div><span id="kakaoIdentity"></span></div>
+				    <div><span id="kakaoNickName"></span></div>
+				    <!-- <div><img id="kakaoThumbnailImg" src=""/></div> -->
+							</fieldset>
 		</form>	
 	</div>
 		
 </div>
-<!-- naver -->
-
-<!-- Main Login End -->
 
 <!-- NAVER login -->
 <div id="naver_id_login" style="text-align:center; "><a href="/member/login_api">
 <img src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" style="width: 300px; height: auto;"/></a>
 </div>
-
+<br>
 <!-- KAKAO login -->
 <div style="width: 300px; height: auto; margin: auto;">
 <a id="kakao-login-btn"></a>
@@ -101,11 +112,6 @@
 
 <!-- KAKAO user -->
 
-<br>
-    <div><span id="kakaoIdentity"></span></div>
-    <div><span id="kakaoNickName"></span></div>
-    <div><img id="kakaoProfileImg" src=""/></div>
-    <!-- <div><img id="kakaoThumbnailImg" src=""/></div> -->
 
 <a href="javascript:logout()">logout</a>
 
@@ -156,18 +162,6 @@ function logout() {
 </script>
 
 <%@ include file="../footer.jsp"%>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

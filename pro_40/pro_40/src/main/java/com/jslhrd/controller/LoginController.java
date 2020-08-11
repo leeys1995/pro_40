@@ -2,6 +2,7 @@ package com.jslhrd.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -15,14 +16,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
-
-import lombok.AllArgsConstructor;
+import com.jslhrd.domain.MemberVO;
+import com.jslhrd.service.MemberService;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class LoginController {
+	private MemberService service;
 	
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
@@ -32,7 +34,8 @@ public class LoginController {
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
 	}
-
+	
+	//2020/08/11 수정 -------------------------------->	/member/login >> /member/login_api
 	@RequestMapping(value = "/member/login_api", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model, HttpSession session) {
 
@@ -42,9 +45,10 @@ public class LoginController {
 		model.addAttribute("url", naverAuthUrl);
 		return "redirect:"+naverLoginBO.getAuthorizationUrl(session);
 	}
-
+	
+	//2020/08/11 수정 -------------------------------->
 	@RequestMapping(value = "/member/callback", method = { RequestMethod.GET, RequestMethod.POST })
-	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
+	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session,HttpServletRequest request)
 			throws IOException {
 		System.out.println("naver callback");
 		OAuth2AccessToken oauthToken;
@@ -63,26 +67,37 @@ public class LoginController {
 			e.printStackTrace();
 		}
 		JSONObject jsonObj = (JSONObject) obj;
+		//2020/08/11 수정 <--------------------------------
 		//3. 데이터 파싱
 		JSONObject response_obj = (JSONObject)jsonObj.get("response");
+		
 		//response의 nickname값 파싱
-		String name = (String)response_obj.get("name");
-		//값 DB에 저장
-		
-		//
-		
-		System.out.println(name);
 		System.out.println("파싱 후 출력===>" + response_obj);
-		//4.파싱 닉네임 세션으로 저장
 		
+		//4.파싱 닉네임 세션으로 저장
+		MemberVO user = new MemberVO();
+		user.setName((String)response_obj.get("name"));
+		user.setUserid((String)response_obj.get("id"));
+		
+		request.getSession().setAttribute("user", user);
+		request.getSession().setMaxInactiveInterval(1800);
 		//session.setAttribute("sessionId",nickname); //세션 생성
 		//model.addAttribute("result", apiResult);
 		
-		return "member/naverSuccess";
+		return "redirect:/";
+		//2020/08/11 수정 -------------------------------->
 	}
-
-	@RequestMapping(value = "member/logout", method = { RequestMethod.GET, RequestMethod.POST })
+	//2020/08/11 수정 ----------->member/logout >> member/logout_api
+	@RequestMapping(value = "member/logout_api", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpSession session) throws IOException {
+		System.out.println("kakao logout");
+		session.invalidate();
+		return "member/login";
+	}
+	
+	//2020/08/11 수정 -------------------------------새로 추가됨
+	@RequestMapping(value = "member/kakao", method = { RequestMethod.GET, RequestMethod.POST })
+	public String kakao_logout(HttpSession session) throws IOException {
 		System.out.println("kakao logout");
 		session.invalidate();
 		return "member/login";

@@ -16,60 +16,63 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 	<!-- include Summernote-ko-KR -->
 <title>글쓰기</title>
-<script>
-$(document).ready(function() {
-	  $('#summernote').summernote({
- 	    	placeholder: '병원 소개를 입력해 주세요',
-	        minHeight: 370,
-	        maxHeight: null,
-	        focus: true, 
-	        lang : 'ko-KR',
-	        callback:{
-	        	onImageUpload : function(files){
-	        		uploadSummernoteImageFile(Files[0],this);
-	        	}
-	        }
-	  });
-});
-
-function uploadSummernoteImageFile(file, editor) {
-	data = new FormData();
-	data.append("file", file);
-	$.ajax({
-		data : data,
-		type : "POST",
-		url : "/uploadSummernoteImageFile",
-		contentType : false,
-		processData : false,
-		success : function(data) {
-        	//항상 업로드된 파일의 url이 있어야 한다.
-			$(editor).summernote('insertImage', data.url);
-		}
-	});
-}
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('#summernote').summernote({
+        height: 300,
+        minHeight: null,
+        maxHeight: null,
+        focus: true,
+        callbacks: {
+          onImageUpload: function(files, editor, welEditable) {
+            for (var i = files.length - 1; i >= 0; i--) {
+              sendFile(files[i], this);
+            }
+          }
+        }
+      });
+    });
+    
+    function sendFile(file, el) {
+      var form_data = new FormData();
+      form_data.append('file', file);
+      $.ajax({
+        data: form_data,
+        type: "POST",
+        url: '/image',
+        cache: false,
+        contentType: false,
+        enctype: 'multipart/form-data',
+        processData: false,
+        success: function(url) {
+          $(el).summernote('editor.insertImage', url);
+          $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+        }
+      });
+    }
 </script>
+
 </head>
 <!-- 출력  -->
 <body>
 <h2 style="text-align: center;">병원 소개</h2><br><br>
-
 <div style="width: 60%; margin: auto;">
-	<form method="post">
-		<textarea id="summernote" name="h_about"></textarea>
+	<form name="about" method="post">
+		<textarea id="summernote" name="main_about"></textarea>
 		<br>
 		<input id="subBtn" type="button" value="글 작성" style="float: right; height: 60px; width: 100px;" onclick="goWrite(this.form)"/>
 	</form>
 </div>
-
+</form>
 </body>
 </html>
 
 <!-- Insert -->
 <script>
 function goWrite(frm) {
-	var h_about = frm.h_about.value;
+	var main_about = frm.main_about.value;
 	
-	if (h_about.trim() == ''){
+	if (main_about.trim() == ''){
 		alert("내용을 입력해주세요");
 		return false;
 	}
