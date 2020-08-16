@@ -81,7 +81,7 @@ public class LoginController {
 		return "member/naverSuccess";
 	}
 
-	@RequestMapping(value = "member/logout", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "member/logout_api", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpSession session) throws IOException {
 		System.out.println("kakao logout");
 		session.invalidate();

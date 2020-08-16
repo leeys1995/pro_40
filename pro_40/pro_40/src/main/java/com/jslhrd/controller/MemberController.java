@@ -69,9 +69,9 @@ public class MemberController {
 		vo.setTel(tel);
 		String c_code=vo.getC_code1()+"-"+vo.getC_code2()+"-"+vo.getC_code3();
 		vo.setC_code(c_code);
-		String salt = SHA256Util.generateSalt();
-		String newPassword = SHA256Util.getEncrypt(vo.getPasswd(), salt);
-		vo.setPasswd(newPassword);
+//		String salt = SHA256Util.generateSalt();
+//		String newPassword = SHA256Util.getEncrypt(vo.getPasswd(), salt);
+//		vo.setPasswd(newPassword);
 		int row = service.memInsert(vo);
 		model.addAttribute("row", row);
 		log.info("postmeminsert()*****");
@@ -131,10 +131,10 @@ public class MemberController {
 		MemberVO vo1= service.memIdchk(vo);//BD값
 		log.info("vo1:"+vo1);
 		log.info(vo.getPasswd());
-		String salt = SHA256Util.generateSalt();
-		String newPassword = SHA256Util.getEncrypt(vo.getPasswd(), salt);
-		vo.setPasswd(newPassword);
-		log.info(newPassword);//여기부터 수정 DB값이랑 안맞음
+//		String salt = SHA256Util.generateSalt();
+//		String newPassword = SHA256Util.getEncrypt(vo.getPasswd(), salt);
+//		vo.setPasswd(newPassword);
+//		log.info(newPassword);//여기부터 수정 DB값이랑 안맞음
 		int row=0;
 		if(vo1==null)
 		{
