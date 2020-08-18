@@ -136,7 +136,6 @@
 		<artifactId>json-simple</artifactId>
 		<version>1.1.1</version>
 		</dependency>
-		
 		<!-- 추가 끝 -->
 				
 		<!-- AspectJ -->
