@@ -261,6 +261,8 @@ public class HospController {
 		HospVO vo = service.hospView(idx);
 		model.addAttribute("hosp", vo);
 		model.addAttribute("idx", idx);
+		
+		
 		log.info("hosp_modify().......");
 	}
 

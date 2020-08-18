@@ -21,7 +21,7 @@
 	<div class="navigation">
 		<h1 class="logo">
 			<a href="../hospital/hospital_view?idx=<%=idx%>"><img height="100px"
-				src="/resources/upload/hosp/banner/${h_banner }" alt="모집사진"></a>
+				src="/resources/upload/hosp/banner/${hosp.h_banner }" alt="모집사진"></a>
 		</h1>
 		<div class="nav">
 			<nav>

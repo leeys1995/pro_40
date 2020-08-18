@@ -10,8 +10,8 @@
 <header>
 	<div class="topnav">
 		<ul>
-			<li><a href="login.do">로그인</a></li>
-			<li><a href="member.do">회원가입</a></li>
+			<li><a href="../member/login">로그인</a></li>
+			<li><a href="../member/insert">회원가입</a></li>
 			<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
 		</ul>
 	</div>
