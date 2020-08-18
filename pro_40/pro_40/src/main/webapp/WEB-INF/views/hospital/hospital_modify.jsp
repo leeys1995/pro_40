@@ -26,12 +26,12 @@
 		<div class="nav">
 			<nav>
 				<ul class="navi">
-					<li><a href="about.do">병원소개</a></li>
-					<li><a href="about.do">진료안내</a></li>
-					<li><a href="../hospital_board/hospital_board?idx=<%=idx%>&page=1">공지</a></li>
-					<li><a href="../hospital/hospital_reservation?idx=<%=idx%>">예약</a></li>
-					<li><a href="../hospital/hospital_modify?idx=<%=idx%>">홈페이지 <br> 수정</a></li>
-					<li><a href="../hospital/reservation?idx=<%=idx%>">예약관리</a></li>
+					<li><a href="hospital_about?idx=<%=idx%>">병원소개</a></li>
+							<li><a href="hospital_guidance?idx=<%=idx%>">진료안내</a></li>
+							<li><a href="/hospital_board/hospital_board?idx=<%=idx%>&page=1">공지</a></li>
+							<li><a href="hospital_reservation?idx=<%=idx%>">예약</a></li>							
+							<li><a href="hospital_modify?idx=<%=idx%>">홈페이지 <br> 수정</a></li>
+							<li><a href="reservation?idx=<%=idx%>">예약관리</a></li>
 
 				</ul>
 			</nav>

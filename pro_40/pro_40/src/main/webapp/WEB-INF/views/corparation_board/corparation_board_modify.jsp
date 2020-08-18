@@ -23,12 +23,16 @@
 		<div class="nav">
 			<nav>
 				<ul class="navi">
-					<li><a href="about.do">기업소개</a></li>
-					<li><a href="about.do">제품소개</a></li>
+					<li><a href="../corparation/corparation_about?idx=${corp.idx }">기업소개</a></li>
+					<li><a href="../corparation/corparation_guidance?idx=${corp.idx }">제품소개</a></li>
 					<li><a href="corparation_board?idx=${idx2 }&page=1">공지</a></li>
 					<li><a href="/corparation_board/product?idx=${corp.idx }&page=1">제품문의</a></li>		
-
-
+					<li><a href="../corparation/corparation_modify?idx=${corp.idx }">홈페이지 <br> 수정</a></li>
+					
+					
+										
+							
+					
 				</ul>
 			</nav>
 		</div>

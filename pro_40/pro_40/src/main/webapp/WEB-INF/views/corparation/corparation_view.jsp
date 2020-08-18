@@ -75,8 +75,8 @@
 				<div class="nav">
 					<nav>
 						<ul class="navi">
-							<li><a href="about.do">기업소개</a></li>
-							<li><a href="about.do">제품소개</a></li>
+							<li><a href="corparation_about?idx=${corp.idx }">기업소개</a></li>
+							<li><a href="corparation_guidance?idx=${corp.idx }">제품소개</a></li>
 							<li><a href="/corparation_board/corparation_board?idx=${corp.idx }&page=1">공지</a></li>
 							<li><a href="/corparation_board/product?idx=${corp.idx }&page=1">제품문의</a></li>							
 							<li><a href="corparation_modify?idx=${corp.idx }">홈페이지 <br> 수정</a></li>
@@ -157,16 +157,9 @@
 		<div>
 			<img height="1000px"
 				src="/resources/upload/corp/corparation_photo/${corp.c_photo }" alt=""
-				title="배움의 즐거움이 있는곳">
+				title="기업 메인 사진">
 		</div>
-		<div>
-			<img height="1000px" src="/images/a2.jpg" alt="" title="나에게 주는 만큼">
-		</div>
-		<div>
-			<img height="1000px" src="/images/a3.jpg" alt=""
-				title="나에게도 많은 축복이 있습니다">
-		</div>
-
+	
 	</div>
 
 	<div class="aaa_wrap">

@@ -124,7 +124,7 @@
 	<!-- 예약시스템 시작 -->
 	<select id="reservationList"
 		resultType="com.jslhrd.domain.ReservationVO">
-		select * from hosp_reservation where idx = #{idx} and day=#{day} 
+		select * from hosp_reservation where idx = #{idx} and day=#{day}  and reservation_ok = 0
 	</select>
 
 
@@ -144,7 +144,7 @@
 	<update id="reservationProInsert">
 		update hosp_reservation set
 		name=#{name},tel=#{tel},disease=#{disease},reservation_ok=reservation_ok+1
-		where idx=#{idx} and year=#{year} and month=#{month} and day=#{day} and reservation_time=#{reservation_time}
+		where idx=#{idx} and year=#{year} and month=08 and day=#{day} and reservation_time=#{reservation_time}
 	</update>
 
 	<!-- 예약자 확인 -->

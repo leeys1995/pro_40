@@ -19,6 +19,7 @@
 		padding:15px;
 		height: 200px;
 		}
+		
 </style>
 <!-- 카카오톡 맵 좌표 찍기 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=831d3575fb87dc0f7e2e0d4494eb90f6&libraries=services"></script>
@@ -75,8 +76,8 @@
 				<div class="nav">
 					<nav>
 						<ul class="navi">
-							<li><a href="about.do">병원소개</a></li>
-							<li><a href="about.do">진료안내</a></li>
+							<li><a href="hospital_about?idx=${hosp.idx }">병원소개</a></li>
+							<li><a href="hospital_guidance?idx=${hosp.idx }">진료안내</a></li>
 							<li><a href="/hospital_board/hospital_board?idx=${hosp.idx }&page=1">공지</a></li>
 							<li><a href="hospital_reservation?idx=${hosp.idx }">예약</a></li>							
 							<li><a href="hospital_modify?idx=${hosp.idx }">홈페이지 <br> 수정</a></li>
@@ -158,14 +159,7 @@
 		<div>
 			<img height="1000px"
 				src="/resources/upload/hosp/hospital_photo/${hosp.h_photo }" alt=""
-				title="배움의 즐거움이 있는곳">
-		</div>
-		<div>
-			<img height="1000px" src="/images/a2.jpg" alt="" title="나에게 주는 만큼">
-		</div>
-		<div>
-			<img height="1000px" src="/images/a3.jpg" alt=""
-				title="나에게도 많은 축복이 있습니다">
+				title="병원 메인 사진">
 		</div>
 
 	</div>

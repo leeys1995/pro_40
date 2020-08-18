@@ -9,7 +9,7 @@ public class ReservationVO {
 	private String name;
 	private String tel;
 	private String disease;
-	private String reservation_ok;
+	private int reservation_ok;
 	private String year;
 	private String reservation_time;
 	private String month;

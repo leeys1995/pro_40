@@ -249,7 +249,7 @@ public class CorpController {
 		vo.setC_history(SqlMark.lineBreak(vo.getC_history()));
 		vo.setC_come(SqlMark.lineBreak(vo.getC_come()));
 		model.addAttribute("corp", vo);
-
+   
 		model.addAttribute("list", service.corpboardList(idx));
 	}
 
@@ -427,5 +427,25 @@ public class CorpController {
 			}
 		}
 	//////////////////////////////////////////////////////////
+		
 
+		//병원 소개 페이지
+		@GetMapping("corparation_about")
+		public void corparation(@RequestParam("idx") int idx ,Model model) {
+			
+			log.info("corparationAbout().......");
+			CorpVO vo = service.corpView(idx);
+			model.addAttribute("corp", vo);
+			
+		}
+		
+		//진료 안내 페이지
+			@GetMapping("corparation_guidance")
+			public void corparation_guidance(@RequestParam("idx") int idx ,Model model) {
+				
+				log.info("corparationGuidance().......");
+				CorpVO vo = service.corpView(idx);
+				model.addAttribute("corp", vo);
+			}
+		
 }
