@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.jslhrd.domain.HospBoardVO;
 import com.jslhrd.domain.HospVO;
 import com.jslhrd.domain.PageVO;
+import com.jslhrd.domain.ReservationVO;
 import com.jslhrd.mapper.HospMapper;
 
 import lombok.AllArgsConstructor;
@@ -57,8 +58,8 @@ public class HospServiceImpl implements HospService {
 		mapper.hospWrite(vo);
 
 	}
-	
-	//조회수 증가
+
+	// 조회수 증가
 	@Override
 	public void hospHits(int idx, HttpServletRequest request, HttpServletResponse response) {
 
@@ -81,24 +82,94 @@ public class HospServiceImpl implements HospService {
 			mapper.hospHits(idx);
 		}
 	}
-	
-	//뷰처리
+
+	// 뷰처리
 	@Override
 	public HospVO hospView(int idx) {
 
 		return mapper.hospView(idx);
 	}
 
+	// 리스트
 	@Override
 	public List<HospBoardVO> hospboardList(int idx) {
 		// TODO Auto-generated method stub
 		return mapper.hospboardList(idx);
 	}
-	
+
+	// 수정
 	@Override
 	public void hospModify(HospVO vo) {
-	
+
 		mapper.hospModify(vo);
+
+	}
+
+	// 예약시스템 시작
+
+	// 리스트 홈페이지 이동
+	@Override
+	public List<ReservationVO> reservationList(ReservationVO vo) {
+
+		return mapper.reservationList(vo);
+	}
+
+	// 리스트 홈페이지 확인 홈페이지 이동
+	@Override
+	public List<ReservationVO> reservationListPro(int idx) {
+
+		return mapper.reservationListPro(idx);
+	}
+
+	// 예약 추가 사이트
+	@Override
+	public void reservationWrite(ReservationVO vo) {
+
+		mapper.reservationWrite(vo);
+
+	}
+
+	// 예약자 확인
+	@Override
+	public List<ReservationVO> reservationList_ok(int idx) {
 		
+		return mapper.reservationList_ok(idx);
+	}
+	
+	//예약하기
+	@Override
+	public void reservationProInsert(ReservationVO vo) {
+		
+		mapper.reservationProInsert(vo);
+		
+	}
+	
+	//예약 시간 삭제
+	@Override
+	public void hospitalReservationDelete(ReservationVO vo) {
+		
+		mapper.hospitalReservationDelete(vo);
+		
+	}
+	
+	//미예약 개수
+	@Override
+	public int reservationCount(int idx) {
+		// TODO Auto-generated method stub
+		return mapper.reservationCount(idx);
+	}
+	
+	//예약된 개수
+	@Override
+	public int reservationCount_ok(int idx) {
+		// TODO Auto-generated method stub
+		return mapper.reservationCount_ok(idx);
+	}
+	
+	//예약자 상세 신상 확인
+	@Override
+	public ReservationVO hospital_reservationPro2(ReservationVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.hospital_reservationPro2(vo);
 	}
 }

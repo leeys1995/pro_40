@@ -1,6 +1,10 @@
 package com.jslhrd.controller;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +22,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jslhrd.domain.HospVO;
 import com.jslhrd.domain.PageVO;
-import com.jslhrd.service.HospBoardService;
+import com.jslhrd.domain.ReservationVO;
 import com.jslhrd.service.HospService;
 import com.jslhrd.util.PageIndex;
 import com.jslhrd.util.SqlMark;
@@ -265,11 +269,12 @@ public class HospController {
 	@PostMapping("hospital_modify")
 	public String hospModifyPro(MultipartHttpServletRequest request) {
 		
-		log.info("hosp_modifyPro().......");
+		
 		
 		
 		HospVO vo = new HospVO();
 		
+		vo.setIdx(Integer.parseInt(request.getParameter("idx")));
 		vo.setH_name(request.getParameter("h_name"));
 		vo.setH_code(request.getParameter("h_code"));
 		vo.setH_tel(request.getParameter("h_tel"));
@@ -339,15 +344,274 @@ public class HospController {
 		
 		int idx = Integer.parseInt(request.getParameter("idx"));
 		
+		log.info("hosp_modifyPro().......");
+		
 		return "redirect:/hospital/hospital_view?idx="+idx;
 	}
 	// 삭제 
-
-	// 파일완전 삭제 메소드
 	
+	// 배너 완전 삭제 메소드
+		private void deleteFiles(String filename) {
+			
+			
+			log.info("파일이름:"+filename);
+			if(filename == "") {
+				return;
+			}
+			
+			try {
+				
+				log.info("파일이름:"+filename);
+				Path file = Paths.get("C:\\Users\\leeys\\eclipse-workspace\\exSpring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\pro_40\\resources\\hosp\\banner\\"+filename);
+				
+				Files.deleteIfExists(file);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// 기업사진 완전 삭제 메소드
+			private void deleteFiles1(String filename) {
+				
+				
+				log.info("파일이름:"+filename);
+				if(filename == "") {
+					return;
+				}
+				
+				try {
+					
+					log.info("파일이름:"+filename);
+					Path file = Paths.get("C:\\Users\\leeys\\eclipse-workspace\\exSpring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\pro_40\\resources\\hosp\\hospital_photo\\"+filename);
+					
+					Files.deleteIfExists(file);
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			// 기업 제품사진 완전 삭제 메소드
+			private void deleteFiles2(String filename) {
+				
+				
+				log.info("파일이름:"+filename);
+				if(filename == "") {
+					return;
+				}
+				
+				try {
+					
+					log.info("파일이름:"+filename);
+					Path file = Paths.get("C:\\Users\\leeys\\eclipse-workspace\\exSpring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\pro_40\\resources\\hosp\\doctor_photo\\"+filename);
+					
+					Files.deleteIfExists(file);
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			// 기업 비디오 삭제 메소드
+			private void deleteFiles3(String filename) {
+				
+				
+				log.info("파일이름:"+filename);
+				if(filename == "") {
+					return;
+				}
+				
+				try {
+					
+					log.info("파일이름:"+filename);
+					Path file = Paths.get("C:\\Users\\leeys\\eclipse-workspace\\exSpring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\pro_40\\resources\\hosp\\video\\"+filename);
+					
+					Files.deleteIfExists(file);
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		//////////////////////////////////////////////////////////
+
 
 	//////////////////////////////////////////////////////////
 	
+	// 예약 관리시스템
 	
+	@GetMapping("reservation")
+	public void reservation(@RequestParam("idx") int idx, Model model) {
+		
+		model.addAttribute("idx", idx);
+		log.info("Reservation().......");
+	}
 	
+	//달력있는 홈페이지 연결
+	@GetMapping("hospital_reservation")
+	public void hospitalReservation(@RequestParam("idx") int idx,Model model) {
+		
+		log.info("hospitalReservation().......");
+			
+		model.addAttribute("idx", idx);
+	}
+	
+	//예약 할수있는 기능
+	@GetMapping("hospital_reservationPro")
+	public void hospitalReservationPro(@RequestParam("idx") int idx,@RequestParam("year") String year,
+			@RequestParam("month") String month,
+			@RequestParam("index") String index ,Model model) {
+		
+		
+		ReservationVO vo = new ReservationVO();
+		vo.setIdx(idx);
+		vo.setYear(year);
+		vo.setMonth(month);
+		vo.setDay(index);
+		
+		List<ReservationVO> list = service.reservationList(vo);
+		
+		model.addAttribute("list", list);
+		
+		model.addAttribute("idx", idx);
+		model.addAttribute("month", month);
+		model.addAttribute("year", year);	
+		model.addAttribute("day", index);
+		log.info("hospitalReservationPro().......");
+			
+		
+	}
+	
+	//예약 기능
+		@PostMapping("hospital_reservationPro")
+		public String hospitalReservationPro1(ReservationVO vo,Model model) {
+			
+			log.info("hospitalReservationPro1().......");
+			
+			log.info("name......."+vo.getName());
+			log.info("disease......."+vo.getDisease());
+			log.info("시간"+vo.getReservation_time());
+			log.info("name......."+vo.getDay());
+			log.info("disease......."+vo.getIdx());
+			log.info("시간"+vo.getMonth());
+			log.info("name......."+vo.getReservation_ok());
+			log.info("disease......."+vo.getYear());
+			log.info("시간"+vo.getTel());
+			
+			
+		    service.reservationProInsert(vo);
+		    
+		    
+			return "redirect:/hospital/hospital_reservation?idx="+vo.getIdx();
+			
+		}
+		
+	//예약 확인 사이트
+	@GetMapping("hospital_reservationList")
+	public void hospitalReservationList(@RequestParam("idx") int idx,Model model) {
+		
+		log.info("hospitalReservationList().......");
+		
+		int listcount = service.reservationCount(idx);
+		List<ReservationVO> list = service.reservationListPro(idx);
+		
+		model.addAttribute("listcount", listcount);
+		model.addAttribute("list", list);
+	}
+	
+	@GetMapping("hospital_reservation_write")
+	public void hospital_reservationWrite(@RequestParam("idx") int idx,Model model) {
+		
+		
+		log.info("hospitalReservationWrite().......");
+		
+		model.addAttribute("idx",idx);
+		
+	}
+	
+	@PostMapping("hospital_reservation_write")
+	public String hospital_reservationWritePro(HttpServletRequest request, HttpServletResponse response) {
+		
+		log.info("hospitalReservationWritePro().......");
+		
+		ReservationVO vo = new ReservationVO();
+		
+		vo.setIdx(Integer.parseInt(request.getParameter("idx")));
+		
+		String date = request.getParameter("date");
+		String time = request.getParameter("time");
+		
+		String year =date.substring(0,4);
+		String month = date.substring(5,7);
+		String day= date.substring(8,10);
+		
+		
+		log.info("year:"+year);
+		log.info("month:"+month);
+		log.info("day:"+day);
+		log.info("time"+time);
+		
+		
+		vo.setYear(year);
+		vo.setMonth(month);
+		vo.setDay(day);
+		vo.setReservation_time(time);
+		
+
+		//예약 시간 추가
+		service.reservationWrite(vo);
+		
+		return "redirect:/hospital/hospital_reservationList?idx="+request.getParameter("idx");
+	}
+	
+	//예약자 확인
+	@GetMapping("hospital_reservationList_ok")
+	public void hospital_reservationList_ok (@RequestParam("idx") int idx ,Model model) {
+		
+		log.info("hospitalReservationList_ok().......");
+		
+		int listcount = service.reservationCount_ok(idx);
+		List<ReservationVO> list = service.reservationList_ok(idx);
+		
+		model.addAttribute("listcount", listcount);
+		model.addAttribute("list", list);
+	}
+	
+	//예약 추가한후 삭제 
+	@GetMapping("hospitalReservationDelete")
+	public String hospitalReservationDelete(@RequestParam("idx") int idx,@RequestParam("year") String year,@RequestParam("month") String month,
+			@RequestParam("day") String day,@RequestParam("reservation_time") String reservation_time) {
+			
+		ReservationVO vo = new ReservationVO();
+		vo.setIdx(idx);
+		vo.setYear(year);
+		vo.setMonth(month);
+		vo.setDay(day);
+		vo.setReservation_time(reservation_time);
+		
+		service.hospitalReservationDelete(vo);
+		
+		log.info("hospitalReservationDelete().......");
+		
+		return "redirect:/hospital/hospital_reservationList?idx="+idx;
+	}
+	
+	//병원 입장에서 예약자 신상 확인 
+	@GetMapping("hospital_reservationPro2")
+	public void hospital_reservationPro2(@RequestParam("idx") int idx,@RequestParam("year") String year,
+			@RequestParam("month") String month,
+			@RequestParam("day") String day,
+			@RequestParam("reservation_time") String reservation_time,Model model){
+		
+		ReservationVO vo = new ReservationVO();
+		
+		vo.setIdx(idx);
+		vo.setYear(year);
+		vo.setMonth(month);
+		vo.setDay(day);
+		vo.setReservation_time(reservation_time);
+		
+		vo = service.hospital_reservationPro2(vo);
+		
+		model.addAttribute("res", vo);
+		
+		log.info("hospitalReservationPro2().......");
+	}
 }

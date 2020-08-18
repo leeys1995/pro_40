@@ -12,8 +12,8 @@
 <header>
 	<div class="topnav">
 		<ul>
-			<li><a href="login.do">로그인</a></li>
-			<li><a href="member.do">회원가입</a></li>
+			<li><a href="../member/login">로그인</a></li>
+			<li><a href="../member/insert">회원가입</a></li>
 			<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
 		</ul>
 	</div>
@@ -28,7 +28,7 @@
 					<li><a href="about.do">병원소개</a></li>
 					<li><a href="about.do">진료안내</a></li>
 					<li><a href="hospital_board?idx=<%=idx%>&page=1">공지</a></li>
-					<li><a href="../hospital/hospital_reservation?idx=<%=idx%>">예약</a></li>
+					<li><a href="hospital_board_cal?idx=<%=idx%>">예약</a></li>
 					<li><a href="../hospital/hospital_modify?idx=<%=idx%>">홈페이지 <br> 수정</a></li>
 					<li><a href="../hospital/reservation?idx=<%=idx%>">예약관리</a></li>
 
@@ -40,35 +40,8 @@
 
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">공지사항</h2>
-		<div class="sub-search">
+		<h2 class="sub-title">예약관리 시스템</h2>
 		
-			<form name="board" method="post" action="hospital_board?page=1&idx=<%=idx%>">
-				
-				
-				<tr>
-					<td><select name="search">
-						    
-							<option value="subject"
-							<c:if test="${pageVO.search =='subject'}">selected</c:if>>글제목</option>
-
-							<option value="contents"
-							<c:if test="${pageVO.search =='contents'}">selected</c:if>>글내용</option>
-							</select></td>
-							<c:if test="${empty pageVO.key }">
-							<td><input type="text" size=20 name="key"></td>
-							</c:if>
-							<c:if test="${!empty pageVO.key }">
-							<td><input type="text" size=20 name="key"
-									value="${pageVO.key }"></td>
-							</c:if>
-							<td><a href="javascript:b_search()"><input type="button" value="검색" class="btn"></a></td>
-
-											</tr>
-				<br>
-				<td>총개수:${totcount }</td>
-			</form>
-		</div>
 	</div>
 
 	<div class="content-body">
@@ -85,23 +58,28 @@
 			<tbody>
 				<tr>
 					<th>번호</th>
-					<th>제목</th>
-					<th>글쓴이</th>
-					<th>날자</th>
-					<th>조회수</th>
+					<th>성명</th>
+					<th>년도</th>
+					<th>월</th>
+					<th>날짜</th>
+					<th>시간</th>
+					
 				</tr>
 
 				
 				<c:if test="${!empty list }">
-				 <c:forEach items="${list }" var="board">
+				 <c:forEach items="${list }" var="res">
 						<tr>
-						<td>${board.idx }</td>
-						<td><a href="hospboardHits?idx=${board.idx }&idx2=<%=idx%>">${board.subject }</a></td>
-						<td>${h_name }</td>
-						<td>${board.regdate.substring(0,10) }</td>
-						<td>${board.readcnt }</td>
+						<td>${listcount }</td>
+						<td><a href="hospital_reservationPro2?idx=${res.idx }&year=${res.year}&month=${res.month}
+						&day=${res.day}&reservation_time=${res.reservation_time}">${res.name }</a></td>
+						<td>${res.year }</td>
+						<td>${res.month}</td>
+						<td>${res.day}</td>
+						<td>${res.reservation_time}</td>
 					
 					</tr>
+					<c:set var="listcount" value="${listcount-1}" />
 				</c:forEach>
 				</c:if>
 				
@@ -127,10 +105,6 @@
 
 
 
-		<a href="hospital_board_write?idx=<%=idx %>" class="btn-write">글쓰기</a>
-
-
-
 	</div>
 
 </div>
@@ -142,18 +116,7 @@
 	<!-- &copy; &nbsp; &gt; > &lt;< -->
 </div>
 
-<script>
-function b_search() {
 
-	if (board.key.value == "") {
-
-		alert("검색어를 입력하세요");
-		board.key.focus();
-		return;
-	}
-	board.submit();
-}
-</script>
 
 
 

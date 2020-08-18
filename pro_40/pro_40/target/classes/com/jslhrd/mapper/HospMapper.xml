@@ -33,53 +33,55 @@
 			where rownum <= #{endpage}) X where X.rnum >= #{startpage}	
 		]]>
 	</select>
-	
+
 	<!-- 게시물 조건 맞는 전체검색 -->
-	<select id="hospListSearch" resultType="com.jslhrd.domain.HospVO">
+	<select id="hospListSearch"
+		resultType="com.jslhrd.domain.HospVO">
 		select X.* from(select rownum as rnum, A.* from(
-		select * from hosp order by idx desc) A where
+		select * from hosp
+		order by idx desc) A where
 		<choose>
 			<when test="search=='h_name'">
-				h_name like '%' || #{key} || '%'  
-			</when>			
+				h_name like '%' || #{key} || '%'
+			</when>
 		</choose>
 		<choose>
 			<when test="search=='h_addr1'">
-				h_addr1 like '%' || #{key} || '%'  
-			</when>			
+				h_addr1 like '%' || #{key} || '%'
+			</when>
 		</choose>
 		<choose>
 			<when test="search=='d_mager'">
-				d_mager like '%' || #{key} || '%'  
-			</when>			
-		</choose>		
+				d_mager like '%' || #{key} || '%'
+			</when>
+		</choose>
 		<trim prefix="AND">
 			<![CDATA[
 				rownum <= #{endpage}) X where 
-			]]>		
+			]]>
 		</trim>
 		<choose>
 			<when test="search=='h_name'">
-				h_name like '%' || #{key} || '%'  
-			</when>			
+				h_name like '%' || #{key} || '%'
+			</when>
 		</choose>
 		<choose>
 			<when test="search=='h_addr1'">
-				h_addr1 like '%' || #{key} || '%'  
-			</when>			
+				h_addr1 like '%' || #{key} || '%'
+			</when>
 		</choose>
 		<choose>
 			<when test="search=='d_mager'">
-				d_mager like '%' || #{key} || '%'  
-			</when>			
-		</choose>		
-			<trim prefix="AND">
+				d_mager like '%' || #{key} || '%'
+			</when>
+		</choose>
+		<trim prefix="AND">
 			<![CDATA[
 				rnum >= #{startpage} 
-			]]>		
+			]]>
 		</trim>
 	</select>
-	
+
 	<!-- 병원 게시판 글쓰기 -->
 	<insert id="hospWrite">
 		insert into
@@ -89,28 +91,86 @@
 
 	<!-- View -->
 	<select id="hospView" resultType="com.jslhrd.domain.HospVO">
-		select * from hosp where idx=#{idx}
+		select * from hosp where
+		idx=#{idx}
 	</select>
-	
+
 	<!-- 조회수 증가 -->
 	<update id="hospHits">
-		update hosp set h_readcnt = h_readcnt+1 where idx= #{idx}
+		update hosp set h_readcnt = h_readcnt+1 where idx=
+		#{idx}
 	</update>
-	
+
 	<!-- 수정 -->
 	<update id="hospModify">
-	    update hosp set h_code = #{h_code},h_name=#{h_name},h_addr1=#{h_addr1},h_addr2=#{h_addr2},
-	    h_tel=#{h_tel},d_medical=#{d_medical},d_mager=#{d_mager},h_video=#{h_video},h_banner=#{h_banner},
-	    h_photo=#{h_photo},h_history=#{h_history},h_come=#{h_come},d_photo=#{d_photo} where idx=#{idx}		
+		update hosp set h_code =
+		#{h_code},h_name=#{h_name},h_addr1=#{h_addr1},h_addr2=#{h_addr2},
+		h_tel=#{h_tel},d_medical=#{d_medical},d_mager=#{d_mager},h_video=#{h_video},h_banner=#{h_banner},
+		h_photo=#{h_photo},h_history=#{h_history},h_come=#{h_come},d_photo=#{d_photo}
+		where idx=#{idx}
 	</update>
-	
+
 	<!-- 삭제 -->
-	
+
 	<!-- 파일 불러오기 -->
-	
+
 	<!-- 공지사항 불러오기 -->
-	<select id="hospboardList" resultType="com.jslhrd.domain.HospBoardVO">
+	<select id="hospboardList"
+		resultType="com.jslhrd.domain.HospBoardVO">
 		select * from hosp_bo where idx2 = #{idx}
 	</select>
-		
+
+
+	<!-- 예약시스템 시작 -->
+	<select id="reservationList"
+		resultType="com.jslhrd.domain.ReservationVO">
+		select * from hosp_reservation where idx = #{idx} and day=#{day} 
+	</select>
+
+
+	<!-- 예약 확인 -->
+	<select id="reservationListPro"
+		resultType="com.jslhrd.domain.ReservationVO">
+		select * from hosp_reservation where idx=#{idx} and reservation_ok = 0
+	</select>
+
+	<!-- 예약 시간 추가 -->
+	<insert id="reservationWrite">
+		insert into hosp_reservation(idx,year,month,day,reservation_time)
+		values(#{idx},#{year},#{month},#{day},#{reservation_time})
+	</insert>
+
+	<!-- 예약 하기 -->
+	<update id="reservationProInsert">
+		update hosp_reservation set
+		name=#{name},tel=#{tel},disease=#{disease},reservation_ok=reservation_ok+1
+		where idx=#{idx} and year=#{year} and month=#{month} and day=#{day} and reservation_time=#{reservation_time}
+	</update>
+
+	<!-- 예약자 확인 -->
+	<select id="reservationList_ok"
+		resultType="com.jslhrd.domain.ReservationVO">
+		select * from hosp_reservation where idx=#{idx} and reservation_ok = 1
+	</select>
+
+	<!-- 예약 추가후 시간 삭제 -->
+	<delete id="hospitalReservationDelete">
+		delete from hosp_reservation where idx=#{idx} and year=#{year} and month=#{month} and day=#{day} and reservation_time=#{reservation_time}
+	</delete>
+	
+	<!-- 미예약 수 -->
+	<select id="reservationCount" resultType="int">
+		select count(*) from hosp_reservation where idx=#{idx} and reservation_ok = 0
+	</select>
+	
+	<!-- 예약된 수 -->
+	<select id="reservationCount_ok" resultType="int">
+		select count(*) from hosp_reservation where idx=#{idx} and reservation_ok = 1
+	</select>
+	
+	<!-- 예약자 상세 신상 확인 -->
+	<select id="hospital_reservationPro2" resultType="com.jslhrd.domain.ReservationVO">
+	    select * from hosp_reservation where idx=#{idx} and year=#{year} and month=#{month} and day=#{day} and reservation_time=#{reservation_time}
+	</select>
+	
 </mapper>

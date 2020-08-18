@@ -5,6 +5,7 @@ import java.util.List;
 import com.jslhrd.domain.HospBoardVO;
 import com.jslhrd.domain.HospVO;
 import com.jslhrd.domain.PageVO;
+import com.jslhrd.domain.ReservationVO;
 
 public interface HospMapper {
 	
@@ -38,4 +39,32 @@ public interface HospMapper {
 	
 	//공지사항 불러오기
 	public List<HospBoardVO> hospboardList(int idx);
+	
+	
+	//예약시스템 시작
+	public List<ReservationVO> reservationList(ReservationVO vo);
+	
+	//예약시스템 확인
+	public List<ReservationVO> reservationListPro(int idx);
+	
+	//예약 시간 추가
+	public void reservationWrite(ReservationVO vo);
+	
+	//예약 하기
+	public void reservationProInsert(ReservationVO vo);
+	
+	//예약자 확인 
+	public List<ReservationVO> reservationList_ok(int idx);
+	
+	//예약 시간 추가 후 삭제
+	public void hospitalReservationDelete(ReservationVO vo);
+	
+	//미예약 개수
+	public int reservationCount(int idx);
+
+	//예약 된 개수 
+	public int reservationCount_ok(int idx);
+	
+	//예약자 상세 신상 확인
+	public ReservationVO hospital_reservationPro2(ReservationVO vo);
 }
