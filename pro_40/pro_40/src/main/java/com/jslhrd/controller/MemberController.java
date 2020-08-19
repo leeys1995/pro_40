@@ -63,6 +63,7 @@ public class MemberController {
 		vo.setC_code(c_code);
 
 		String newPassword = pwdEncoder.encode(vo.getPasswd());
+		log.info(vo.getPasswd()+"****************");
 		vo.setPasswd(newPassword);
 
 		int row = service.memInsert(vo);
@@ -135,16 +136,20 @@ public class MemberController {
 			return "/member/login_pro";
 		}else
 		{
-			boolean pwMatch = pwdEncoder.matches(vo.getPasswd(),vo1.getPasswd());
+			boolean pwMatch = pwdEncoder.matches(vo.getPasswd(),vo1.getUserpw());
 			log.info(""+pwMatch);
-			if(pwMatch==true)
+			if(pwMatch)
 			{
+				log.info(vo.getPasswd());
+				vo.setPasswd(vo1.getUserpw());
 				log.info("postmemlogin(2)*****");
+				
 				service.lastTimeUpdate(vo);
 				row = 1;
 				request.getSession().setAttribute("user", service.memLogin(vo));
 				request.getSession().setMaxInactiveInterval(1800);
 				model.addAttribute("row", row);
+				log.info(""+service.memLogin(vo));
 				return "/member/login_pro";
 			}else
 			{
