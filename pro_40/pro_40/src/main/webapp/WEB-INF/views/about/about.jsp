@@ -59,6 +59,7 @@ text-align: center; padding: 20px;
 </style>
 
 <script type="text/javascript">
+
 $(function(){
     //전역변수선언
     var editor_object = [];
@@ -86,6 +87,7 @@ $(function(){
         $("#frm").submit();
     })
 })
+
 function about_input() {
 	alert("test!!!");
 	about_form.action="about_pro";

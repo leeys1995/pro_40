@@ -32,7 +32,7 @@ if(userid==null)
 							<label for="id">아이디</label>
 						</th>
 						<td>
-							<input type="text" name="userid" id="userid" class="minput"placeholder="중복환인 버튼을 눌러주세요" readonly value="<%=userid%>"> 
+							<input type="text" name="userid" id="userid" class="minput" placeholder="중복환인 버튼을 눌러주세요" readonly value="<%=userid%>"> 
 							<a href="javascript:idchk()" class="btn-write">중복확인</a>
 						</td>
 					</tr>
