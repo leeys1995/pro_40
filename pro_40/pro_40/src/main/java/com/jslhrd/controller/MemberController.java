@@ -1,15 +1,7 @@
 package com.jslhrd.controller;
 
-import java.io.IOException;
-
 import java.util.Properties;
 import java.util.Random;
-
-import javax.servlet.http.HttpSession;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import javax.inject.Inject;
 import javax.mail.Message;
@@ -23,12 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -38,10 +29,8 @@ import com.jslhrd.domain.MemberVO;
 import com.jslhrd.domain.PageVO;
 import com.jslhrd.service.MemberService;
 import com.jslhrd.util.PageIndex;
-import com.jslhrd.util.SHA256Util;
 
 import lombok.AllArgsConstructor;
-import com.github.scribejava.core.model.OAuth2AccessToken;
 
 @AllArgsConstructor
 @Controller
@@ -51,6 +40,9 @@ public class MemberController {
 	private static final Logger log = LoggerFactory.getLogger(MemberController.class);
 	
 	private MemberService service;
+	
+	@Inject
+	BCryptPasswordEncoder pwdEncoder;
 	
 	//회원가입 페이지
 	@GetMapping("/insert")
@@ -69,9 +61,10 @@ public class MemberController {
 		vo.setTel(tel);
 		String c_code=vo.getC_code1()+"-"+vo.getC_code2()+"-"+vo.getC_code3();
 		vo.setC_code(c_code);
-//		String salt = SHA256Util.generateSalt();
-//		String newPassword = SHA256Util.getEncrypt(vo.getPasswd(), salt);
-//		vo.setPasswd(newPassword);
+
+		String newPassword = pwdEncoder.encode(vo.getPasswd());
+		vo.setPasswd(newPassword);
+
 		int row = service.memInsert(vo);
 		model.addAttribute("row", row);
 		log.info("postmeminsert()*****");
@@ -130,13 +123,11 @@ public class MemberController {
 		log.info("postmemlogin()*****");
 		MemberVO vo1= service.memIdchk(vo);//BD값
 		log.info("vo1:"+vo1);
+
 		log.info(vo.getPasswd());
-//		String salt = SHA256Util.generateSalt();
-//		String newPassword = SHA256Util.getEncrypt(vo.getPasswd(), salt);
-//		vo.setPasswd(newPassword);
-//		log.info(newPassword);//여기부터 수정 DB값이랑 안맞음
+
 		int row=0;
-		if(vo1==null)
+		if(vo1==null )
 		{
 			log.info("postmemlogin(1)*****");
 			row = 0;
@@ -144,7 +135,9 @@ public class MemberController {
 			return "/member/login_pro";
 		}else
 		{
-			if(vo1.getUserpw().equals(vo.getPasswd()))
+			boolean pwMatch = pwdEncoder.matches(vo.getPasswd(),vo1.getPasswd());
+			log.info(""+pwMatch);
+			if(pwMatch==true)
 			{
 				log.info("postmemlogin(2)*****");
 				service.lastTimeUpdate(vo);
