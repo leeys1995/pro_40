@@ -5,9 +5,12 @@
 <%@ include file="header.jsp" %>
 	
 	<div class="slider">
-	    <div><img src="/images/a1.jpg" alt="" title="배움의 즐거움이 있는곳"></div>
-	    <div><img src="/images/a2.jpg" alt="" title="나에게 주는 만큼"></div>
-	    <div><img src="/images/a3.jpg" alt="" title="나에게도 많은 축복이 있습니다"></div>
+	   <div><img src="/images/5.JPG" alt="" title="JSL 인재개발원"></div>
+	    <div><img src="/images/6.JPG" alt="" title="하이브리드 소프트웨어"></div>
+	    <div><img src="/images/1.JPG" alt="" title="전문과 가정 40기"></div>
+	    <div><img src="/images/2.JPG" alt="" title="조별 프로젝트"></div>
+	    <div><img src="/images/3.JPG" alt="" title="조원"></div>
+	    <div><img src="/images/4.JPG" alt="" title="최석호 이영석 염철준"></div>
   	</div>
 
 	<div class="bbs_wrap">

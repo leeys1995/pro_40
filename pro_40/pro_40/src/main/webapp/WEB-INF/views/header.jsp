@@ -12,7 +12,8 @@
 	<link href="/css/mystyle.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-
+	<!-- 2020/08/19 테스트중 -->
+	<link href="/css/search.css" rel="stylesheet">
   <script>
     $(function(){
     	
@@ -47,6 +48,14 @@
 					<li><a href="/member/login">로그인</a></li>
 					<li><a href="/member/insert">회원가입</a></li>
 					<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+					<!--	2020/08/19 테스트중	-->
+					<li>
+						<div id="wrap">
+  							<form action="" autocomplete="on" id="main_search_form">
+							<input id="search" name="search" type="text" placeholder="검색어 입력"><input id="search_submit" value="Rechercher" type="submit">
+							</form>
+						</div>
+					</li>
 				</ul>
 </c:if>
 <c:if test="${!empty user}">	
@@ -72,7 +81,7 @@
 				<div class="nav">
 					<nav>
 						<ul class="navi">
-							<li><a href="about.do">사이트소개</a></li>
+							<li><a href="/about/about">사이트소개</a></li>
 							<li><a href="/notice/notice?page=1">공지사항</a></li>
 							<li><a href="/hospital/hospital?page=1">병원</a></li>
 							<li><a href="/corparation/corparation?page=1">기업</a></li>

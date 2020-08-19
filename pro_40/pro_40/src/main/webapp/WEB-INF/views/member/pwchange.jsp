@@ -120,7 +120,7 @@
 			my.email2.focus();
 		}
 		my.method="post";
-		my.action="idsearch";
+		my.action="pwchange";
 		my.submit();
 
 	}
