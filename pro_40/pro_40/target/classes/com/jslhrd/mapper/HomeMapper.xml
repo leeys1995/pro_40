@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jslhrd.mapper.HomeMapper">
+
+	<!-- 공지사항 리스트 가져오기 -->
+	<select id="noticeList" resultType="com.jslhrd.domain.NoticeVO">
+	  select * from notice
+	</select>
+	
+	<!-- 병원 리스트 가져오기 -->
+	<select id="hospList" resultType="com.jslhrd.domain.HospVO">
+		select * from hosp
+	</select>
+	
+	<!-- 기업 리스트 가져오기 -->
+	<select id="corpList" resultType="com.jslhrd.domain.CorpVO">
+		select * from corp
+	</select>
+</mapper>

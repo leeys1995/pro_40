@@ -1,6 +1,9 @@
 package com.jslhrd.controller;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -246,7 +249,7 @@ public class CorpController {
 		vo.setC_history(SqlMark.lineBreak(vo.getC_history()));
 		vo.setC_come(SqlMark.lineBreak(vo.getC_come()));
 		model.addAttribute("corp", vo);
-
+   
 		model.addAttribute("list", service.corpboardList(idx));
 	}
 
@@ -266,7 +269,8 @@ public class CorpController {
 		log.info("corp_modifyPro().......");
 
 		CorpVO vo = new CorpVO();
-
+		
+		vo.setIdx(Integer.parseInt(request.getParameter("idx")));
 		vo.setC_name(request.getParameter("c_name"));
 		vo.setC_code(request.getParameter("c_code"));
 		vo.setC_tel(request.getParameter("c_tel"));
@@ -337,10 +341,111 @@ public class CorpController {
 
 		return "redirect:/corparation/corparation_view?idx=" + idx;
 	}
+	
 	// 삭제
 
-	// 파일완전 삭제 메소드
-
+	
+	
+	// 배너 완전 삭제 메소드
+	private void deleteFiles(String filename) {
+		
+		
+		log.info("파일이름:"+filename);
+		if(filename == "") {
+			return;
+		}
+		
+		try {
+			
+			log.info("파일이름:"+filename);
+			Path file = Paths.get("C:\\Users\\leeys\\eclipse-workspace\\exSpring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\pro_40\\resources\\corp\\banner\\"+filename);
+			
+			Files.deleteIfExists(file);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	// 기업사진 완전 삭제 메소드
+		private void deleteFiles1(String filename) {
+			
+			
+			log.info("파일이름:"+filename);
+			if(filename == "") {
+				return;
+			}
+			
+			try {
+				
+				log.info("파일이름:"+filename);
+				Path file = Paths.get("C:\\Users\\leeys\\eclipse-workspace\\exSpring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\pro_40\\resources\\corp\\corparation_photo\\"+filename);
+				
+				Files.deleteIfExists(file);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// 기업 제품사진 완전 삭제 메소드
+		private void deleteFiles2(String filename) {
+			
+			
+			log.info("파일이름:"+filename);
+			if(filename == "") {
+				return;
+			}
+			
+			try {
+				
+				log.info("파일이름:"+filename);
+				Path file = Paths.get("C:\\Users\\leeys\\eclipse-workspace\\exSpring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\pro_40\\resources\\corp\\product_photo\\"+filename);
+				
+				Files.deleteIfExists(file);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// 기업 비디오 삭제 메소드
+		private void deleteFiles3(String filename) {
+			
+			
+			log.info("파일이름:"+filename);
+			if(filename == "") {
+				return;
+			}
+			
+			try {
+				
+				log.info("파일이름:"+filename);
+				Path file = Paths.get("C:\\Users\\leeys\\eclipse-workspace\\exSpring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\pro_40\\resources\\corp\\video\\"+filename);
+				
+				Files.deleteIfExists(file);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 	//////////////////////////////////////////////////////////
+		
 
+		//병원 소개 페이지
+		@GetMapping("corparation_about")
+		public void corparation(@RequestParam("idx") int idx ,Model model) {
+			
+			log.info("corparationAbout().......");
+			CorpVO vo = service.corpView(idx);
+			model.addAttribute("corp", vo);
+			
+		}
+		
+		//진료 안내 페이지
+			@GetMapping("corparation_guidance")
+			public void corparation_guidance(@RequestParam("idx") int idx ,Model model) {
+				
+				log.info("corparationGuidance().......");
+				CorpVO vo = service.corpView(idx);
+				model.addAttribute("corp", vo);
+			}
+		
 }

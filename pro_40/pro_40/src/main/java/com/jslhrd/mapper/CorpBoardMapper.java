@@ -79,5 +79,5 @@ public interface CorpBoardMapper {
 	public String productPass(ProductVO vo);
 	
 	//답글달기
-
+	public void productReply(ProductVO vo);
 }

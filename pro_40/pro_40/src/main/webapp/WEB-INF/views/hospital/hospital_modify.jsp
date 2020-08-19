@@ -2,7 +2,42 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@ include file="../header.jsp" %>
+<%
+	int idx = Integer.parseInt(request.getParameter("idx"));
+%>
+<link href="../css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<link href="../css/common.css" rel="stylesheet">
+<link href="../css/mystyle.css" rel="stylesheet">
+<header>
+	<div class="topnav">
+		<ul>
+			<li><a href="../member/login">로그인</a></li>
+			<li><a href="../member/insert">회원가입</a></li>
+			<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+		</ul>
+	</div>
+	<div class="navigation">
+		<h1 class="logo">
+			<a href="../hospital/hospital_view?idx=<%=idx%>"><img height="100px"
+				src="/resources/upload/hosp/banner/${hosp.h_banner }" alt="모집사진"></a>
+		</h1>
+		<div class="nav">
+			<nav>
+				<ul class="navi">
+					<li><a href="hospital_about?idx=<%=idx%>">병원소개</a></li>
+							<li><a href="hospital_guidance?idx=<%=idx%>">진료안내</a></li>
+							<li><a href="/hospital_board/hospital_board?idx=<%=idx%>&page=1">공지</a></li>
+							<li><a href="hospital_reservation?idx=<%=idx%>">예약</a></li>							
+							<li><a href="hospital_modify?idx=<%=idx%>">홈페이지 <br> 수정</a></li>
+							<li><a href="reservation?idx=<%=idx%>">예약관리</a></li>
+
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>
 
 <script>
 	function setThumbnail(event) {
@@ -90,7 +125,7 @@
 					
 					<tr>
 						<th>병원이름</th>
-						<td><input type="text" name="h_name" value="${hosp.h_name }" readonly></td>
+						<td><input type="text" name="h_name" value="${hosp.h_name }"></td>
 					</tr>
 					<tr>
 						<th>사업자등록</th>
