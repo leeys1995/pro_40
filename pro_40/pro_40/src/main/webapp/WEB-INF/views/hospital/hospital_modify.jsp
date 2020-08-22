@@ -5,11 +5,17 @@
 <%
 	int idx = Integer.parseInt(request.getParameter("idx"));
 %>
+<head>
 <link href="../css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link href="../css/common.css" rel="stylesheet">
 <link href="../css/mystyle.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="header">
 <header>
 	<div class="topnav">
 		<ul>
@@ -19,10 +25,10 @@
 		</ul>
 	</div>
 	<div class="navigation">
-		<h1 class="logo">
-			<a href="../hospital/hospital_view?idx=<%=idx%>"><img height="100px"
+			<div style="height:100px; width:200px;">
+			<a href="../hospital/hospital_view?idx=<%=idx%>"><img
 				src="/resources/upload/hosp/banner/${hosp.h_banner }" alt="모집사진"></a>
-		</h1>
+			</div>
 		<div class="nav">
 			<nav>
 				<ul class="navi">
@@ -38,7 +44,9 @@
 		</div>
 	</div>
 </header>
+</div>
 
+	<div class="line"></div>
 <script>
 	function setThumbnail(event) {
 		var reader = new FileReader();
@@ -94,7 +102,7 @@
 </style>
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">장수하늘소 갤러리</h2>
+		<h2 class="sub-title">홈페이지 수정</h2>
 	</div>
 	
 	<div class="write-form">
@@ -105,7 +113,7 @@
 				<col width="80%">
 			</colgroup>
 			<tbody>
-			<form name="input" method="post" action="hospital_modify" enctype="multipart/form-data">
+			<form name="input" method="post" enctype="multipart/form-data">
 			
 					
 					<input type="hidden" name="idx" value="${idx }">
@@ -196,9 +204,11 @@
 
 					
 					<tr>
-						<td colspan="2">
+						<td colspan="3">
+							
 							<a href="javascript:send()"><input type="button" value="수정" class="btn-write"></a>
-							<a href="javascript:home()">"<input type="button" value="뒤로가기" class="btn-reset"></a>
+							<a href="javascript:home()"><input type="button" value="뒤로가기" class="btn-reset"></a>
+							<a href="javascript:del()"><input type="button" value="삭제" class="btn-reset" style="background-color:green;"></a>
 						</td>
 					</tr>
 				</form>
@@ -207,7 +217,7 @@
 	</div>
 		
 </div>
-
+</body>
 <script>
 	function send() {
 		
@@ -279,9 +289,10 @@
 		}
 		
 		
-		
-		
+	
 		alert("수정합니다.");
+		
+		input.action="hospital_modify";
 		input.submit();
 	}
 	
@@ -289,13 +300,27 @@
 		
 		history.back();
 	}
+	
+	function del(){
+		
+		alert("홈페이지를 삭제합니다.");
+		input.action="hospital_delete";
+		input.submit();
+	}
 </script>
 
-<%@ include file="../footer.jsp" %>
-
-
-
-
+<footer class="footer">
+		<div class="container clearfix">
+			<address class="address">
+				<p class="title">병원</p>
+				<br>
+				<p>주소 : ${hosp.h_addr1 } ${hosp.h_addr2 }/고객센터: ${hosp.h_tel } 	사업자등록번호: ${hosp.h_code }</p>
+				
+				<br>
+			</address>
+			<p class="copyright">Copyright &copy ${hosp.h_name }. All rights reserved.</p>
+		</div>
+</footer>
 
 
 

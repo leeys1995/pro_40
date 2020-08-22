@@ -50,10 +50,12 @@
 				</ul>
 			</div>
 			<div class="navigation">
-				<h1 class="logo">
-					<a href="hospital_view?idx=${hosp.idx }"><img height="100px"
+				
+				<div style="height:100px; width:200px;">
+				<a href="hospital_view?idx=${hosp.idx }"><img
 						src="/resources/upload/hosp/banner/${hosp.h_banner }" alt="모집사진"></a>
-				</h1>
+				</div>
+				
 				<div class="nav">
 					<nav>
 						<ul class="navi">
@@ -114,7 +116,8 @@
 		<div class="container clearfix">
 			<address class="address">
 				<p class="title">병원</p>
-				주소 : ${hosp.h_addr1 } ${hosp.h_addr2 }/고객센터: ${hosp.h_tel } 	사업자등록번호: ${hosp.h_code }
+				<br>
+				<p>주소 : ${hosp.h_addr1 } ${hosp.h_addr2 }/고객센터: ${hosp.h_tel } 	사업자등록번호: ${hosp.h_code }</p>
 			</address>
 			<p class="copyright">Copyright &copy ${hosp.h_name }. All rights reserved.</p>
 		</div>

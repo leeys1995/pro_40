@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- ---------------------------------------------------2020/08/14수정------------- -->
-<jsp:include page="../header.jsp" />
+
+
+	
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
@@ -97,6 +99,9 @@ function about_input() {
 </head>
 
 <body>
+
+<%@ include file="../header.jsp" %>
+
 <br><br>
 	<h1 style="text-align: center;">병원 소개</h1><br><br>
 	<div class="border">
@@ -104,8 +109,13 @@ function about_input() {
 			<textarea name="smarteditor" id="smarteditor" rows="10" cols="100" style="width:766px; height:412px;"></textarea>
 			<!-- <input type="button" id="savebutton" value="저장하기" style="width: 100px; height: 50px; background:#FA5858; padding:10px 16px; color:#fff;"/> -->
 			<div class="input_btn">
+			
+			<c:if test="${user.userid=='admin' }">
 			<button class="pushy__btn pushy__btn--md pushy__btn--blue" id="savebutton" onclick="javascript:about_input()">저장하기</button>&emsp;
 			<button class="pushy__btn pushy__btn--md pushy__btn--red" >취소하기</button><br>
+			</c:if>
+			
+			
 			</div>
 		</form>
 	</div>

@@ -99,9 +99,13 @@
 	<div class="sitewrap">
 		<span class="fa fa-close" id="close" style="cursor: pointer"></span>
 		<div class="inner">
-			<span class="map">홈페이지소개</span> <span class="map">공지사항</span> <span
-				class="map">병원</span> <span class="map">기업</span> <span class="map">검색</span>
-			<span class="map">회원가입</span> <span class="map">로그인</span>
+			 <span class="map"> <a href="/about/about" style="color:white;">홈페이지소개</a></span>
+			 <span class="map"> <a href="/notice/notice?page=1" style="color:white;">공지사항</a></span>
+			 <span class="map"> <a href="/hospital/hospital?page=1" style="color:white;">병원</a></span> 
+			 <span class="map"> <a href="/corparation/corparation?page=1" style="color:white;">기업</a></span> 
+			 <span class="map"> <a href="#" style="color:white;">검색</a></span>
+			 <span class="map"> <a href="/member/login" style="color:white;">회원가입</a></span>
+			 <span class="map"> <a href="/member/insert" style="color:white;">로그인</a></span>
 		</div>
 	</div>
 	

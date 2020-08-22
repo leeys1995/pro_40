@@ -345,7 +345,29 @@ public class HospController {
 		return "redirect:/hospital/hospital_view?idx=" + idx;
 	}
 	// 삭제
-
+	@PostMapping("hospital_delete")
+	public String hospDelete(MultipartHttpServletRequest request) {
+		
+		
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		
+		
+		String mf1 = service.hospBanner(idx);
+		String mf2 = service.hospHphoto(idx);
+		String mf3 = service.hospDphoto(idx);
+		String mf4 = service.hospHvideo(idx);
+		
+		deleteFiles(mf1);
+		deleteFiles1(mf2);
+		deleteFiles2(mf3);	
+		deleteFiles3(mf4);
+		
+		service.hospDelete(idx);
+		
+		log.info("hosp_delete().......");
+		
+		return "redirect:/hospital/hospital?page=1";
+	}
 	// 배너 완전 삭제 메소드
 	private void deleteFiles(String filename) {
 
@@ -443,7 +465,8 @@ public class HospController {
 	public void reservation(@RequestParam("idx") int idx, Model model) {
 
 		model.addAttribute("idx", idx);
-
+		
+		
 		HospVO vo = service.hospView(idx);
 
 		model.addAttribute("hosp", vo);
@@ -456,8 +479,17 @@ public class HospController {
 
 		log.info("hospitalReservation().......");
 
+		List<ReservationVO> list = service.reservation_countO(idx);
+		List<ReservationVO> list1 = service.reservation_countX(idx);
+		
+		log.info("list:"+list);
+		log.info("list1:"+list1);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("list1", list1);
+		
 		HospVO vo = service.hospView(idx);
-
+		
 		model.addAttribute("hosp", vo);
 		model.addAttribute("idx", idx);
 	}
@@ -481,6 +513,11 @@ public class HospController {
 		model.addAttribute("month", month);
 		model.addAttribute("year", year);
 		model.addAttribute("day", index);
+		
+		HospVO vo1 = service.hospView(idx);
+		
+		model.addAttribute("hosp",vo1);
+		
 		log.info("hospitalReservationPro().......");
 
 	}
@@ -526,6 +563,9 @@ public class HospController {
 
 		log.info("hospitalReservationWrite().......");
 
+		HospVO vo = service.hospView(idx);
+		
+		model.addAttribute("hosp",vo);
 		model.addAttribute("idx", idx);
 
 	}

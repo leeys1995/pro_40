@@ -146,7 +146,7 @@ public class CorpController {
 
 	}
 
-	// 병원 등록폼
+	// 기업 등록폼
 	@GetMapping("corparation_write")
 	public void corparationWrite() {
 
@@ -198,7 +198,7 @@ public class CorpController {
 
 		vo.setC_photo(c_photo);
 
-		// 의사 사진 저장경로 설정
+		// 제품 사진 저장경로 설정
 		String path3 = request.getRealPath("/resources/upload/corp/product_photo/");
 		String p_photo = mf3.getOriginalFilename();
 		File file3 = new File(path3 + p_photo);
@@ -210,7 +210,7 @@ public class CorpController {
 
 		vo.setP_photo(p_photo);
 
-		// 병원홍보영상 저장경로 설정
+		// 기업홍보영상 저장경로 설정
 		String path4 = request.getRealPath("/resources/upload/corp/video/");
 		String c_video = mf4.getOriginalFilename();
 		File file4 = new File(path4 + c_video);
@@ -243,7 +243,7 @@ public class CorpController {
 		log.info("corp_view()..........");
 
 		CorpVO vo = service.corpView(idx);
-
+		
 		vo.setP_intro(SqlMark.lineBreak(vo.getP_intro()));
 		vo.setP_mager(SqlMark.lineBreak(vo.getP_mager()));
 		vo.setC_history(SqlMark.lineBreak(vo.getC_history()));
@@ -343,7 +343,29 @@ public class CorpController {
 	}
 	
 	// 삭제
-
+		@PostMapping("corparation_delete")
+		public String corpDelete(MultipartHttpServletRequest request) {
+			
+			
+			int idx = Integer.parseInt(request.getParameter("idx"));
+			
+			
+			String mf1 = service.corpBanner(idx);
+			String mf2 = service.corpCphoto(idx);
+			String mf3 = service.corpPphoto(idx);
+			String mf4 = service.corpCvideo(idx);
+			
+			deleteFiles(mf1);
+			deleteFiles1(mf2);
+			deleteFiles2(mf3);	
+			deleteFiles3(mf4);
+			
+			service.corpDelete(idx);
+			
+			log.info("corp_delete().......");
+			
+			return "redirect:/corparation/corparation?page=1";
+		}
 	
 	
 	// 배너 완전 삭제 메소드

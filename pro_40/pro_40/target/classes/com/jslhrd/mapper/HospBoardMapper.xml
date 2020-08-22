@@ -120,4 +120,6 @@
 	<select id="hospBanner" resultType="String">
 		select h_banner from hosp where idx=#{idx}
 	</select>
+	
+	
 </mapper>

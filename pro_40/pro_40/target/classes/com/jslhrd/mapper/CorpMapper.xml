@@ -106,8 +106,29 @@
 	</update>
 	
 	<!-- 삭제 -->
+	<delete id="corpDelete" >
+	   delete from corp where idx=#{idx}
+	</delete>
 	
-	<!-- 파일 불러오기 -->
+	<!-- h_banner 불러오기 -->
+	<select id="corpBanner" resultType="String">
+	    select c_banner from corp where idx=#{idx}
+	</select>
+	
+	<!-- h_photo 불러오기 -->
+	<select id="corpCphoto" resultType="String">
+	    select c_photo from corp where idx=#{idx}
+	</select>
+	
+	<!-- d_photo 불러오기 -->
+	<select id="corpPphoto" resultType="String">
+	    select p_photo from corp where idx=#{idx}
+	</select>
+	
+	<!-- h_video 불러오기 -->
+	<select id="corpCvideo" resultType="String">
+	    select c_video from corp where idx=#{idx}
+	</select>
 	
 	<!-- 공지사항 불러오기 -->
 	<select id="corpboardList" resultType="com.jslhrd.domain.CorpBoardVO">

@@ -111,9 +111,31 @@
 	</update>
 
 	<!-- 삭제 -->
-
-	<!-- 파일 불러오기 -->
-
+	<delete id="hospDelete" >
+	   delete from hosp where idx=#{idx}
+	</delete>
+	
+	<!-- h_banner 불러오기 -->
+	<select id="hospBanner" resultType="String">
+	    select h_banner from hosp where idx=#{idx}
+	</select>
+	
+	<!-- h_photo 불러오기 -->
+	<select id="hospHphoto" resultType="String">
+	    select h_photo from hosp where idx=#{idx}
+	</select>
+	
+	<!-- d_photo 불러오기 -->
+	<select id="hospDphoto" resultType="String">
+	    select d_photo from hosp where idx=#{idx}
+	</select>
+	
+	<!-- h_video 불러오기 -->
+	<select id="hospHvideo" resultType="String">
+	    select h_video from hosp where idx=#{idx}
+	</select>
+	
+	
 	<!-- 공지사항 불러오기 -->
 	<select id="hospboardList"
 		resultType="com.jslhrd.domain.HospBoardVO">
@@ -173,4 +195,11 @@
 	    select * from hosp_reservation where idx=#{idx} and year=#{year} and month=#{month} and day=#{day} and reservation_time=#{reservation_time}
 	</select>
 	
+	<select id="reservation_countO" resultType="com.jslhrd.domain.ReservationVO">
+	    select day from hosp_reservation where reservation_ok=1 and idx=#{idx} group by day
+	</select>
+	
+	<select id="reservation_countX" resultType="com.jslhrd.domain.ReservationVO">
+		select day from hosp_reservation where reservation_ok=0 and idx=#{idx} group by day
+	</select>
 </mapper>

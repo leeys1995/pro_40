@@ -78,7 +78,9 @@
 
 
 		</ul>
+		<c:if test="${!empty user }">
 		<a href="corparation_write" class="btn-write">글쓰기</a>
+		</c:if>
 	</div>
 
 </div>

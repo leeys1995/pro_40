@@ -141,8 +141,11 @@ public class MemberController {
 			if(pwMatch)
 			{
 				log.info("postmemlogin(2)*****");
+				
+				vo.setPasswd(vo1.getUserpw());
 				service.lastTimeUpdate(vo);
 				row = 1;
+				
 				request.getSession().setAttribute("user", service.memLogin(vo));
 				request.getSession().setMaxInactiveInterval(1800);
 				model.addAttribute("row", row);

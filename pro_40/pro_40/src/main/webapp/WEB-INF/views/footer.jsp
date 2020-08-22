@@ -3,7 +3,7 @@
     
 <div class="footer">
 		<footer>
-			<p>&copy; JANGSU. All &nbsp;&nbsp;&nbsp;Rights Reserved.</p>
+			<p>&copy; HOMEPAGE 제작소 &nbsp;&nbsp;&nbsp;Rights Reserved.</p>
 		</footer>
 		<!-- &copy; &nbsp; &gt; > &lt;< -->
 	</div>

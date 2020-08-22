@@ -4,11 +4,18 @@
 <%
 	int idx = Integer.parseInt(request.getParameter("idx"));
 %>
+
+<head>
 <link href="../css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link href="../css/common.css" rel="stylesheet">
 <link href="../css/mystyle.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="header">
 <header>
 	<div class="topnav">
 		<ul>
@@ -18,10 +25,10 @@
 		</ul>
 	</div>
 	<div class="navigation">
-		<h1 class="logo">
-			<a href="../hospital/hospital_view?idx=<%=idx%>"><img height="100px"
+			<div style="height:100px; width:200px;">
+			<a href="../hospital/hospital_view?idx=<%=idx%>"><img 
 				src="/resources/upload/hosp/banner/${hosp.h_banner }" alt="모집사진"></a>
-		</h1>
+		</div>
 		<div class="nav">
 			<nav>
 				<ul class="navi">
@@ -36,7 +43,8 @@
 		</div>
 	</div>
 </header>
-
+</div>
+	<div class="line"></div>
 <div class="contain">
 	<div class="sub-topcontent">
 		<h2 class="sub-title">예약관리 시스템</h2>
@@ -110,13 +118,16 @@
 
 </div>
 
-<div class="footer">
-	<footer>
-		<p>&copy; JANGSU. All &nbsp;&nbsp;&nbsp;Rights Reserved.</p>
-	</footer>
-	<!-- &copy; &nbsp; &gt; > &lt;< -->
-</div>
-
+</body>
+<footer class="footer">
+		<div class="container clearfix">
+			<address class="address">
+				<p class="title">병원</p>
+				<p>주소 : ${hosp.h_addr1 } ${hosp.h_addr2 }/고객센터: ${hosp.h_tel } 	사업자등록번호: ${hosp.h_code }</p><br>
+			</address>
+			<p class="copyright">Copyright &copy ${hosp.h_name }. All rights reserved.</p>
+		</div>
+</footer>
 
 
 

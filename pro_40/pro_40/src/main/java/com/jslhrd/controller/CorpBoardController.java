@@ -20,9 +20,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jslhrd.domain.CorpBoardVO;
+import com.jslhrd.domain.CorpVO;
 import com.jslhrd.domain.PageVO;
 import com.jslhrd.domain.ProductVO;
 import com.jslhrd.service.CorpBoardService;
+import com.jslhrd.service.CorpService;
 import com.jslhrd.util.PageIndex;
 import com.jslhrd.util.SqlMark;
 
@@ -36,7 +38,8 @@ public class CorpBoardController {
 	private static final Logger log = LoggerFactory.getLogger(HospController.class);
 
 	private CorpBoardService service;
-
+	private CorpService service1;
+	
 	// 전체 리스트 검색
 	@GetMapping("corparation_board")
 	public void corpboardList(@RequestParam("page") int page, PageVO vo, Model model, @RequestParam("idx") int idx) {
@@ -108,7 +111,9 @@ public class CorpBoardController {
 			model.addAttribute("listpage",
 					PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey(), idx));
 		}
-
+		
+		CorpVO vo1 = service1.corpView(idx);
+		model.addAttribute("corp", vo1);
 	}
 
 	// 검색된 리스트 가져오기
@@ -163,7 +168,10 @@ public class CorpBoardController {
 
 		String c_name = service.corpName(idx);
 		model.addAttribute("c_name", c_name);
-
+		
+		
+		CorpVO vo1 = service1.corpView(idx);
+		model.addAttribute("corp", vo1);
 	}
 
 	// 기업 등록폼
@@ -171,6 +179,14 @@ public class CorpBoardController {
 	public void corparationboardWrite(@RequestParam("idx") int idx, Model model) {
 
 		model.addAttribute("idx", idx);
+		
+		String c_banner = service.corpBanner(idx);
+		
+		
+		CorpVO vo1 = service1.corpView(idx);
+		model.addAttribute("corp", vo1);
+		
+		model.addAttribute("c_banner",c_banner);
 		log.info("corpitalboardWrite()....");
 	}
 
@@ -342,6 +358,10 @@ public class CorpBoardController {
 			log.info("product()....");
 			String url = "product";
 
+			
+			CorpVO vo1 = service1.corpView(idx);
+			model.addAttribute("corp", vo1);
+			
 			String c_name = service.corpName(idx);
 			String c_banner = service.corpBanner(idx);
 
@@ -405,6 +425,7 @@ public class CorpBoardController {
 						PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey(), idx));
 			}
 
+			
 		}
 
 		// 검색된 리스트 가져오기
@@ -466,6 +487,12 @@ public class CorpBoardController {
 		@GetMapping("product_write")
 		public void productWrite(@RequestParam("idx") int idx, Model model) {
 
+			String c_banner = service.corpBanner(idx);
+			
+			CorpVO vo1 = service1.corpView(idx);
+			model.addAttribute("corp", vo1);
+			
+			model.addAttribute("c_banner",c_banner);
 			model.addAttribute("idx", idx);
 			log.info("productWrite()....");
 		}
@@ -485,6 +512,10 @@ public class CorpBoardController {
 		public void productPass(Model model, @RequestParam("idx") int idx,@RequestParam("idx2") int idx2) {
 			
 			log.info("productPass()....");
+			
+			CorpVO vo1 = service1.corpView(idx2);
+			model.addAttribute("corp", vo1);
+			
 			model.addAttribute("idx", idx);
 			model.addAttribute("idx2", idx2);
 			
@@ -527,6 +558,8 @@ public class CorpBoardController {
 			vo.setP_contents(SqlMark.lineBreak(vo.getP_contents()));
 
 			String c_name = service.corpName(idx2);
+			CorpVO vo1 = service1.corpView(idx2);
+			model.addAttribute("corp", vo1);
 			
 			model.addAttribute("c_name", c_name);
 			model.addAttribute("idx2", idx2);

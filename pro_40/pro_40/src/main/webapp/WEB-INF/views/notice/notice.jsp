@@ -74,7 +74,10 @@
 			<ul>
 				<li><a href="#">${listpage }</a></li>
 			</ul>
+			
+			<c:if test="${user.userid=='admin' }">
 			<a href="notice_write" class="btn-write">글쓰기</a>
+			</c:if>
 		</div>
 
 </div>

@@ -50,10 +50,10 @@
 				</ul>
 			</div>
 			<div class="navigation">
-				<h1 class="logo">
+				<div  style="height:100px; width:200px;">
 					<a href="corparation_view?idx=${corp.idx }"><img height="100px"
 						src="/resources/upload/corp/banner/${corp.c_banner }" alt="모집사진"></a>
-				</h1>
+				</div>
 				<div class="nav">
 					<nav>
 						<ul class="navi">
@@ -112,7 +112,7 @@
 		<div class="container clearfix">
 			<address class="address">
 				<p class="title">기업</p>
-				주소 : ${corp.c_addr1 } ${corp.c_addr2 }/고객센터: ${corp.c_tel } 	사업자등록번호: ${corp.c_code }
+				<p>주소 : ${corp.c_addr1 } ${corp.c_addr2 }/고객센터: ${corp.c_tel } 	사업자등록번호: ${corp.c_code }</p>
 			</address>
 			<p class="copyright">Copyright &copy ${corp.c_name }. All rights reserved.</p>
 		</div>

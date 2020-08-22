@@ -4,7 +4,8 @@
 <%
 	int idx2 = Integer.parseInt(request.getParameter("idx"));
 %>
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=YOUR_CLIENT_ID&submodules=geocoder"></script>
+<script type="text/javascript"
+	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=YOUR_CLIENT_ID&submodules=geocoder"></script>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -15,13 +16,14 @@
 <link href="../css/common.css" rel="stylesheet">
 <link href="../css/mystyle.css" rel="stylesheet" type="text/css">
 <style>
-	.aaa_right {
-		padding:15px;
-		height: 200px;
-		}
+.aaa_right {
+	padding: 15px;
+	height: 200px;
+}
 </style>
 <!-- 카카오톡 맵 좌표 찍기 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=831d3575fb87dc0f7e2e0d4494eb90f6&libraries=services"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=831d3575fb87dc0f7e2e0d4494eb90f6&libraries=services"></script>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -29,7 +31,6 @@
 	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
 <script>
-
 	$(function() {
 
 		$('.slider').bxSlider({
@@ -61,25 +62,44 @@
 	<div class="header">
 		<header>
 			<div class="topnav">
-				<ul>
-					<li><a href="../member/login">로그인</a></li>
-					<li><a href="../member/insert">회원가입</a></li>
-					<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
-				</ul>3
+				<c:if test="${empty user }">
+					<ul>
+						<li><a href="../member/login">로그인</a></li>
+						<li><a href="../member/insert">회원가입</a></li>
+						<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+					</ul>
+				</c:if>
+				<c:if test="${!empty user}">
+					
+						<ul>
+							<li><a href="javascript:logout()">로그아웃</a></li>
+							<li><a href="" class="sitemap">사이트맵</a></li>
+						</ul>
+					</c:if>
 			</div>
 			<div class="navigation">
-				<h1 class="logo">
-					<a href="corparation_view?idx=${corp.idx }"><img height="100px"
+
+				<div style="height: 100px; width: 200px;">
+
+					<a href="corparation_view?idx=${corp.idx }"><img
 						src="/resources/upload/corp/banner/${corp.c_banner }" alt="모집사진"></a>
-				</h1>
+
+				</div>
+
 				<div class="nav">
 					<nav>
 						<ul class="navi">
 							<li><a href="corparation_about?idx=${corp.idx }">기업소개</a></li>
 							<li><a href="corparation_guidance?idx=${corp.idx }">제품소개</a></li>
-							<li><a href="/corparation_board/corparation_board?idx=${corp.idx }&page=1">공지</a></li>
-							<li><a href="/corparation_board/product?idx=${corp.idx }&page=1">제품문의</a></li>							
-							<li><a href="corparation_modify?idx=${corp.idx }">홈페이지 <br> 수정</a></li>
+							<li><a
+								href="/corparation_board/corparation_board?idx=${corp.idx }&page=1">공지</a></li>
+							<li><a
+								href="/corparation_board/product?idx=${corp.idx }&page=1">제품문의</a></li>
+								
+							<li><a href="corparation_modify?idx=${corp.idx }">홈페이지 <br>
+									수정
+							</a></li>
+						
 
 						</ul>
 					</nav>
@@ -93,9 +113,18 @@
 	<div class="sitewrap">
 		<span class="fa fa-close" id="close" style="cursor: pointer"></span>
 		<div class="inner">
-			<span class="map">홈페이지소개</span> <span class="map">공지사항</span> <span
-				class="map">병원</span> <span class="map">기업</span> <span class="map">검색</span>
-			<span class="map">회원가입</span> <span class="map">로그인</span>
+			<span class="map"><a href="corparation_about?idx=${corp.idx }"
+				style="color: white;">기업소개</a></span> <span class="map"><a
+				href="corparation_guidance?idx=${corp.idx }" style="color: white;">제품소개</a></span>
+			<span class="map"><a
+				href="/corparation_board/corparation_board?idx=${corp.idx }&page=1"
+				style="color: white;">공지</a></span> <span class="map"><a
+				href="/corparation_board/product?idx=${corp.idx }&page=1"
+				style="color: white;">제품문의</a></span> <span class="map"><a
+				href="corparation_modify?idx=${corp.idx }" style="color: white;">홈페이지
+					수정</a></span> <span class="map"><a href="/member/login"
+				style="color: white;">회원가입</a></span> <span class="map"> <a
+				href="/member/insert" style="color: white;">로그인</a></span>
 		</div>
 	</div>
 
@@ -155,95 +184,113 @@
 	<div class="slider">
 
 		<div>
-			<img height="1000px"
-				src="/resources/upload/corp/corparation_photo/${corp.c_photo }" alt=""
-				title="기업 메인 사진">
+			<img height="500px"
+				src="/resources/upload/corp/corparation_photo/${corp.c_photo }"
+				alt="" title="기업 메인 사진">
 		</div>
-	
-	</div>
 
+	</div>
+	<br>
+	<br>
+	<br>
 	<div class="aaa_wrap">
-		<div class="aaa_left">
+		<div class="aaa_left" style="height: 300px;">
 			<h2 class="title">공지시항</h2>
 			<ul>
-			
-			 <c:if test="${!empty list }">
-			    <c:forEach items="${list }" var="corp_board" begin="0" end="4">
-				<li><a href="../corparation_board/corpboardHits?idx=${corp_board.idx }&idx2=<%=idx2%>">${corp_board.subject }</a> </li>
-				</c:forEach>
-			</c:if>
-		
-			<c:if test="${empty list }">
-			
-			<li>아직 데이터가 존재하지 않습니다.</li>
-			</c:if>
+
+				<c:if test="${!empty list }">
+					<c:forEach items="${list }" var="corp_board" begin="0" end="4">
+						<li><a
+							href="../corparation_board/corpboardHits?idx=${corp_board.idx }&idx2=<%=idx2%>">${corp_board.subject }</a>
+						</li>
+					</c:forEach>
+				</c:if>
+
+				<c:if test="${empty list }">
+
+					<li>아직 데이터가 존재하지 않습니다.</li>
+				</c:if>
 			</ul>
-			<a href="../corparation_board/corparation_board?page=1&idx=${corp.idx }"><span class="fa fa-plus plus"></span></a>
+			<a
+				href="../corparation_board/corparation_board?page=1&idx=${corp.idx }"><span
+				class="fa fa-plus plus"></span></a>
 		</div>
 
-		<div class="aaa_right">
+		<div class="aaa_right" style="height: 300px;">
 			<h2 class="title">병원 홍보 동영상</h2>
-				<ul>
+			<ul>
 				<li><video controls
-						src="/resources/upload/corp/video/${corp.c_video }"	
+						src="/resources/upload/corp/video/${corp.c_video }"
 						autoplay="autoplay" width=500 height=200></video></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				 
-				</ul>		
+
+
+			</ul>
 		</div>
 
 	</div>
+	<br>
+	<br>
+	<br>
 
-		<div id="map" style="width:100%;height:350px;"></div>
-	<div class="footer">
-		<footer>
-			<p>&copy; JANGSU. All &nbsp;&nbsp;&nbsp;Rights Reserved.</p>
-		</footer>
-		<!-- &copy; &nbsp; &gt; > &lt;< -->
-	</div>
+	<div id="map" style="width: 100%; height: 350px;"></div>
+	<footer class="footer">
+		<div class="container clearfix">
+			<address class="address">
+				<p class="title">기업</p>
+				<p>주소 : ${corp.c_addr1 } ${corp.c_addr2 }/고객센터: ${corp.c_tel }
+					사업자등록번호: ${corp.c_code }</p>
+				<br>
+			</address>
+			<p class="copyright">Copyright &copy ${corp.c_name }. All rights
+				reserved.</p>
+		</div>
+	</footer>
 </body>
 </html>
 
 <script>
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };  
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = {
+		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		level : 3
+	// 지도의 확대 레벨
+	};
 
-// 지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption);
 
-// 주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
 
-// 주소로 좌표를 검색합니다
-geocoder.addressSearch('${corp.c_addr1}'+'${corp.c_addr2}', function(result, status) {
+	// 주소로 좌표를 검색합니다
+	geocoder
+			.addressSearch(
+					'${corp.c_addr1}' + '${corp.c_addr2}',
+					function(result, status) {
 
-    // 정상적으로 검색이 완료됐으면 
-     if (status === kakao.maps.services.Status.OK) {
+						// 정상적으로 검색이 완료됐으면 
+						if (status === kakao.maps.services.Status.OK) {
 
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+							var coords = new kakao.maps.LatLng(result[0].y,
+									result[0].x);
 
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
+							// 결과값으로 받은 위치를 마커로 표시합니다
+							var marker = new kakao.maps.Marker({
+								map : map,
+								position : coords
+							});
 
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">${corp.c_name}</div>'
-        });
-        infowindow.open(map, marker);
+							// 인포윈도우로 장소에 대한 설명을 표시합니다
+							var infowindow = new kakao.maps.InfoWindow(
+									{
+										content : '<div style="width:150px;text-align:center;padding:6px 0;">${corp.c_name}</div>'
+									});
+							infowindow.open(map, marker);
 
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-    } 
-});    
+							// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+							map.setCenter(coords);
+						}
+					});
 </script>
 
 

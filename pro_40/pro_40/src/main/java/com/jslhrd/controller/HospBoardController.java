@@ -20,8 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jslhrd.domain.HospBoardVO;
+import com.jslhrd.domain.HospVO;
 import com.jslhrd.domain.PageVO;
 import com.jslhrd.service.HospBoardService;
+import com.jslhrd.service.HospService;
 import com.jslhrd.util.PageIndex;
 import com.jslhrd.util.SqlMark;
 
@@ -35,6 +37,7 @@ public class HospBoardController {
 	private static final Logger log = LoggerFactory.getLogger(HospController.class);
 
 	private HospBoardService service;
+	private HospService service1;
 	
 	//전체 리스트 검색
 		@GetMapping("hospital_board")
@@ -109,7 +112,8 @@ public class HospBoardController {
 				model.addAttribute("listpage", PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey(),idx));
 			}
 			
-			
+			HospVO vo1 = service1.hospView(idx);
+			model.addAttribute("hosp",vo1);
 		}
 		
 		//검색된 리스트 가져오기
@@ -163,7 +167,9 @@ public class HospBoardController {
 			
 			String h_name = service.hospName(idx);
 			model.addAttribute("h_name", h_name);
-
+			
+			HospVO vo1 = service1.hospView(idx);
+			model.addAttribute("hosp",vo1);
 		}
 
 		// 병원 등록폼
@@ -172,6 +178,13 @@ public class HospBoardController {
 			
 			
 			model.addAttribute("idx", idx);
+			String h_banner = service.hospBanner(idx);
+			
+			model.addAttribute("h_banner",h_banner);
+			
+			HospVO vo1 = service1.hospView(idx);
+			model.addAttribute("hosp",vo1);
+			
 			log.info("hospitalboardWrite()....");
 		}
 
@@ -237,6 +250,10 @@ public class HospBoardController {
 			model.addAttribute("idx2", idx2);
 			model.addAttribute("idx", idx);
 			model.addAttribute("board", vo);
+			
+			HospVO vo1 = service1.hospView(idx2);
+			model.addAttribute("hosp", vo1);
+			
 		}
 
 		// 수정
@@ -250,6 +267,9 @@ public class HospBoardController {
 			
 			HospBoardVO vo = service.hospboardView(idx);
 			model.addAttribute("board", vo);
+			
+			HospVO vo1 = service1.hospView(idx2);
+			model.addAttribute("hosp",vo1);
 		}
 		
 		@PostMapping("hospital_board_modify")
