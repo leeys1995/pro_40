@@ -68,7 +68,12 @@
 			<form name="input" method="post" action="hospital_write" enctype="multipart/form-data">
 			
 			      
-			        
+			       <input type="hidden" name= "idx" value="${user.idx }">
+			       
+			        <tr>
+						<th>※ 홈페이지 비밀번호</th>
+						<td><input type="password" name="h_pass"  placeholder="홈페이지 수정과 삭제시 필요합니다."></td>
+					</tr>
 					<tr>
 						<th>병원 배너</th>
 						<td><input type="file" name="h_banner" accept="image/*"
@@ -82,6 +87,7 @@
 					<tr>
 						<th>병원이름</th>
 						<td><input type="text" name="h_name"></td>
+						
 					</tr>
 					<tr>
 						<th>사업자등록</th>

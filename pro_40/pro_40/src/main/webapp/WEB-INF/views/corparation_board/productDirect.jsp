@@ -34,10 +34,7 @@
 					<li><a href="../corparation/corparation_guidance?idx=<%=idx%>">제품소개</a></li>
 					<li><a href="corparation_board?idx=<%=idx%>&page=1">공지</a></li>
 					<li><a href="/corparation_board/product?idx=<%=idx%>&page=1">제품문의</a></li>		
-					<li><a href="../corparation/corparation_controller?idx=<%=idx%>">홈페이지 <br>
-									관리
-							</a></li>
-						
+					<li><a href="../corparation/corparation_modify?idx=<%=idx%>">홈페이지 <br> 수정</a></li>	
 
 
 				</ul>
@@ -98,7 +95,7 @@
 					<td>${product.idx }</td>
 					<td class="tleft">
 					
-					<a href="product_pass?idx=${product.idx }&idx2=<%=idx%>">${product.p_subject }</a>
+					<a href="product_view?idx=${product.idx }&idx2=<%=idx%>">${product.p_subject }</a>
 					
 					
 					</td>

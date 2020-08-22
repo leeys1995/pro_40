@@ -35,8 +35,7 @@
 							<li><a href="hospital_guidance?idx=<%=idx%>">진료안내</a></li>
 							<li><a href="/hospital_board/hospital_board?idx=<%=idx%>&page=1">공지</a></li>
 							<li><a href="hospital_reservation?idx=<%=idx%>">예약</a></li>							
-							<li><a href="hospital_modify?idx=<%=idx%>">홈페이지 <br> 수정</a></li>
-							<li><a href="reservation?idx=<%=idx%>">예약관리</a></li>
+							<li><a href="hospital_controller?idx=<%=idx%>">홈페이지 <br> 관리</a></li>
 				</ul>
 			</nav>
 		</div>

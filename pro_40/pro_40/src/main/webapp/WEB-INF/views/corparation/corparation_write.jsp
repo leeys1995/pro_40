@@ -66,6 +66,15 @@
 			</colgroup>
 			<tbody>
 			<form name="input" method="post" action="corparation_write" enctype="multipart/form-data">
+			
+			        <input type="hidden" name="idx" value="${user.idx }">
+			        
+			        
+			         <tr>
+						<th>※ 홈페이지 비밀번호</th>
+						<td><input type="password" name="c_pass"  placeholder="홈페이지 수정과 삭제시 필요합니다."></td>
+					</tr>
+					
 					<tr>
 						<th>기업 배너</th>
 						<td><input type="file" name="c_banner" accept="image/*"

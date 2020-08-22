@@ -28,6 +28,7 @@
 
 </style>
   
+  
 <title>Insert title here</title>
 </head>
 <body>
@@ -44,7 +45,7 @@
 				<ul>
 					<li><a href="../member/login">로그인</a></li>
 					<li><a href="../member/insert">회원가입</a></li>
-					<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+					<li><a href="/" ">홈으로</a>
 				</ul>
 			</div>
 			<div class="navigation">
@@ -59,7 +60,10 @@
 							<li><a href="corparation_guidance?idx=${corp.idx }">제품소개</a></li>
 							<li><a href="/corparation_board/corparation_board?idx=${corp.idx }&page=1">공지</a></li>
 							<li><a href="/corparation_board/product?idx=${corp.idx }&page=1">제품문의</a></li>							
-							<li><a href="corparation_modify?idx=${corp.idx }">홈페이지 <br> 수정</a></li>
+							<li><a href="corparation_controller?idx=${corp.idx }">홈페이지 <br>
+									관리
+							</a></li>
+						
 
 
 						</ul>

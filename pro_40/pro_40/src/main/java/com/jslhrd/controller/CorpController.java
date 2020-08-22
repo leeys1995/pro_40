@@ -159,6 +159,8 @@ public class CorpController {
 		log.info("corparationWritePro()....");
 		CorpVO vo = new CorpVO();
 
+		vo.setC_pass(request.getParameter("c_pass"));
+		vo.setIdx(Integer.parseInt(request.getParameter("idx")));
 		vo.setC_name(request.getParameter("c_name"));
 		vo.setC_code(request.getParameter("c_code"));
 		vo.setC_tel(request.getParameter("c_tel"));
@@ -470,4 +472,59 @@ public class CorpController {
 				model.addAttribute("corp", vo);
 			}
 		
+			// 홈페이지 관리 홈페이지
+			@GetMapping("corparation_controller")
+			public void corparationcontroller(@RequestParam("idx") int idx, Model model) {
+
+				log.info("corparationController().......");
+
+				CorpVO vo = service.corpView(idx);
+				
+				model.addAttribute("corp", vo);
+
+			}
+			
+			// 홈페이지 관리 홈페이지 이동가능
+			@PostMapping("corparation_controller")
+			public String corparationcontrollerPro(HttpServletRequest request, HttpServletResponse response) {
+				
+				String c_pass = request.getParameter("c_pass");
+			    
+				int idx = Integer.parseInt(request.getParameter("idx"));
+				
+				String pass = service.corparationPass(idx);
+				
+				log.info("idx="+idx);
+				log.info("c_pass="+c_pass);
+				log.info("pass="+pass);
+				
+				if(c_pass.contains(pass)) {
+					
+					return "redirect:/corparation/corparation_controllerO?idx="+idx;
+				}else {
+					
+					return "redirect:/corparation/corparation_controllerX";
+				}
+			    
+			}
+			
+			
+			@GetMapping("corparation_controllerO")
+			public void corparationControllerO(@RequestParam("idx") int idx, Model model) {
+				
+				log.info("corparationControllerO().......");
+				
+				CorpVO vo= service.corpView(idx);
+				model.addAttribute("corp", vo);
+				
+			}
+			
+			@GetMapping("corparation_controllerX")
+			public void corparationControllerX() {
+				
+				log.info("corparationControllerX().......");
+				
+				
+			}
+			
 }

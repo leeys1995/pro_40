@@ -19,7 +19,7 @@
 		<ul>
 			<li><a href="../member/login">로그인</a></li>
 			<li><a href="../member/insert">회원가입</a></li>
-			<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+			<li><a href="/" ">홈으로</a>
 		</ul>
 	</div>
 	<div class="navigation">

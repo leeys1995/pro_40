@@ -22,7 +22,7 @@
 		<ul>
 			<li><a href="../member/login">로그인</a></li>
 			<li><a href="../member/insert">회원가입</a></li>
-			<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+			<li><a href="/" ">홈으로</a>
 		</ul>
 	</div>
 	<div class="navigation">
@@ -37,7 +37,10 @@
 					<li><a href="../corparation/corparation_guidance?idx=<%=idx%>">제품소개</a></li>
 					<li><a href="corparation_board?idx=<%=idx%>&page=1">공지</a></li>
 					<li><a href="/corparation_board/product?idx=<%=idx%>&page=1">제품문의</a></li>		
-					<li><a href="../corparation/corparation_modify?idx=<%=idx%>">홈페이지 <br> 수정</a></li>	
+					<li><a href="../corparation/corparation_controller?idx=<%=idx%>">홈페이지 <br>
+									관리
+							</a></li>
+						
 
 
 				</ul>
@@ -80,7 +83,7 @@
 					</tr>	
 					<tr>
 						<th>패스워드</th>
-						<td><input type="text" name="p_pass" placeholder="답변을 보려면 필요합니다"></td>
+						<td><input type="password" name="p_pass" placeholder="답변을 보려면 필요합니다"></td>
 					</tr>	
 						
 					

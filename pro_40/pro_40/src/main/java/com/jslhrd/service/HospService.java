@@ -81,4 +81,7 @@ public interface HospService {
 	
 	//예약 날짜 별 예약되어있는 데이터 개수 가져오기
 	public List<ReservationVO> reservation_countO(int idx);
+	
+	//홈페이지 관리 패스워드 가져오기
+	public String hospitalPass(int idx);
 }

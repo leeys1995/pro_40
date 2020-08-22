@@ -40,8 +40,7 @@
 				<ul class="navi">
 					<li><a href="hospital_about?idx=<%=idx%>">병원소개</a></li>
 					<li><a href="hospital_guidance?idx=<%=idx%>">진료안내</a></li>
-					<li><a href="/hospital_board/hospital_board?idx=<%=idx%>&page=1">공지</a></li>
-				    					
+					<li><a href="/hospital_board/hospital_board?idx=<%=idx%>&page=1">공지</a></li>						
 					<li><a href="hospital_modify?idx=<%=idx%>">홈페이지 <br> 수정</a></li>
 					<li><a href="reservation?idx=<%=idx%>">예약관리</a></li>
 
@@ -56,14 +55,16 @@
 
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">예약 시스템</h2>
+		<h2 class="sub-title">홈페이지 총 관리 페이지</h2>
 		
 		
 		</div>
 		 <table>
 		 <tr>
-		<td><a href="hospital_reservationList_ok?idx=${idx }" class="btn-write">예약자 확인</a></td>
-		<td><a href="hospital_reservationList?idx=${idx }" class="btn-write">예약 시간 관리</a></td>
+		<td><a href="hospital_modify?idx=${hosp.idx }" class="btn-write">홈페이지 수정</a></td>
+		<td><a href="reservation?idx=${hosp.idx }" class="btn-write">예약관리</a></td>
+		<td><a href="/hospital_board/hospital_board_write?idx=${hosp.idx }" class="btn-write">공지사항 글쓰기</a></td>
+		
 		</tr>
 		</table>
 </div>

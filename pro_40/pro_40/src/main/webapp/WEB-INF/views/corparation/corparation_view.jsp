@@ -67,13 +67,14 @@
 						<li><a href="../member/login">로그인</a></li>
 						<li><a href="../member/insert">회원가입</a></li>
 						<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+						<li><a href="/" ">홈으로</a>
 					</ul>
 				</c:if>
 				<c:if test="${!empty user}">
 					
 						<ul>
 							<li><a href="javascript:logout()">로그아웃</a></li>
-							<li><a href="" class="sitemap">사이트맵</a></li>
+							<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
 						</ul>
 					</c:if>
 			</div>
@@ -96,8 +97,8 @@
 							<li><a
 								href="/corparation_board/product?idx=${corp.idx }&page=1">제품문의</a></li>
 								
-							<li><a href="corparation_modify?idx=${corp.idx }">홈페이지 <br>
-									수정
+							<li><a href="corparation_controller?idx=${corp.idx }">홈페이지 <br>
+									관리
 							</a></li>
 						
 

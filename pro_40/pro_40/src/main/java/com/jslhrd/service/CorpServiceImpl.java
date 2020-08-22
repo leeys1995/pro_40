@@ -137,4 +137,10 @@ public class CorpServiceImpl implements CorpService {
 			return mapper.corpCvideo(idx);
 		}
 		
+		//홈페이지 관리 패스워드 가져오기
+		@Override
+		public String corparationPass(int idx) {
+			
+			return mapper.corparationPass(idx);
+		}
 }

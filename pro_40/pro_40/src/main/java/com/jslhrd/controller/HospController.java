@@ -160,6 +160,8 @@ public class HospController {
 		log.info("hospitalWritePro()....");
 		HospVO vo = new HospVO();
 
+		vo.setH_pass(request.getParameter("h_pass"));
+		vo.setIdx(Integer.parseInt(request.getParameter("idx")));
 		vo.setH_name(request.getParameter("h_name"));
 		vo.setH_code(request.getParameter("h_code"));
 		vo.setH_tel(request.getParameter("h_tel"));
@@ -261,8 +263,7 @@ public class HospController {
 		HospVO vo = service.hospView(idx);
 		model.addAttribute("hosp", vo);
 		model.addAttribute("idx", idx);
-		
-		
+
 		log.info("hosp_modify().......");
 	}
 
@@ -344,30 +345,30 @@ public class HospController {
 
 		return "redirect:/hospital/hospital_view?idx=" + idx;
 	}
+
 	// 삭제
 	@PostMapping("hospital_delete")
 	public String hospDelete(MultipartHttpServletRequest request) {
-		
-		
+
 		int idx = Integer.parseInt(request.getParameter("idx"));
-		
-		
+
 		String mf1 = service.hospBanner(idx);
 		String mf2 = service.hospHphoto(idx);
 		String mf3 = service.hospDphoto(idx);
 		String mf4 = service.hospHvideo(idx);
-		
+
 		deleteFiles(mf1);
 		deleteFiles1(mf2);
-		deleteFiles2(mf3);	
+		deleteFiles2(mf3);
 		deleteFiles3(mf4);
-		
+
 		service.hospDelete(idx);
-		
+
 		log.info("hosp_delete().......");
-		
+
 		return "redirect:/hospital/hospital?page=1";
 	}
+
 	// 배너 완전 삭제 메소드
 	private void deleteFiles(String filename) {
 
@@ -465,8 +466,7 @@ public class HospController {
 	public void reservation(@RequestParam("idx") int idx, Model model) {
 
 		model.addAttribute("idx", idx);
-		
-		
+
 		HospVO vo = service.hospView(idx);
 
 		model.addAttribute("hosp", vo);
@@ -481,15 +481,15 @@ public class HospController {
 
 		List<ReservationVO> list = service.reservation_countO(idx);
 		List<ReservationVO> list1 = service.reservation_countX(idx);
-		
-		log.info("list:"+list);
-		log.info("list1:"+list1);
-		
+
+		log.info("list:" + list);
+		log.info("list1:" + list1);
+
 		model.addAttribute("list", list);
 		model.addAttribute("list1", list1);
-		
+
 		HospVO vo = service.hospView(idx);
-		
+
 		model.addAttribute("hosp", vo);
 		model.addAttribute("idx", idx);
 	}
@@ -513,11 +513,11 @@ public class HospController {
 		model.addAttribute("month", month);
 		model.addAttribute("year", year);
 		model.addAttribute("day", index);
-		
+
 		HospVO vo1 = service.hospView(idx);
-		
-		model.addAttribute("hosp",vo1);
-		
+
+		model.addAttribute("hosp", vo1);
+
 		log.info("hospitalReservationPro().......");
 
 	}
@@ -564,8 +564,8 @@ public class HospController {
 		log.info("hospitalReservationWrite().......");
 
 		HospVO vo = service.hospView(idx);
-		
-		model.addAttribute("hosp",vo);
+
+		model.addAttribute("hosp", vo);
 		model.addAttribute("idx", idx);
 
 	}
@@ -610,10 +610,10 @@ public class HospController {
 
 		int listcount = service.reservationCount_ok(idx);
 		List<ReservationVO> list = service.reservationList_ok(idx);
-		
+
 		HospVO vo = service.hospView(idx);
-		
-		model.addAttribute("hosp",vo);
+
+		model.addAttribute("hosp", vo);
 		model.addAttribute("listcount", listcount);
 		model.addAttribute("list", list);
 	}
@@ -644,6 +644,9 @@ public class HospController {
 			@RequestParam("month") String month, @RequestParam("day") String day,
 			@RequestParam("reservation_time") String reservation_time, Model model) {
 
+		
+		HospVO vo1 = service.hospView(idx);
+		model.addAttribute("hosp", vo1);
 		ReservationVO vo = new ReservationVO();
 
 		vo.setIdx(idx);
@@ -658,24 +661,75 @@ public class HospController {
 
 		log.info("hospitalReservationPro2().......");
 	}
-	
-	//병원 소개 페이지
+
+	// 병원 소개 페이지
 	@GetMapping("hospital_about")
-	public void hospital_about(@RequestParam("idx") int idx ,Model model) {
-		
+	public void hospital_about(@RequestParam("idx") int idx, Model model) {
+
 		log.info("hospitalAbout().......");
 		HospVO vo = service.hospView(idx);
 		model.addAttribute("hosp", vo);
 	}
-	
-	//진료 안내 페이지
-		@GetMapping("hospital_guidance")
-		public void hospital_guidance(@RequestParam("idx") int idx,Model model) {
+
+	// 진료 안내 페이지
+	@GetMapping("hospital_guidance")
+	public void hospital_guidance(@RequestParam("idx") int idx, Model model) {
+
+		log.info("hospitalGuidance().......");
+		HospVO vo = service.hospView(idx);
+		model.addAttribute("hosp", vo);
+	}
+
+	// 홈페이지 관리 홈페이지
+	@GetMapping("hospital_controller")
+	public void hospitalcontroller(@RequestParam("idx") int idx, Model model) {
+
+		log.info("hospitalController().......");
+
+		HospVO vo = service.hospView(idx);
+		model.addAttribute("hosp", vo);
+
+	}
+
+	// 홈페이지 관리 홈페이지 이동가능
+	@PostMapping("hospital_controller")
+	public String hospitalcontrollerPro(HttpServletRequest request, HttpServletResponse response) {
+		
+		String h_pass = request.getParameter("h_pass");
+	    
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		
+		String pass = service.hospitalPass(idx);
+		
+		log.info("idx="+idx);
+		log.info("h_pass="+h_pass);
+		log.info("pass="+pass);
+		
+		if(h_pass.contains(pass)) {
 			
-			log.info("hospitalGuidance().......");
-			HospVO vo = service.hospView(idx);
-			model.addAttribute("hosp", vo);
+			return "redirect:/hospital/hospital_controllerO?idx="+idx;
+		}else {
+			
+			return "redirect:/hospital/hospital_controllerX";
 		}
+	    
+	}
 	
+	@GetMapping("hospital_controllerO")
+	public void hospitalControllerO(@RequestParam("idx") int idx, Model model) {
+		
+		log.info("hospitalControllerO().......");
+		
+		HospVO vo= service.hospView(idx);
+		model.addAttribute("hosp", vo);
+		
+	}
 	
+	@GetMapping("hospital_controllerX")
+	public void hospitalControllerX() {
+		
+		log.info("hospitalControllerX().......");
+		
+		
+	}
 }

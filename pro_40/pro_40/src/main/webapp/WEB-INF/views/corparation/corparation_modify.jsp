@@ -31,29 +31,7 @@
 <script
 	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
-<script>
-	$(function() {
 
-		$('.slider').bxSlider({
-			mode : 'fade',
-			captions : true
-		});
-
-		$(".sitemap").click(function() {
-			$(".sitewrap").slideDown();
-		})
-		$("#close").click(function() {
-			$(".sitewrap").slideUp();
-		})
-
-		$(".nav > nav > .navi > li").hover(function() {
-			$(this).children(".navi2").stop().slideDown();
-		}, function() {
-			$(this).children(".navi2").stop().slideUp();
-		});
-
-	});
-</script>
 
 
 
@@ -66,7 +44,7 @@
 				<ul>
 					<li><a href="../member/login">로그인</a></li>
 					<li><a href="../member/insert">회원가입</a></li>
-					<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+					<li><a href="/" ">홈으로</a>
 				</ul>
 			</div>
 			<div class="navigation">
@@ -96,14 +74,7 @@
 
 	<div class="line"></div>
 
-	<div class="sitewrap">
-		<span class="fa fa-close" id="close" style="cursor: pointer"></span>
-		<div class="inner">
-			<span class="map">홈페이지소개</span> <span class="map">공지사항</span> <span
-				class="map">병원</span> <span class="map">기업</span> <span class="map">검색</span>
-			<span class="map">회원가입</span> <span class="map">로그인</span>
-		</div>
-	</div>
+
 
 
 	<script>

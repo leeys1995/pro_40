@@ -43,4 +43,7 @@ public interface CorpMapper {
 
 	// 공지사항 불러오기
 	public List<CorpBoardVO> corpboardList(int idx);
+	
+	//홈페이지 관리 패스워드 가져오기
+	public String corparationPass(int idx);
 }

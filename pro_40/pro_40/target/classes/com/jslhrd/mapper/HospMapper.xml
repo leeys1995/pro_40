@@ -85,8 +85,8 @@
 	<!-- 병원 게시판 글쓰기 -->
 	<insert id="hospWrite">
 		insert into
-		hosp(idx,h_code,h_name,h_addr1,h_addr2,h_tel,d_medical,d_mager,h_video,h_banner,h_photo,h_history,h_come,d_photo)
-		values(hosp_seq_idx.nextval,#{h_code},#{h_name},#{h_addr1},#{h_addr2},#{h_tel},#{d_medical},#{d_mager},#{h_video},#{h_banner},#{h_photo},#{h_history},#{h_come},#{d_photo})
+		hosp(idx,h_code,h_name,h_addr1,h_addr2,h_tel,d_medical,d_mager,h_video,h_banner,h_photo,h_history,h_come,d_photo,h_pass)
+		values(#{idx},#{h_code},#{h_name},#{h_addr1},#{h_addr2},#{h_tel},#{d_medical},#{d_mager},#{h_video},#{h_banner},#{h_photo},#{h_history},#{h_come},#{d_photo},#{h_pass})
 	</insert>
 
 	<!-- View -->
@@ -201,5 +201,10 @@
 	
 	<select id="reservation_countX" resultType="com.jslhrd.domain.ReservationVO">
 		select day from hosp_reservation where reservation_ok=0 and idx=#{idx} group by day
+	</select>
+	
+	<!-- 홈페이지 관리 패스워드 가져오기 -->
+	<select id="hospitalPass" resultType="String">
+		select h_pass from hosp where idx=#{idx}
 	</select>
 </mapper>

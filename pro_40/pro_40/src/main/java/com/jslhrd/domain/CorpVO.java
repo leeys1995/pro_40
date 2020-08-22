@@ -20,6 +20,6 @@ public class CorpVO {
 	private String c_come;
 	private String P_photo;
 	private int c_readcnt;
-	
+	private String c_pass;
 	
 }

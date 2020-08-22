@@ -218,4 +218,12 @@ public class HospServiceImpl implements HospService {
 		// TODO Auto-generated method stub
 		return mapper.reservation_countX(idx);
 	}
+	
+	//홈페이지 관리 패스워드 가져오기
+	@Override
+	public String hospitalPass(int idx) {
+		// TODO Auto-generated method stub
+		return mapper.hospitalPass(idx);
+	}
+	
 }

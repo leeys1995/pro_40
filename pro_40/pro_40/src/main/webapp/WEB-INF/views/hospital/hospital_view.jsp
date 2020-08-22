@@ -67,14 +67,16 @@
 
 						<li><a href="../member/login">로그인</a></li>
 						<li><a href="../member/insert">회원가입</a></li>
+						<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
 
 					</ul>
 				</c:if>
 				<c:if test="${!empty user}">
 					<c:if test="${user.userid eq 'admin' }">
 						<ul>
-							<li><a href="../member/list?page=1">회원관리</a></li>
+							
 							<li><a href="javascript:logout()">로그아웃</a></li>
+							<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
 
 						</ul>
 					</c:if>
@@ -103,10 +105,7 @@
 							<li><a
 								href="/hospital_board/hospital_board?idx=${hosp.idx }&page=1">공지</a></li>
 							<li><a href="hospital_reservation?idx=${hosp.idx }">예약</a></li>
-							<li><a href="hospital_modify?idx=${hosp.idx }">홈페이지 <br>
-									수정
-							</a></li>
-							<li><a href="reservation?idx=${hosp.idx }">예약관리</a></li>
+							<li><a href="hospital_controller?idx=${hosp.idx }">홈페이지 <br> 관리</a></li>
 
 						</ul>
 					</nav>
@@ -117,7 +116,23 @@
 
 	<div class="line"></div>
 
+<div class="line"></div>
 
+	<div class="sitewrap">
+		<span class="fa fa-close" id="close" style="cursor: pointer"></span>
+		<div class="inner">
+			<span class="map"><a href="hospital_about?idx=${hosp.idx }"
+				style="color: white;">병원소개</a></span> <span class="map"><a
+				href="hospital_guidance?idx=${hosp.idx }" style="color: white;">진료안내</a></span>
+			<span class="map"><a
+				href="/hospital_board/hospital_board?idx=${hosp.idx }&page=1"
+				style="color: white;">공지</a></span> <span class="map"><a
+				href="hospital_reservation?idx=${hosp.idx }"
+				style="color: white;">예약</a></span> <span class="map"><a
+				href="hospital_controller?idx=${hosp.idx }" style="color: white;">홈페이지<br>
+					관리</a></span> <span class="map">
+		</div>
+	</div>
 
 	<style>
 /* aaa css */

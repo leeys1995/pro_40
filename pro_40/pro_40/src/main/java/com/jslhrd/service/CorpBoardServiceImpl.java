@@ -196,4 +196,18 @@ public class CorpBoardServiceImpl implements CorpBoardService {
 			
 			mapper.productReply(vo);
 		}
+		
+		// 전체 목록 검색
+		@Override
+		public List<ProductVO> productDirectList(PageVO vo) {
+			// TODO Auto-generated method stub
+			return mapper.productDirectList(vo);
+		}
+
+		// 조건에 맞는 게시물 불러오기
+		@Override
+		public List<ProductVO> productDirectListSearch(PageVO vo) {
+			// TODO Auto-generated method stub
+			return mapper.productDirectListSearch(vo);
+		}
 }
