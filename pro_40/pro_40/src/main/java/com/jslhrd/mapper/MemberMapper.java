@@ -50,5 +50,7 @@ public interface MemberMapper
 	//PW 변경전 개인정보 검색
 	public MemberVO pwchange(MemberVO vo);
 	
+	//pw 업데이트 
+	public int pwupdate(MemberVO vo);
 
 }

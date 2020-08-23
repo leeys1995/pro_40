@@ -7,12 +7,12 @@
 	    <div><img src="/images/5.JPG" alt="" title="JSL 인재개발원"></div>
 	    <div><img src="/images/6.JPG" alt="" title="하이브리드 소프트웨어"></div>
 	    <div><img src="/images/1.JPG" alt="" title="전문과 가정 40기"></div>
-	    <div><img src="/images/2.JPG" alt="" title="조별 프로젝트"></div>
+	    <div><img src="/images/2.JPG" alt="" title="乙(おつ)조 프로젝트"></div>
 	    <div><img src="/images/3.JPG" alt="" title="조원"></div>
 	    <div><img src="/images/4.JPG" alt="" title="최석호 이영석 염철준"></div>
   	</div>
 
-	<div class="bbs_wrap">
+	<div class="bbs_wrap" >
 		<div class="bbs_left">
 			<h2 class="title">공지시항</h2>
 			<ul>

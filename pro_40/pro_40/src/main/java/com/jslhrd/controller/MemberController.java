@@ -63,7 +63,6 @@ public class MemberController {
 		vo.setC_code(c_code);
 
 		String newPassword = pwdEncoder.encode(vo.getPasswd());
-		log.info(vo.getPasswd()+"****************");
 		vo.setPasswd(newPassword);
 
 		int row = service.memInsert(vo);
@@ -356,12 +355,12 @@ public class MemberController {
    }
    
    @RequestMapping("/sendEmail.do")
-   public String sendEmail(HttpServletRequest req, HttpServletResponse res, @RequestParam("userid") String userid, MemberVO vo) throws Exception
+   public String sendEmail(HttpServletRequest req, HttpServletResponse res, @RequestParam("userid") String userid, MemberVO vo,Model model) throws Exception
    {
 	   //메일관련 정보 
 	  String host = "smtp.naver.com";
 	  final String emailid = "tjr0315"; 
-	  final String pass = "tkfkdgo1!2@3#";
+	  final String pass = "tkfkdgo1!2@";
 	  int port = 587;
 	  
 	  //메일내용 
@@ -411,10 +410,18 @@ public class MemberController {
 	  mimeMessage.setSubject(subject);
 	  mimeMessage.setText(body);
 	  Transport.send(mimeMessage);
-	
+	  
+	  model.addAttribute("userid",vo.getUserid());
 	  return "/member/pwchange_pro";
    }
 
-  
-   
+  @PostMapping("pwupdate")
+  public String pwupdate(MemberVO vo,Model model)
+  {
+	  String newPassword = pwdEncoder.encode(vo.getPasswd());
+	  vo.setPasswd(newPassword);
+	  int row = service.pwupdate(vo);
+	   model.addAttribute("row", row);
+	  return "/member/pwupdate_pro";
+  }
 }

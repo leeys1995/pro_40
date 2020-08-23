@@ -111,5 +111,10 @@ public class MemberServiceImpl implements MemberService
 		mapper.pwcodeupdate(vo);
 	}
 	
+	@Override
+	public int pwupdate(MemberVO vo) 
+	{
+		return mapper.pwupdate(vo);
+	}
 
 }

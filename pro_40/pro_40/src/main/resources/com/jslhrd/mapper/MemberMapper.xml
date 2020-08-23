@@ -131,4 +131,8 @@
 	<update id="pwcodeupdate">
 		update usertbl set pw_code=#{pw_code} where userid=#{userid}
 	</update>
+<!-- pw 수정 -->	
+	<update id="pwupdate">
+		update usertbl set userpw=#{passwd} where userid=#{userid} and pw_code=#{pw_code}
+	</update>
 </mapper>

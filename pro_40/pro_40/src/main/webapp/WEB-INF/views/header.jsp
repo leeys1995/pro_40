@@ -67,10 +67,13 @@
 
 </c:if>
 			</div>
+			<a href="/"><img src="/images/mainlogo.jpg" alt="" style="width: 150px; height: 100;"></a>
 			<div class="navigation">
-				<h1 class="logo"><a href="/">LOGO</a></h1>
-				<div class="nav">
+	
+				<div class="nav" >
+				
 					<nav>
+					
 						<ul class="navi">
 							<li><a href="about.do">사이트소개</a></li>
 							<li><a href="/notice/notice?page=1">공지사항</a></li>
