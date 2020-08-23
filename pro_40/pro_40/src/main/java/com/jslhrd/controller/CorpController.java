@@ -159,6 +159,11 @@ public class CorpController {
 		log.info("corparationWritePro()....");
 		CorpVO vo = new CorpVO();
 
+		CorpVO vo1 = service.corpView(Integer.parseInt(request.getParameter("idx")));
+		
+		if(vo1==null) {
+			
+		
 		vo.setC_pass(request.getParameter("c_pass"));
 		vo.setIdx(Integer.parseInt(request.getParameter("idx")));
 		vo.setC_name(request.getParameter("c_name"));
@@ -228,8 +233,19 @@ public class CorpController {
 		service.corpWrite(vo);
 
 		return "redirect:/corparation/corparation?page=1";
+		}else {
+			
+			return "redirect:/corparation/corparation_writeX";
+			
+		}
 	}
 
+	@GetMapping("corparation_writeX")
+	public void corparation_writeX() {
+		
+		log.info("corpartion_writeX");
+		
+	}
 	// 조회수 증가
 	@GetMapping("corpHits")
 	public String corpHits(@RequestParam("idx") int idx, HttpServletRequest request, HttpServletResponse response) {

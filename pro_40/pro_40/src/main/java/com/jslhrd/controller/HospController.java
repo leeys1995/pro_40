@@ -160,6 +160,10 @@ public class HospController {
 		log.info("hospitalWritePro()....");
 		HospVO vo = new HospVO();
 
+		HospVO vo1 = service.hospView(Integer.parseInt(request.getParameter("idx")));
+		
+		if(vo1==null) {
+		
 		vo.setH_pass(request.getParameter("h_pass"));
 		vo.setIdx(Integer.parseInt(request.getParameter("idx")));
 		vo.setH_name(request.getParameter("h_name"));
@@ -229,8 +233,22 @@ public class HospController {
 		service.hospWrite(vo);
 
 		return "redirect:/hospital/hospital?page=1";
+		
+		}else {
+			
+			return "redirect:/hospital/hospital_writeX";
+			
+		}
 	}
-
+	
+	
+	@GetMapping("hospital_writeX")
+	public void hospital_writeX() {
+		
+		log.info("hospital_writeX");
+	}
+	
+	
 	// 조회수 증가
 	@GetMapping("hospHits")
 	public String hospHits(@RequestParam("idx") int idx, HttpServletRequest request, HttpServletResponse response) {
