@@ -15,6 +15,7 @@
 <head>
 <style type="text/css">
 .border{width: 850px; height: auto; margin: auto;}
+.border p{max-width: 150px; max-height: 150px;}
 .re{width: 800px; height: auto; text-align:center; margin: auto; padding: 20px;}
 
 .input_btn{
@@ -104,9 +105,12 @@ $(document).ready(function(){
 	</div>
 	<!-- 관리자만 보이게 처리하기
 					-2020/08/21 수정- -->
+	<c:if test="${!empty about_view }">				
 	<div class="re" id="about_modify">
 		<button class="pushy__btn pushy__btn--df pushy__btn--green" id="test">修正する</button>
 	</div>
+	</c:if>
+	
 </body>
 </html>
 
@@ -134,7 +138,7 @@ $(document).ready(function(){
 		htParams : {
 			bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 			bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-			bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+			bUseModeChanger : false,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
 			//bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
 			//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
 			SE2M_FontName: {

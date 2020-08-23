@@ -37,7 +37,7 @@
 				<c:if test="${search.tblname eq 'corp' }">
 					<li class="li2">
 						<a href="/corparation/corpHits?idx=${search.idx }">
-							<img src="/resources/upload/hosp/hospital_photo/${search.h_photo }" alt="写真">
+							<img src="/resources/upload/corp/corparation_photo/${search.h_photo }" alt="写真">
 						</a>
 						<p class="p26">
 							<a href="/corparation/corpHits?idx=${search.idx }">

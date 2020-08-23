@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>장수하늘소</title>
+	<title>病院管理</title>
 	<link href="/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 	<link href="/css/common.css" rel="stylesheet">
@@ -45,9 +45,9 @@
 			<div class="topnav">
 <c:if test="${empty user}">			
 				<ul>
-					<li><a href="/member/login">로그인</a></li>
-					<li><a href="/member/insert">회원가입</a></li>
-					<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+					<li><a href="/member/login">ログイン</a></li>
+					<li><a href="/member/insert">新規取得</a></li>
+					<li><a href="javascript:void(0)" class="sitemap">サイトマップ</a></li>
 					
 					<!--	2020/08/19 전체검색	-->
 					<li>
@@ -57,22 +57,21 @@
 							</form>
 						</div>
 					</li>
-					
 				</ul>
 </c:if>
 <c:if test="${!empty user}">	
 <c:if test="${user.userid eq 'admin' }">	
 				<ul>
-					<li><a href="/member/list?page=1">회원관리</a></li>
-					<li><a href="javascript:logout()">로그아웃</a></li>
-					<li><a href="" class="sitemap">사이트맵</a></li>
+					<li><a href="/member/list?page=1">会員管理</a></li>
+					<li><a href="javascript:logout()">ログアウト</a></li>
+					<li><a href="" class="sitemap">サイトマップ</a></li>
 				</ul>
 </c:if>
 <c:if test="${ user.userid != 'admin'}">
 				<ul>
-					<li><a href="/member/modify">개인전보 수정</a></li>
-					<li><a href="javascript:logout()">로그아웃</a></li>
-					<li><a href="" class="sitemap">사이트맵</a></li>
+					<li><a href="/member/modify">個人情報修正</a></li>
+					<li><a href="javascript:logout()">ログアウト</a></li>
+					<li><a href="" class="sitemap">サイトマップ</a></li>
 				</ul>	
 </c:if>
 
@@ -89,9 +88,9 @@
 						<ul class="navi">
 							<!-- 사이트 소개 링크 -->
 							<li><a href="/about/about">サイト紹介</a></li>
-							<li><a href="/notice/notice?page=1">공지사항</a></li>
-							<li><a href="/hospital/hospital?page=1">병원</a></li>
-							<li><a href="/corparation/corparation?page=1">기업</a></li>
+							<li><a href="/notice/notice?page=1">お知らせ</a></li>
+							<li><a href="/hospital/hospital?page=1">病院</a></li>
+							<li><a href="/corparation/corparation?page=1">企業</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -104,9 +103,9 @@
 	<div class="sitewrap">
 		<span class="fa fa-close" id="close" style="cursor: pointer"></span>
 		<div class="inner">
-			<span class="map">홈페이지소개</span> <span class="map">공지사항</span> <span
-				class="map">병원</span> <span class="map">기업</span> <span class="map">검색</span>
-			<span class="map">회원가입</span> <span class="map">로그인</span>
+			<span class="map">ホームーページ紹介</span> <span class="map">お知らせ</span> <span
+				class="map">病院</span> <span class="map">企業</span> <span class="map">検索</span>
+			<span class="map">新規取得</span> <span class="map">ログイン</span>
 		</div>
 	</div>
 	

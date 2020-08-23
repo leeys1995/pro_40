@@ -66,7 +66,7 @@
   </style>
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">장수하늘소 로그인</h2>
+		<h2 class="sub-title">ログイン</h2>
 	</div>
 	<div class="write-form" style="width:50%; margin:0 auto; border:1px solid #ccc; padding:20px;">
 	
@@ -80,17 +80,17 @@
 				<legend class="readonly">로그인그룹</legend>
 				<div style="width:70%; float:left;">
 					<label for="userid" class="readonly">아이디</label>
-					<input type="text" name="userid" id="userid" placeholder="아이디">
+					<input type="text" name="userid" id="userid" placeholder="ログインID">
 					<label for="pw" class="readonly">패스워드</label>
-					<input type="password" name="passwd" id="passwd" placeholder="패스워드">
+					<input type="password" name="passwd" id="passwd" placeholder="パスワード">
 				</div>
 				<div style="width:28%; float:right;padding:15px;
 				height:132px; margin-top:3px;">
-					<input type="submit" value="로그인" alt="로그인" 
+					<input type="submit" value="ログイン" alt="로그인" 
 					style="background: #FF4000; color:#fff;
 					width:100%; height:100%; border:0 none; cursor:pointer;">
 				</div>
-				<p style="clear:both;padding-top:20px; text-align:center;"><a href="/member/idsearch">아이디찾기</a> | <a href="/member/pwchange">패스워드찾기</a> | <a href="/member/insert">회원가입</a></p>
+				<p style="clear:both;padding-top:20px; text-align:center;"><a href="/member/idsearch">IDを探す</a> | <a href="/member/pwchange">パスワードを探す</a> | <a href="/member/insert">新規取得</a></p>
 				<!-- 외부 api로 로그인		-2020/08/22-	 -->
 				    <div><span id="kakaoIdentity"></span></div>
 				    <div><span id="kakaoNickName"></span></div>
@@ -101,15 +101,17 @@
 	</div>
 		
 </div>
-
 <!-- NAVER login -->
 <div id="naver_id_login" style="text-align:center; "><a href="/member/login_api">
-<img src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" style="width: 300px; height: auto;"/></a>
+<img src="/images/Log in with NAVER_Official_Green.PNG" style="width: 300px; height: auto;"/></a>
+
 </div>
 <br>
 <!-- KAKAO login -->
-<div style="width: 300px; height: auto; margin: auto;">
-<a id="kakao-login-btn"></a>
+<!-- 임시용 영어 KAKAO 로그인 버튼 	- 2020/08/23 수정- -->
+<div style="width: 300px; height: auto; margin: auto; cursor: pointer;">
+	<!-- <a id="kakao-login-btn"></a> -->
+	<img src="/images/kakao_login.png" id="kakao-login-btn">
 </div>
 
 <!-- login script-->
