@@ -42,7 +42,7 @@ h3 {
 	<h2 style="text-align: center" id="name"></h2>
 	<h4 style="text-align: center" id="email"></h4>
 	
-	 <a href="logout_api">로그아웃</a>
+	 <a href="logout">로그아웃</a>
 
 </body>
 </html>

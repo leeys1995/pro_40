@@ -217,7 +217,9 @@
 	</delete>
 	
 	<!-- reply 답글달기 -->
-	
+	<update id="productReply">
+		update product set reply= #{reply}, reply_ok = reply_ok+1 where idx=#{idx} and idx2=#{idx2}
+	</update>
 	
 	
 </mapper>	

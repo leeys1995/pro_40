@@ -10,12 +10,10 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 	<link href="/css/common.css" rel="stylesheet">
 	<link href="/css/mystyle.css" rel="stylesheet">
-	<!-- 2020/08/19 테스트중 -->
-	<link href="/css/search.css" rel="stylesheet">
-	
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-
+	<!-- 2020/08/19 테스트중 -->
+	<link href="/css/search.css" rel="stylesheet">
   <script>
     $(function(){
     	
@@ -50,11 +48,12 @@
 					<li><a href="/member/login">로그인</a></li>
 					<li><a href="/member/insert">회원가입</a></li>
 					<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
-					<!--	2020/08/19 테스트중	-->
+					
+					<!--	2020/08/19 전체검색	-->
 					<li>
 						<div id="wrap">
-  							<form action="" autocomplete="on" id="main_search_form">
-							<input id="search" name="search" type="text" placeholder="검색어 입력"><input id="search_submit" value="Rechercher" type="submit">
+  							<form action="/about/search_page" autocomplete="on" id="main_search_form">
+								<input id="search" name="search" type="text" placeholder="検索ワードを入力してください"><input id="search_submit" value="Rechercher" type="submit">
 							</form>
 						</div>
 					</li>
@@ -80,11 +79,16 @@
 </c:if>
 			</div>
 			<div class="navigation">
-				<h1 class="logo"><a href="/">LOGO</a></h1>
+			<!-- 로고 -->
+			<a  href="/"><img src="/images/logo.jpg" 
+			style="width: 150px; height: auto; margin: 0; padding: 0; 
+			position: relative; right: 150px; top: -60px;"></a>
+			<!-- 로고 끝 -->
 				<div class="nav">
 					<nav>
 						<ul class="navi">
-							<li><a href="/about/about">사이트소개</a></li>
+							<!-- 사이트 소개 링크 -->
+							<li><a href="/about/about">サイト紹介</a></li>
 							<li><a href="/notice/notice?page=1">공지사항</a></li>
 							<li><a href="/hospital/hospital?page=1">병원</a></li>
 							<li><a href="/corparation/corparation?page=1">기업</a></li>
@@ -122,25 +126,9 @@ function logout()
 }
 
 </script>	
-
-<!-- 2020/08/19 검색(수정중) -->
-<!-- <script type="text/javascript">
-var searchField = $('.search');
-var searchInput = $("input[type='search']");
-
-var checkSearch = function(){
-    var contents = searchInput.val();
-    if(contents.length !== 0){
-       searchField.addClass('full');
-    } else {
-       searchField.removeClass('full');
-    }
-};
-
-$("input[type='search']").focus(function(){
-    searchField.addClass('isActive');
-  }).blur(function(){
-  	searchField.removeClass('isActive');
-    checkSearch();
-});
-</script> -->
+	
+	
+	
+	
+	
+	

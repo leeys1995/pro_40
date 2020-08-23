@@ -10,8 +10,8 @@
 <header>
 	<div class="topnav">
 		<ul>
-			<li><a href="login.do">로그인</a></li>
-			<li><a href="member.do">회원가입</a></li>
+			<li><a href="../member/login">로그인</a></li>
+			<li><a href="../member/insert">회원가입</a></li>
 			<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
 		</ul>
 	</div>
@@ -23,10 +23,12 @@
 		<div class="nav">
 			<nav>
 				<ul class="navi">
-					<li><a href="about.do">병원소개</a></li>
-					<li><a href="about.do">진료안내</a></li>
+						<li><a href="../hospital/hospital_about?idx=${idx }">병원소개</a></li>
+					<li><a href="../hospital/hospital_guidance?idx=${idx }">진료안내</a></li>
 					<li><a href="hospital_board?idx=${idx }&page=1">공지</a></li>
-					<li><a href="/corparation/corparation">예약</a></li>
+					<li><a href="../hospital/hospital_reservation?idx=${idx }">예약</a></li>				
+					<li><a href="../hospital/hospital_modify?idx=${idx }">홈페이지 <br> 수정</a></li>
+					<li><a href="../hospital/reservation?idx=${idx }">예약관리</a></li>
 
 
 				</ul>

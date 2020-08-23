@@ -2,7 +2,104 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@ include file="../header.jsp" %>
+<%
+	int idx2 = Integer.parseInt(request.getParameter("idx"));
+%>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=YOUR_CLIENT_ID&submodules=geocoder"></script>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>장수하늘소</title>
+<link href="../css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<link href="../css/common.css" rel="stylesheet">
+<link href="../css/mystyle.css" rel="stylesheet" type="text/css">
+<style>
+	.aaa_right {
+		padding:15px;
+		height: 200px;
+		}
+</style>
+<!-- 카카오톡 맵 좌표 찍기 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=831d3575fb87dc0f7e2e0d4494eb90f6&libraries=services"></script>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+<script>
+
+	$(function() {
+
+		$('.slider').bxSlider({
+			mode : 'fade',
+			captions : true
+		});
+
+		$(".sitemap").click(function() {
+			$(".sitewrap").slideDown();
+		})
+		$("#close").click(function() {
+			$(".sitewrap").slideUp();
+		})
+
+		$(".nav > nav > .navi > li").hover(function() {
+			$(this).children(".navi2").stop().slideDown();
+		}, function() {
+			$(this).children(".navi2").stop().slideUp();
+		});
+
+	});
+</script>
+
+
+
+
+</head>
+<body>
+	<div class="header">
+		<header>
+			<div class="topnav">
+				<ul>
+					<li><a href="../member/login">로그인</a></li>
+					<li><a href="../member/insert">회원가입</a></li>
+					<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+				</ul>
+			</div>
+			<div class="navigation">
+				<h1 class="logo">
+					<a href="corparation_view?idx=${corp.idx }"><img height="100px"
+						src="/resources/upload/corp/banner/${corp.c_banner }" alt="모집사진"></a>
+				</h1>
+				<div class="nav">
+					<nav>
+						<ul class="navi">
+							<li><a href="corparation_about?idx=${corp.idx }">기업소개</a></li>
+							<li><a href="corparation_guidance?idx=${corp.idx }">제품소개</a></li>
+							<li><a href="/corparation_board/corparation_board?idx=${corp.idx }&page=1">공지</a></li>
+							<li><a href="/corparation_board/product?idx=${corp.idx }&page=1">제품문의</a></li>							
+							<li><a href="corparation_modify?idx=${corp.idx }">홈페이지 <br> 수정</a></li>
+
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</header>
+	</div>
+
+	<div class="line"></div>
+
+	<div class="sitewrap">
+		<span class="fa fa-close" id="close" style="cursor: pointer"></span>
+		<div class="inner">
+			<span class="map">홈페이지소개</span> <span class="map">공지사항</span> <span
+				class="map">병원</span> <span class="map">기업</span> <span class="map">검색</span>
+			<span class="map">회원가입</span> <span class="map">로그인</span>
+		</div>
+	</div>
+
 
 <script>
 	function setThumbnail(event) {
@@ -130,7 +227,7 @@
 					</tr>
 					<tr>
 						<th>3.사진</th>
-						<td><input type="file" name="c_photo" accept="image/*" onchange="setThumbnail2(event);">
+						<td><input type="file" name="p_photo" accept="image/*" onchange="setThumbnail2(event);">
 						<div id="image_container2"></div></td>
 						
 					</tr>

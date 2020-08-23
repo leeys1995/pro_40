@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>네이버 :: Smart Editor 2 &#8482;</title>
-<script type="text/javascript" src="./js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="./js/service/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <body>
 <form action="sample/viewer/index.php" method="post">
@@ -20,22 +20,41 @@
 <script type="text/javascript">
 var oEditors = [];
 
+var sLang = "ja_JP";	// 언어 (ko_KR/ en_US/ ja_JP/ zh_CN/ zh_TW), default = ko_KR
+var aDefaultFontSet = [];
+switch(sLang){
+	case "ja_JP" :
+		aDefaultFontSet = [["MS UI Gothic", "MS UI Gothic"], ["MS Pゴシック", "MS Pゴシック"], ["MS ゴシック", "MS ゴシック"], ["MS P明朝", "MS P明朝"], ["MS 明朝", "MS 明朝"], ["Arial", "Arial"], ["Arial Black", "Arial Black"], ["Comic Sans MS", "Comic Sans MS"], ["Courier New", "Courier New"], ["Times New Roman", "Times New Roman"], ["Verdana", "Verdana"]];
+		break;
+	case "zh_CN" :
+		aDefaultFontSet = [["宋体", "宋体"], ["新宋体", "新宋体"], ["黑体", "黑体"], ["仿宋", "仿宋"], ["楷体", "楷体"], ["幼圆", "幼圆"], ["隶书", "隶书"], ["华文彩云", "华文彩云"], ["Arial", "Arial"], ["Comic Sans MS", "Comic Sans MS"], ["Verdana", "Verdana"], ["Times New Roman", "Times New Roman"], ["Tahoma", "Tahoma"]];
+		break;
+	case "en_US" :
+		aDefaultFontSet = [["Gulim", "Gulim"], ["Batang", "Batang"], ["Gulimche", "Gulimche"], ["Sans Serif", "Sans Serif"], ["Serif", "Serif"], ["Wide", "Wide"], ["Narrow", "Narrow"], ["Comic Sans MS", "Comic Sans MS"], ["Courier New", "Courier New"], ["Garamond", "Garamond"], ["Georgia", "Georgia"], ["Tahoma", "Tahoma"], ["Trebuchet MS", "Trebuchet MS"], ["Verdana", "Verdana"]];
+		break;
+	default :
+		break;
+}
 // 추가 글꼴 목록
 //var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
 
 nhn.husky.EZCreator.createInIFrame({
 	oAppRef: oEditors,
 	elPlaceHolder: "ir1",
-	sSkinURI: "SmartEditor2Skin.html",	
+	sSkinURI: "SmartEditor2Skin_ja_JP.html",	
 	htParams : {
 		bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
 		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
 		//bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
 		//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+		SE2M_FontName: {
+			aDefaultFontList: aDefaultFontSet
+		},
 		fOnBeforeUnload : function(){
 			//alert("완료!");
-		}
+		},
+		I18N_LOCALE : sLang
 	}, //boolean
 	fOnAppLoad : function(){
 		//예제 코드

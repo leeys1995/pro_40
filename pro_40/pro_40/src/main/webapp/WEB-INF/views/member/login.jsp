@@ -10,6 +10,7 @@
 <meta name="viewport" content="user-scalable=no,inital-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,width=device-width">
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
+<!-- Kakao Api -->
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function() {
         // @details 카카오톡 Developer API 사이트에서 발급받은 JavaScript Key
@@ -90,10 +91,11 @@
 					width:100%; height:100%; border:0 none; cursor:pointer;">
 				</div>
 				<p style="clear:both;padding-top:20px; text-align:center;"><a href="/member/idsearch">아이디찾기</a> | <a href="/member/pwchange">패스워드찾기</a> | <a href="/member/insert">회원가입</a></p>
-				
+				<!-- 외부 api로 로그인		-2020/08/22-	 -->
 				    <div><span id="kakaoIdentity"></span></div>
 				    <div><span id="kakaoNickName"></span></div>
 				    <!-- <div><img id="kakaoThumbnailImg" src=""/></div> -->
+				    
 							</fieldset>
 		</form>	
 	</div>
@@ -109,11 +111,6 @@
 <div style="width: 300px; height: auto; margin: auto;">
 <a id="kakao-login-btn"></a>
 </div>
-
-<!-- KAKAO user -->
-
-
-<a href="javascript:logout()">logout</a>
 
 <!-- login script-->
 <script>
@@ -133,7 +130,7 @@
 </script>
 
 <!-- KAKAO logout script-->
-<script>
+<!-- <script>
 function logout() {
 	Kakao.Auth.logout(
 		function(obj) {
@@ -141,7 +138,7 @@ function logout() {
 		location.href='/member/kakao';
 	 });
 }
-</script>
+</script> -->
 
 
 <br>
@@ -162,6 +159,3 @@ function logout() {
 </script>
 
 <%@ include file="../footer.jsp"%>
-
-
-

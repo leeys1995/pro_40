@@ -191,4 +191,9 @@ public class CorpBoardServiceImpl implements CorpBoardService {
 		}
 		
 		//답글달기
+		@Override
+		public void productReply(ProductVO vo) {
+			
+			mapper.productReply(vo);
+		}
 }
