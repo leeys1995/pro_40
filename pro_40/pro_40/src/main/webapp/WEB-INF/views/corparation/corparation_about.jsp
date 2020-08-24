@@ -87,13 +87,13 @@
 	<div class="container">
 		<div class="text_center">
 				<p><span class="support_text">${corp.c_name }은</span><br/>
-<strong>${corp.c_history }</strong></p>
+<strong>${corp.p_mager }</strong></p>
 				<span class="col_bar"></span>
 		</div>
 		<div class="greeting_cont">
-			<img src="/resources/upload/hosp/hospital_photo/${corp.c_photo }" alt="" style="float:left; padding:0px 40px; width:500px; height:500px;">
+			<img src="/resources/upload/corp/corparation_photo/${corp.c_photo }" alt="" style="float:left; padding:0px 40px; width:500px; height:500px;">
 			<div class="text_wrap"><p>
-				${corp.p_intro }
+				${corp.c_history }
 			</p><strong class="sign">${corp.c_name } &nbsp 기 업 장</strong></div>
 		</div>
 	</div>
@@ -104,7 +104,7 @@
 	
 	<div class="container clearfix">
 			<address class="address">
-				<p class="title">오시는 길</p>
+				<p class="title" style="font-size:20px;"><strong>오시는 길</strong></p>
 				 ${corp.c_come }
 			</address>
 		

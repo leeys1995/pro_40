@@ -130,7 +130,12 @@
 		
 		<div class="paging">
 			<ul>
-				<li><a href="#">${listpage }</a></li>
+			
+				<li style="padding: 0 30px;"><a href="${prev }"><img
+					src="/images/i_prev.gif"></a></li>
+			<li><a href="#">${page }</a></li>
+			<li style="padding: 0 30px;"><a href="${next }"><img
+					src="/images/i_next.gif"></a></li>
 			</ul>
 			<a href="product_write?idx=<%=idx %>" class="btn-write">글쓰기</a>
 		</div>

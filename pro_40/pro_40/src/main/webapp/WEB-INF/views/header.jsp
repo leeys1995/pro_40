@@ -48,11 +48,11 @@
 					<li><a href="/member/login">로그인</a></li>
 					<li><a href="/member/insert">회원가입</a></li>
 					<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
-					<!--	2020/08/19 테스트중	-->
+				<!--	2020/08/19 전체검색	-->
 					<li>
 						<div id="wrap">
-  							<form action="" autocomplete="on" id="main_search_form">
-							<input id="search" name="search" type="text" placeholder="검색어 입력"><input id="search_submit" value="Rechercher" type="submit">
+  							<form action="/about/search_page" autocomplete="on" id="main_search_form">
+								<input id="search" name="search" type="text" placeholder="検索ワードを入力してください"><input id="search_submit" value="Rechercher" type="submit">
 							</form>
 						</div>
 					</li>
@@ -76,8 +76,9 @@
 
 </c:if>
 			</div>
+			<a href="/"><img src="/images/mainlogo.jpg" alt="" style="width: 150px; height: 100;"></a>
 			<div class="navigation">
-				<h1 class="logo"><a href="/">LOGO</a></h1>
+				
 				<div class="nav">
 					<nav>
 						<ul class="navi">
@@ -85,8 +86,8 @@
 							<li><a href="/notice/notice?page=1">공지사항</a></li>
 							<li><a href="/hospital/hospital?page=1">병원</a></li>
 							<li><a href="/corparation/corparation?page=1">기업</a></li>
-							<li><a href="qa.do">검색</a></li>						
-
+										
+			
 						</ul>
 					</nav>
 				</div>

@@ -326,21 +326,27 @@ img {
 	padding: 30px 0;
 	overflow: hidden;
 	/* 플로트시킨 부모에게 overflow:hidden 을 주면 부모높이 인식됨*/
+	
 }
 
 .paging ul {
 	width: 360px;
 	margin: 0 auto;
+	
+	
 }
 
 .paging ul li {
 	float: left;
 	margin: 5px;
+	
 }
 
 .paging ul li a {
 	padding: 12px;
 	border: 1px solid #ccc; /* 선두께 선종류 선색상 */
+	margin: 12px;
+	
 }
 
 .btn-write {

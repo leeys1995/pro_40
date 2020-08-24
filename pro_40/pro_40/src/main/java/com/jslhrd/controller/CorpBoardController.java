@@ -105,11 +105,39 @@ public class CorpBoardController {
 		}
 
 		if (vo.getKey() == null) {
-			model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url, "", idx));
-
+			//다음 페이지
+			String nextpage="/corparation_board/corparation_board?idx="+idx+"&page="+totpage;
+			if(nowpage<totpage) {
+				nextpage="/corparation_board/corparation_board?idx="+idx+"&page="+(nowpage+1);
+			}
+			//이전페이지
+			String prevPage="/corparation_board/corparation_board?idx="+idx+"&page="+1;
+			if(nowpage>1) {
+				prevPage="/corparation_board/corparation_board?idx="+idx+"&page="+(nowpage-1);
+			}
+			
+			model.addAttribute("prev",prevPage);
+			model.addAttribute("next",nextpage);
+			model.addAttribute("page",PageIndex.pageList(nowpage, totpage, url, "").substring(46,PageIndex.pageList(nowpage, totpage, url, "").length()-46));
+			
+			//model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url, ""));
 		} else {
-			model.addAttribute("listpage",
-					PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey(), idx));
+			//model.addAttribute("listpage", PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()));
+			//다음 페이지
+			String nextpage="/corparation_board/corparation_board?idx="+idx+"&page="+totpage+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+			if(nowpage<totpage) {
+				nextpage="/corparation_board/corparation_board?idx="+idx+"&page="+(nowpage+1)+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+			}
+			//이전페이지
+			String prevPage="/corparation_board/corparation_board?idx="+idx+"&page="+1+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+			if(nowpage>1) {
+				prevPage="/corparation_board/corparation_board?idx="+idx+"&page="+(nowpage-1)+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+			}
+			
+			model.addAttribute("prev",prevPage);
+			model.addAttribute("next",nextpage);
+			
+			model.addAttribute("page",PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).substring(46,PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).length()-46));
 		}
 		
 		CorpVO vo1 = service1.corpView(idx);
@@ -164,7 +192,21 @@ public class CorpBoardController {
 		// model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url,
 		// ""));
 
-		model.addAttribute("listpage", PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey(), idx));
+		String nextpage="/corparation_board/corparation_board?idx="+idx+"&page="+totpage+"&search="+vo.getSearch()+"&key="+vo.getKey();
+		if(nowpage<totpage) {
+			nextpage="/corparation_board/corparation_board?idx="+idx+"&page="+(nowpage+1)+"&search="+vo.getSearch()+"&key="+vo.getKey();
+		}
+		//이전페이지
+		String prevPage="/corparation_board/corparation_board?idx="+idx+"&page="+1+"&search="+vo.getSearch()+"&key="+vo.getKey();
+		if(nowpage>1) {
+			prevPage="/corparation_board/corparation_board?idx="+idx+"&page="+(nowpage-1)+"&search="+vo.getSearch()+"&key="+vo.getKey();
+		}
+		
+		
+		model.addAttribute("prev",prevPage);
+		model.addAttribute("next",nextpage);
+		
+		model.addAttribute("page",PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).substring(46,PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).length()-46));
 
 		String c_name = service.corpName(idx);
 		model.addAttribute("c_name", c_name);
@@ -418,12 +460,41 @@ public class CorpBoardController {
 			}
 
 			if (vo.getKey() == null) {
-				model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url, "", idx));
-
+				//다음 페이지
+				String nextpage="/corparation_board/product?idx="+idx+"&page="+totpage;
+				if(nowpage<totpage) {
+					nextpage="/corparation_board/product?idx="+idx+"&page="+(nowpage+1);
+				}
+				//이전페이지
+				String prevPage="/corparation_board/product?idx="+idx+"&page="+1;
+				if(nowpage>1) {
+					prevPage="/corparation_board/product?idx="+idx+"&page="+(nowpage-1);
+				}
+				
+				model.addAttribute("prev",prevPage);
+				model.addAttribute("next",nextpage);
+				model.addAttribute("page",PageIndex.pageList(nowpage, totpage, url, "").substring(46,PageIndex.pageList(nowpage, totpage, url, "").length()-46));
+				
+				//model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url, ""));
 			} else {
-				model.addAttribute("listpage",
-						PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey(), idx));
+				//model.addAttribute("listpage", PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()));
+				//다음 페이지
+				String nextpage="/corparation_board/product?idx="+idx+"&page="+totpage+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+				if(nowpage<totpage) {
+					nextpage="/corparation_board/product?idx="+idx+"&page="+(nowpage+1)+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+				}
+				//이전페이지
+				String prevPage="/corparation_board/product?idx="+idx+"&page="+1+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+				if(nowpage>1) {
+					prevPage="/corparation_board/product?idx="+idx+"&page="+(nowpage-1)+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+				}
+				
+				model.addAttribute("prev",prevPage);
+				model.addAttribute("next",nextpage);
+				
+				model.addAttribute("page",PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).substring(46,PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).length()-46));
 			}
+			
 
 			
 		}
@@ -476,7 +547,23 @@ public class CorpBoardController {
 			// model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url,
 			// ""));
 
-			model.addAttribute("listpage", PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey(), idx));
+
+			String nextpage="/corparation_board/product?idx="+idx+"&page="+totpage+"&search="+vo.getSearch()+"&key="+vo.getKey();
+			if(nowpage<totpage) {
+				nextpage="/corparation_board/product?idx="+idx+"&page="+(nowpage+1)+"&search="+vo.getSearch()+"&key="+vo.getKey();
+			}
+			//이전페이지
+			String prevPage="/corparation_board/product?idx="+idx+"&page="+1+"&search="+vo.getSearch()+"&key="+vo.getKey();
+			if(nowpage>1) {
+				prevPage="/corparation_board/product?idx="+idx+"&page="+(nowpage-1)+"&search="+vo.getSearch()+"&key="+vo.getKey();
+			}
+			
+			
+			model.addAttribute("prev",prevPage);
+			model.addAttribute("next",nextpage);
+			
+			model.addAttribute("page",PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).substring(46,PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).length()-46));
+
 
 			String c_name = service.corpName(idx);
 			model.addAttribute("c_name", c_name);

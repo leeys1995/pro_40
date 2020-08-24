@@ -4,8 +4,10 @@ import lombok.Data;
 
 @Data
 public class SearchVO {
-	String ho_co;
-	String[] booking;
-	
+	private int idx;
+	private String h_name;
+	private String h_photo;
+	private int h_readcnt;
+	private String tblname;
 	
 }

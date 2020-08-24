@@ -10,6 +10,7 @@
 <meta name="viewport" content="user-scalable=no,inital-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,width=device-width">
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
+<!-- Kakao Api -->
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function() {
         // @details 카카오톡 Developer API 사이트에서 발급받은 JavaScript Key
@@ -19,20 +20,25 @@
               container : "#kakao-login-btn"
             , success : function( authObj ) {
                 // console.log( authObj );
-          alert(JSON.stringify(authObj))
+          //alert(JSON.stringify(authObj)) <---토큰값
                 Kakao.API.request({
                      url: '/v2/user/me'
                     , success : function( res ) {
+						$(document).ready(function() {
+							$('#userid').val(res.id);
+							$('#name').val(res.properties.nickname);
+							kakao.method="post";
+							kakao.action="kakao_login";
+							kakao.submit();
+						});
+						
                         // console.log( res );
                         // @breif 아이디
-                        document.getElementById( "kakaoIdentity" ).innerHTML = res.id;
-                        alert(res.id)
+                        //document.getElementById( "kakaoIdentity" ).innerHTML = res.id;
+                        //alert(res.id) <--유저 id
                         // @breif 닉네임
-                        document.getElementById( "kakaoNickName" ).innerHTML = res.properties.nickname;
-                        // @breif 프로필 이미지
-                        document.getElementById( "kakaoProfileImg" ).src = res.properties.profile_image;
-                        // @breif 썸네일 이미지
-                        //document.getElementById( "kakaoThumbnailImg" ).src = res.properties.thumbnail_image;
+                        //document.getElementById( "kakaoNickName" ).innerHTML = res.properties.nickname;
+                        
                     }, fail : function( error ) {
                         alert( JSON.stringify( error ) );
                     }
@@ -60,56 +66,53 @@
   </style>
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">장수하늘소 로그인</h2>
+		<h2 class="sub-title">ログイン</h2>
 	</div>
-	
 	<div class="write-form" style="width:50%; margin:0 auto; border:1px solid #ccc; padding:20px;">
+	
+		<form name="kakao">
+			<input id="userid" name="userid" type="hidden" />
+			<input id="name"  name="name" type="hidden" />
+		</form>
+	
 		<form name="my" method="post" action="login" onsubmit="return formcheck();">
 			<fieldset>
 				<legend class="readonly">로그인그룹</legend>
 				<div style="width:70%; float:left;">
-				<br>
 					<label for="userid" class="readonly">아이디</label>
-					<input type="text" name="userid" id="userid" placeholder="아이디">
-				<br>
-				<br>
+					<input type="text" name="userid" id="userid" placeholder="ログインID">
 					<label for="pw" class="readonly">패스워드</label>
-					<input type="password" name="passwd" id="passwd" placeholder="패스워드">
+					<input type="password" name="passwd" id="passwd" placeholder="パスワード">
 				</div>
 				<div style="width:28%; float:right;padding:15px;
 				height:132px; margin-top:3px;">
-					<input type="submit" value="로그인" alt="로그인" 
+					<input type="submit" value="ログイン" alt="로그인" 
 					style="background: #FF4000; color:#fff;
 					width:100%; height:100%; border:0 none; cursor:pointer;">
 				</div>
-				<p style="clear:both;padding-top:20px; text-align:center;"><a href="/member/idsearch">아이디찾기</a> | <a href="/member/pwchange">패스워드찾기</a> | <a href="/member/insert">회원가입</a></p>
-			</fieldset>
+				<p style="clear:both;padding-top:20px; text-align:center;"><a href="/member/idsearch">IDを探す</a> | <a href="/member/pwchange">パスワードを探す</a> | <a href="/member/insert">新規取得</a></p>
+				<!-- 외부 api로 로그인		-2020/08/22-	 -->
+				    <div><span id="kakaoIdentity"></span></div>
+				    <div><span id="kakaoNickName"></span></div>
+				    <!-- <div><img id="kakaoThumbnailImg" src=""/></div> -->
+				    
+							</fieldset>
 		</form>	
 	</div>
 		
 </div>
-<!-- naver -->
-
-<!-- Main Login End -->
-
 <!-- NAVER login -->
 <div id="naver_id_login" style="text-align:center; "><a href="/member/login_api">
-<img src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" style="width: 300px; height: auto;"/></a>
+<img src="/images/Log in with NAVER_Official_Green.PNG" style="width: 300px; height: auto;"/></a>
+
 </div>
-
-<!-- KAKAO login -->
-<div style="width: 300px; height: auto; margin: auto;">
-<a id="kakao-login-btn"></a>
-</div>
-
-<!-- KAKAO user -->
-
 <br>
-    <div><span id="kakaoIdentity"></span></div>
-    <div><span id="kakaoNickName"></span></div>
-    <!-- <div><img id="kakaoThumbnailImg" src=""/></div> -->
-
-<a href="javascript:logout()">logout</a>
+<!-- KAKAO login -->
+<!-- 임시용 영어 KAKAO 로그인 버튼 	- 2020/08/23 수정- -->
+<div style="width: 300px; height: auto; margin: auto; cursor: pointer;">
+	<!-- <a id="kakao-login-btn"></a> -->
+	<img src="/images/kakao_login.png" id="kakao-login-btn">
+</div>
 
 <!-- login script-->
 <script>
@@ -129,7 +132,7 @@
 </script>
 
 <!-- KAKAO logout script-->
-<script>
+<!-- <script>
 function logout() {
 	Kakao.Auth.logout(
 		function(obj) {
@@ -137,7 +140,7 @@ function logout() {
 		location.href='/member/kakao';
 	 });
 }
-</script>
+</script> -->
 
 
 <br>
@@ -158,18 +161,3 @@ function logout() {
 </script>
 
 <%@ include file="../footer.jsp"%>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

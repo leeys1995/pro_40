@@ -1,13 +1,14 @@
 package com.jslhrd.mapper;
 
-import com.jslhrd.domain.AboutVO;
 
 public interface AboutMapper {
-
-	//병원 소개
-	public int aboutInsert(AboutVO vo);
+	//첫 글 입력시
+	public void aboutInsert(String main_about);
 	
-	//병원소개 메인페이지
-	public String aboutSearch();
+	//저장 값 가져오기
+	public String aboutView();
+	
+	//DB에 값이 있을 때
+	public void aboutModify(String main_about);
 	
 }

@@ -91,7 +91,7 @@
 		</div>
 		<div class="greeting_cont">
 			<img src="/resources/upload/hosp/doctor_photo/${hosp.d_photo }" alt="" style="float:left; padding:0px 40px; width:500px; height:500px;">
-			<div class="text_wrap"><p>${hosp.d_mager }</p></div>
+			<div class="text_wrap"><p>${hosp.d_medical }</p></div>
 		</div>
 	</div>
 	<!-- end contents -->

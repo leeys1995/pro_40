@@ -130,11 +130,11 @@
 						
 					</tr>
 					<tr>
-						<th>제품종류</th>
-						<td><textarea name="p_mager"></textarea></td>
+						<th>기업 소개 제목</th>
+						<td><input type="text" name="p_mager"></td>
 					</tr>
 					<tr>
-						<th>연역</th>
+						<th>기업 소개 내용</th>
 						<td><textarea name="c_history"></textarea></td>
 					</tr>
 					<tr>

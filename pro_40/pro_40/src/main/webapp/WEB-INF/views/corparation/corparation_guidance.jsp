@@ -90,8 +90,8 @@
 				<span class="col_bar"></span>
 		</div>
 		<div class="greeting_cont">
-			<img src="/resources/upload/hosp/doctor_photo/${corp.p_photo }" alt="" style="float:left; padding:0px 40px; width:500px; height:500px;">
-			<div class="text_wrap"><p>${corp.p_mager }</p></div>
+			<img src="/resources/upload/corp/product_photo/${corp.p_photo }" alt="" style="float:left; padding:0px 40px; width:500px; height:500px;">
+			<div class="text_wrap"><p>${corp.c_intro }</p></div>
 		</div>
 	</div>
 	<!-- end contents -->

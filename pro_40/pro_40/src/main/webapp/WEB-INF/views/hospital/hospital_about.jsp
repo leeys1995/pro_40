@@ -84,13 +84,13 @@
 	<div class="container">
 		<div class="text_center">
 				<p><span class="support_text">${hosp.h_name }은</span><br/>
-<strong>${hosp.h_history }</strong></p>
+<strong>${hosp.d_mager }</strong></p>
 				<span class="col_bar"></span>
 		</div>
 		<div class="greeting_cont">
 			<img src="/resources/upload/hosp/hospital_photo/${hosp.h_photo }" alt="" style="float:left; padding:0px 40px; width:500px; height:500px;">
 			<div class="text_wrap"><p>
-				${hosp.d_medical }
+				${hosp.h_history }
 			</p><strong class="sign">${hosp.h_name } &nbsp 병 원 장</strong></div>
 		</div>
 	</div>
@@ -101,7 +101,7 @@
 	
 	<div class="container clearfix">
 			<address class="address">
-				<p class="title">오시는 길</p>
+				<p class="title" style="font-size:20px;"><strong>오시는 길</strong></p>
 				 ${hosp.h_come }
 			</address>
 		

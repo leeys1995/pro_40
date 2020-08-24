@@ -50,5 +50,7 @@ public interface MemberService
 	//인증코드 등록 
 	public void pwcodeupdate(MemberVO vo);
 	
+	//pw 업데이트 
+	public int pwupdate(MemberVO vo);
 
 }

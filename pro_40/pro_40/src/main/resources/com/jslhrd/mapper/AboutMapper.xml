@@ -3,13 +3,18 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jslhrd.mapper.AboutMapper">
-
-	<update id="aboutInsert">
-		update about set main_about=#{main_about}
-	</update>
+	<!-- 첫 저장시 -->
+	<insert id="aboutInsert">
+	insert into about(main_about) values(#{main_about})
+	</insert>
 	
-	<select id="aboutSearch" resultType="String">
+	<!-- 저장값 가져오기 -->
+	<select id="aboutView" resultType="String">
 		select main_about from about
 	</select>
 	
+	<!-- DB에 값이 있을때 -->
+	<update id="aboutModify">
+		update about set main_about = #{main_about}
+	</update>
 </mapper>

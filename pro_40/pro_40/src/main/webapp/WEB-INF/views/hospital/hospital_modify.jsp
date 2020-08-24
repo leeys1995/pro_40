@@ -178,11 +178,11 @@
 						
 					</tr>
 					<tr>
-						<th>진료과목</th>
-						<td><textarea name="d_mager">${hosp.d_mager }</textarea></td>
+						<th>병원 소개 제목</th>
+						<td><input type="text" name="d_mager" value="${hosp.d_mager }"></td>
 					</tr>
 					<tr>
-						<th>연역</th>
+						<th>병원 소개 내용</th>
 						<td><textarea name="h_history">${hosp.h_history }</textarea></td>
 					</tr>
 					
