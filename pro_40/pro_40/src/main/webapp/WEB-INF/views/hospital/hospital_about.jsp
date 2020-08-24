@@ -44,14 +44,16 @@
 				<ul>
 					<li><a href="../member/login">로그인</a></li>
 					<li><a href="../member/insert">회원가입</a></li>
-					<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+					<li><a href="/" ">홈으로</a>
 				</ul>
 			</div>
 			<div class="navigation">
-				<h1 class="logo">
-					<a href="hospital_view?idx=${hosp.idx }"><img height="100px"
+			
+				<div style="height:100px; width:200px;">
+				<a href="hospital_view?idx=${hosp.idx }"><img
 						src="/resources/upload/hosp/banner/${hosp.h_banner }" alt="모집사진"></a>
-				</h1>
+				</div>
+				
 				<div class="nav">
 					<nav>
 						<ul class="navi">
@@ -59,8 +61,7 @@
 							<li><a href="hospital_guidance?idx=${hosp.idx }">진료안내</a></li>
 							<li><a href="/hospital_board/hospital_board?idx=${hosp.idx }&page=1">공지</a></li>
 							<li><a href="hospital_reservation?idx=${hosp.idx }">예약</a></li>							
-							<li><a href="hospital_modify?idx=${hosp.idx }">홈페이지 <br> 수정</a></li>
-							<li><a href="reservation?idx=${hosp.idx }">예약관리</a></li>
+							<li><a href="hospital_controller?idx=${hosp.idx }">홈페이지 <br> 관리</a></li>
 
 						</ul>
 					</nav>
@@ -83,13 +84,13 @@
 	<div class="container">
 		<div class="text_center">
 				<p><span class="support_text">${hosp.h_name }은</span><br/>
-<strong>${hosp.h_history }</strong></p>
+<strong>${hosp.d_mager }</strong></p>
 				<span class="col_bar"></span>
 		</div>
 		<div class="greeting_cont">
 			<img src="/resources/upload/hosp/hospital_photo/${hosp.h_photo }" alt="" style="float:left; padding:0px 40px; width:500px; height:500px;">
 			<div class="text_wrap"><p>
-				${hosp.d_medical }
+				${hosp.h_history }
 			</p><strong class="sign">${hosp.h_name } &nbsp 병 원 장</strong></div>
 		</div>
 	</div>
@@ -100,7 +101,7 @@
 	
 	<div class="container clearfix">
 			<address class="address">
-				<p class="title">오시는 길</p>
+				<p class="title" style="font-size:20px;"><strong>오시는 길</strong></p>
 				 ${hosp.h_come }
 			</address>
 		
@@ -124,7 +125,7 @@
 		<div class="container clearfix">
 			<address class="address">
 				<p class="title">병원</p>
-				주소 : ${hosp.h_addr1 } ${hosp.h_addr2 }/고객센터: ${hosp.h_tel } 	사업자등록번호: ${hosp.h_code }
+				<p>주소 : ${hosp.h_addr1 } ${hosp.h_addr2 }/고객센터: ${hosp.h_tel } 	사업자등록번호: ${hosp.h_code }</p>
 			</address>
 			<p class="copyright">Copyright &copy ${hosp.h_name }. All rights reserved.</p>
 		</div>

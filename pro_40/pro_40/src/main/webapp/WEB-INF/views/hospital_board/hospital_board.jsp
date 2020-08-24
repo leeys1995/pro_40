@@ -4,24 +4,35 @@
 <%
 	int idx = Integer.parseInt(request.getParameter("idx"));
 %>
+<head>
 <link href="../css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link href="../css/common.css" rel="stylesheet">
 <link href="../css/mystyle.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="header"> 
+
 <header>
 	<div class="topnav">
 		<ul>
 			<li><a href="../member/login">로그인</a></li>
 			<li><a href="../member/insert">회원가입</a></li>
-			<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+			<li><a href="/" ">홈으로</a>
 		</ul>
 	</div>
 	<div class="navigation">
-		<h1 class="logo">
-			<a href="../hospital/hospital_view?idx=<%=idx%>"><img height="100px"
+	
+			
+		<div style="height:100px; width:200px;">
+		
+			<a href="../hospital/hospital_view?idx=<%=idx%>"><img
 				src="/resources/upload/hosp/banner/${h_banner }" alt="모집사진"></a>
-		</h1>
+		
+		</div>
 		<div class="nav">
 			<nav>
 				<ul class="navi">
@@ -29,15 +40,16 @@
 					<li><a href="../hospital/hospital_guidance?idx=<%=idx%>">진료안내</a></li>
 					<li><a href="hospital_board?idx=<%=idx%>&page=1">공지</a></li>
 					<li><a href="../hospital/hospital_reservation?idx=<%=idx%>">예약</a></li>				
-					<li><a href="../hospital/hospital_modify?idx=<%=idx%>">홈페이지 <br> 수정</a></li>
-					<li><a href="../hospital/reservation?idx=<%=idx%>">예약관리</a></li>
+					<li><a href="../hospital/hospital_controller?idx=<%=idx%>">홈페이지 <br> 관리</a></li>
 
 				</ul>
 			</nav>
 		</div>
 	</div>
 </header>
+</div>
 
+<div class="line"></div>
 <div class="contain">
 	<div class="sub-topcontent">
 		<h2 class="sub-title">공지사항</h2>
@@ -120,27 +132,27 @@
 
 	<div class="paging">
 		<ul>
-			
-			<li><div>${listpage }</div></li>
+			<li style="padding: 0 30px;"><a href="${prev }"><img
+					src="/images/i_prev.gif"></a></li>
+			<li><a href="#">${page }</a></li>
+			<li style="padding: 0 30px;"><a href="${next }"><img
+					src="/images/i_next.gif"></a></li>
 			
 		</ul>
-
-
-
-		<a href="hospital_board_write?idx=<%=idx %>" class="btn-write">글쓰기</a>
-
-
 
 	</div>
 
 </div>
-
-<div class="footer">
-	<footer>
-		<p>&copy; JANGSU. All &nbsp;&nbsp;&nbsp;Rights Reserved.</p>
-	</footer>
-	<!-- &copy; &nbsp; &gt; > &lt;< -->
-</div>
+</body>
+<footer class="footer">
+		<div class="container clearfix">
+			<address class="address">
+				<p class="title">병원</p>
+				<p>주소 : ${hosp.h_addr1 } ${hosp.h_addr2 }/고객센터: ${hosp.h_tel } 	사업자등록번호: ${hosp.h_code }</p><br>
+			</address>
+			<p class="copyright">Copyright &copy ${hosp.h_name }. All rights reserved.</p>
+		</div>
+</footer>
 
 <script>
 function b_search() {

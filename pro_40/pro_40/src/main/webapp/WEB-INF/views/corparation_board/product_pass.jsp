@@ -4,11 +4,17 @@
 <%
 	int idx = Integer.parseInt(request.getParameter("idx"));
 %>
+<head>
 <link href="../css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link href="../css/common.css" rel="stylesheet">
 <link href="../css/mystyle.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="header"> 
 <header>
 	<div class="topnav">
 		<ul>
@@ -18,10 +24,10 @@
 		</ul>
 	</div>
 	<div class="navigation">
-		<h1 class="logo">
+		<div style="height: 100px; width: 200px;">
 			<a href="../corparation/corparation_view?idx=<%=idx%>"><img height="100px"
-				src="/resources/upload/corp/banner/${c_banner }" alt="모집사진"></a>
-		</h1>
+				src="/resources/upload/corp/banner/${corp.c_banner }" alt="모집사진"></a>
+		</div>
 		<div class="nav">
 			<nav>
 				<ul class="navi">
@@ -36,6 +42,8 @@
 		</div>
 	</div>
 </header>
+</div>
+	<div class="line"></div>
 
 <div class="contain">
 	<div class="sub-topcontent">
@@ -63,7 +71,7 @@
 	</div>
 		
 </div>
-
+</body>
 <script>
 	function formcheck() {
 		if(my.p_pass.value=="") {
@@ -76,7 +84,15 @@
 	}
 </script>
 
-<%@ include file="../footer.jsp"%>
+<footer class="footer">
+		<div class="container clearfix">
+			<address class="address">
+				<p class="title">기업</p>
+				<p>주소 : ${corp.c_addr1 } ${corp.c_addr2 }/고객센터: ${corp.c_tel } 	사업자등록번호: ${corp.c_code }</p><br>
+			</address>
+			<p class="copyright">Copyright &copy ${corp.c_name }. All rights reserved.</p>
+		</div>
+</footer>
 
 
 

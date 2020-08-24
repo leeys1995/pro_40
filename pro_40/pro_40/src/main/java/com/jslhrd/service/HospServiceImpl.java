@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
+
 import com.jslhrd.domain.HospBoardVO;
 import com.jslhrd.domain.HospVO;
 import com.jslhrd.domain.PageVO;
@@ -105,6 +106,39 @@ public class HospServiceImpl implements HospService {
 
 	}
 
+	//병원 홈페이지 삭제
+	@Override
+	public void hospDelete(int idx) {
+		
+		mapper.hospDelete(idx);
+		
+	}
+	
+	//파일찾기( h_banner , h_photo, d_photo, h_video)
+	@Override
+	public String hospBanner(int idx) {
+		// TODO Auto-generated method stub
+		return mapper.hospBanner(idx);
+	}
+	
+	@Override
+	public String hospHphoto(int idx) {
+		// TODO Auto-generated method stub
+		return mapper.hospHphoto(idx);
+	}
+	
+	@Override
+	public String hospDphoto(int idx) {
+		// TODO Auto-generated method stub
+		return mapper.hospDphoto(idx);
+	}
+	
+	@Override
+	public String hospHvideo(int idx) {
+		// TODO Auto-generated method stub
+		return mapper.hospHvideo(idx);
+	}
+	
 	// 예약시스템 시작
 
 	// 리스트 홈페이지 이동
@@ -172,4 +206,24 @@ public class HospServiceImpl implements HospService {
 		// TODO Auto-generated method stub
 		return mapper.hospital_reservationPro2(vo);
 	}
+	
+	@Override
+	public List<ReservationVO> reservation_countO(int idx) {
+		// TODO Auto-generated method stub
+		return mapper.reservation_countO(idx);
+	}
+	
+	@Override
+	public List<ReservationVO> reservation_countX(int idx) {
+		// TODO Auto-generated method stub
+		return mapper.reservation_countX(idx);
+	}
+	
+	//홈페이지 관리 패스워드 가져오기
+	@Override
+	public String hospitalPass(int idx) {
+		// TODO Auto-generated method stub
+		return mapper.hospitalPass(idx);
+	}
+	
 }

@@ -2,11 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<head>
 <link href="../css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link href="../css/common.css" rel="stylesheet">
 <link href="../css/mystyle.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="header">
 <header>
 	<div class="topnav">
 		<ul>
@@ -16,10 +22,10 @@
 		</ul>
 	</div>
 	<div class="navigation">
-		<h1 class="logo">
-			<a href="./../hospital/hospital_view?idx=${idx2 }"><img height="100px"
+		<div style="height:100px; width:200px;">
+			<a href="./../hospital/hospital_view?idx=${idx2 }"><img 
 				src="/resources/upload/hosp/banner/${h_banner }" alt="모집사진"></a>
-		</h1>
+		</div>
 		<div class="nav">
 			<nav>
 				<ul class="navi">
@@ -34,7 +40,8 @@
 		</div>
 	</div>
 </header>
-
+</div>
+<div class="line"></div>
 
 
 <div class="contain">
@@ -77,7 +84,7 @@
 					<tr>
 						<td colspan="2">
 							<a href="hospital_board_modify?idx=${board.idx }&idx2=${idx2}"><input type="button" value="수정하기" class="btn-write"></a>
-							<a href="hospital_board_delete?idx=${board.idx }&idx2=${idx2}"><input type="button" value="삭제하기" class="btn-write"></a>
+							<a href="hospital_board_delete?idx=${board.idx }&idx2=${idx2}"><input type="button" value="삭제하기" class="btn-reset" style="background-color:green"></a>
 							<a href="javascript:home()">"<input type="button" value="뒤로가기" class="btn-reset"></a>
 						</td>
 					</tr>
@@ -87,7 +94,7 @@
 	</div>
 		
 </div>
-
+</body>
 <script>
 
 	
@@ -97,17 +104,15 @@
 	}
 </script>
 
-<div class="footer">
-	<footer>
-		<p>&copy; JANGSU. All &nbsp;&nbsp;&nbsp;Rights Reserved.</p>
-	</footer>
-	<!-- &copy; &nbsp; &gt; > &lt;< -->
-</div>
-
-
-
-
-
+<footer class="footer">
+		<div class="container clearfix">
+			<address class="address">
+				<p class="title">병원</p>
+				<p>주소 : ${hosp.h_addr1 } ${hosp.h_addr2 }/고객센터: ${hosp.h_tel } 	사업자등록번호: ${hosp.h_code }</p><br>
+			</address>
+			<p class="copyright">Copyright &copy ${hosp.h_name }. All rights reserved.</p>
+		</div>
+</footer>
 
 
 

@@ -222,4 +222,52 @@
 	</update>
 	
 	
+	<!-- 게시물 전체 목록 페이지 처리 -->
+	<select id="productDirectList"
+		resultType="com.jslhrd.domain.ProductVO">
+		<![CDATA[			
+			select X.* from (select rownum as rnum, A.* from(select * from product where idx2=#{idx2} order by idx desc) A
+			where rownum <= #{endpage}) X where X.rnum >= #{startpage}	
+		]]>
+	</select>
+
+	<!-- 게시물 조건 맞는 전체검색 -->
+	<select id="productDirectListSearch"
+		resultType="com.jslhrd.domain.ProductVO">
+		select X.* from(select rownum as rnum, A.* from(
+		select * from product
+		where idx2=#{idx2} order by idx desc) A where
+		<choose>
+			<when test="search=='subject'">
+				subject like '%' || #{key} || '%'
+			</when>
+		</choose>
+		<choose>
+			<when test="search=='contents'">
+				contents like '%' || #{key} || '%'
+			</when>
+		</choose>
+		<trim prefix="AND">
+			<![CDATA[
+				rownum <= #{endpage}) X where 
+			]]>
+		</trim>
+		<choose>
+			<when test="search=='subject'">
+				subject like '%' || #{key} || '%'
+			</when>
+		</choose>
+		<choose>
+			<when test="search=='contents'">
+				contents like '%' || #{key} || '%'
+			</when>
+		</choose>
+		<trim prefix="AND">
+			<![CDATA[
+				rnum >= #{startpage} 
+			]]>
+		</trim>
+	</select>
+	
+	
 </mapper>	

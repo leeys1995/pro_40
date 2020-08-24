@@ -66,6 +66,15 @@
 			</colgroup>
 			<tbody>
 			<form name="input" method="post" action="corparation_write" enctype="multipart/form-data">
+			
+			        <input type="hidden" name="idx" value="${user.idx }">
+			        
+			        
+			         <tr>
+						<th>※ 홈페이지 비밀번호</th>
+						<td><input type="password" name="c_pass"  placeholder="홈페이지 수정과 삭제시 필요합니다."></td>
+					</tr>
+					
 					<tr>
 						<th>기업 배너</th>
 						<td><input type="file" name="c_banner" accept="image/*"
@@ -90,7 +99,16 @@
 					</tr>	
 					<tr>
 						<th>지역</th>
-						<td><input type="text" name="c_addr1"></td>
+						<td>
+						<select name="c_addr1">
+								<option value="">지역선택</option>
+								<option value="서울특별시">서울특별시</option>
+								<option value="부산광역시">부산광역시</option>
+								<option value="대전광역시">대전광역시</option>
+								<option value="광주광역시">광주광역시</option>
+								<option value="대구광역시">대구광역시</option>
+						</select>
+						</td>
 					</tr>
 					<tr>
 						<th>상세주소</th>
@@ -112,11 +130,11 @@
 						
 					</tr>
 					<tr>
-						<th>제품종류</th>
-						<td><textarea name="p_mager"></textarea></td>
+						<th>기업 소개 제목</th>
+						<td><input type="text" name="p_mager"></td>
 					</tr>
 					<tr>
-						<th>연역</th>
+						<th>기업 소개 내용</th>
 						<td><textarea name="c_history"></textarea></td>
 					</tr>
 					<tr>

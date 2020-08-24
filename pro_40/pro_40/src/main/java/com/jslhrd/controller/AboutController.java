@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jslhrd.domain.PhotoVO;
+import com.jslhrd.service.AboutService;
 
 import lombok.AllArgsConstructor;
 
@@ -24,6 +26,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AboutController {
 	
+	private AboutService service;
 	//단일파일업로드
 	@RequestMapping("/photoUpload")
 	public String photoUpload(HttpServletRequest request, PhotoVO vo){
@@ -114,16 +117,27 @@ public class AboutController {
 	}
 
 	@GetMapping("about/about")
-	public void about() {
+	public void about(Model model) {
 		System.out.println("about....");
+		model.addAttribute("about_view",service.aboutView());
 	}
-	//입력값 db 저장									2020/08/14수정
+	
+	//입력값 DB 저장									2020/08/14수정
 	@PostMapping("about/about_pro")
 	public String about_pro(HttpServletRequest request) {
 		System.out.println("about pro....");
+		//입력값
 		String smarteditor = request.getParameter("smarteditor");
-		System.out.println("값===>" + smarteditor);
-		return "redirect:/";	//mapper 위치 지정
+		
+		System.out.println("wpqdkf +>" + request.getParameter("smarteditor"));
+		
+		if(service.aboutView() == null) {
+			service.aboutInsert(smarteditor);
+		}else {
+			service.aboutModify(smarteditor);
+		}
+		
+		return "redirect:/about/about";	//mapper 위치 지정
 	}
 
 }

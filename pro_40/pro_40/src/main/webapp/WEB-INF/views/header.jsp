@@ -48,11 +48,11 @@
 					<li><a href="/member/login">로그인</a></li>
 					<li><a href="/member/insert">회원가입</a></li>
 					<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
-					<!--	2020/08/19 테스트중	-->
+				<!--	2020/08/19 전체검색	-->
 					<li>
 						<div id="wrap">
-  							<form action="" autocomplete="on" id="main_search_form">
-							<input id="search" name="search" type="text" placeholder="검색어 입력"><input id="search_submit" value="Rechercher" type="submit">
+  							<form action="/about/search_page" autocomplete="on" id="main_search_form">
+								<input id="search" name="search" type="text" placeholder="検索ワードを入力してください"><input id="search_submit" value="Rechercher" type="submit">
 							</form>
 						</div>
 					</li>
@@ -76,8 +76,9 @@
 
 </c:if>
 			</div>
+			<a href="/"><img src="/images/mainlogo.jpg" alt="" style="width: 150px; height: 100;"></a>
 			<div class="navigation">
-				<h1 class="logo"><a href="/">LOGO</a></h1>
+				
 				<div class="nav">
 					<nav>
 						<ul class="navi">
@@ -85,8 +86,8 @@
 							<li><a href="/notice/notice?page=1">공지사항</a></li>
 							<li><a href="/hospital/hospital?page=1">병원</a></li>
 							<li><a href="/corparation/corparation?page=1">기업</a></li>
-							<li><a href="qa.do">검색</a></li>						
-
+										
+			
 						</ul>
 					</nav>
 				</div>
@@ -99,9 +100,13 @@
 	<div class="sitewrap">
 		<span class="fa fa-close" id="close" style="cursor: pointer"></span>
 		<div class="inner">
-			<span class="map">홈페이지소개</span> <span class="map">공지사항</span> <span
-				class="map">병원</span> <span class="map">기업</span> <span class="map">검색</span>
-			<span class="map">회원가입</span> <span class="map">로그인</span>
+			 <span class="map"> <a href="/about/about" style="color:white;">홈페이지소개</a></span>
+			 <span class="map"> <a href="/notice/notice?page=1" style="color:white;">공지사항</a></span>
+			 <span class="map"> <a href="/hospital/hospital?page=1" style="color:white;">병원</a></span> 
+			 <span class="map"> <a href="/corparation/corparation?page=1" style="color:white;">기업</a></span> 
+			 <span class="map"> <a href="#" style="color:white;">검색</a></span>
+			 <span class="map"> <a href="/member/login" style="color:white;">회원가입</a></span>
+			 <span class="map"> <a href="/member/insert" style="color:white;">로그인</a></span>
 		</div>
 	</div>
 	

@@ -28,6 +28,7 @@
 
 </style>
   
+  
 <title>Insert title here</title>
 </head>
 <body>
@@ -44,14 +45,14 @@
 				<ul>
 					<li><a href="../member/login">로그인</a></li>
 					<li><a href="../member/insert">회원가입</a></li>
-					<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+					<li><a href="/" ">홈으로</a>
 				</ul>
 			</div>
 			<div class="navigation">
-				<h1 class="logo">
+				<div  style="height:100px; width:200px;">
 					<a href="corparation_view?idx=${corp.idx }"><img height="100px"
 						src="/resources/upload/corp/banner/${corp.c_banner }" alt="모집사진"></a>
-				</h1>
+				</div>
 				<div class="nav">
 					<nav>
 						<ul class="navi">
@@ -59,7 +60,10 @@
 							<li><a href="corparation_guidance?idx=${corp.idx }">제품소개</a></li>
 							<li><a href="/corparation_board/corparation_board?idx=${corp.idx }&page=1">공지</a></li>
 							<li><a href="/corparation_board/product?idx=${corp.idx }&page=1">제품문의</a></li>							
-							<li><a href="corparation_modify?idx=${corp.idx }">홈페이지 <br> 수정</a></li>
+							<li><a href="corparation_controller?idx=${corp.idx }">홈페이지 <br>
+									관리
+							</a></li>
+						
 
 
 						</ul>
@@ -83,13 +87,13 @@
 	<div class="container">
 		<div class="text_center">
 				<p><span class="support_text">${corp.c_name }은</span><br/>
-<strong>${corp.c_history }</strong></p>
+<strong>${corp.p_mager }</strong></p>
 				<span class="col_bar"></span>
 		</div>
 		<div class="greeting_cont">
-			<img src="/resources/upload/hosp/hospital_photo/${corp.c_photo }" alt="" style="float:left; padding:0px 40px; width:500px; height:500px;">
+			<img src="/resources/upload/corp/corparation_photo/${corp.c_photo }" alt="" style="float:left; padding:0px 40px; width:500px; height:500px;">
 			<div class="text_wrap"><p>
-				${corp.p_intro }
+				${corp.c_history }
 			</p><strong class="sign">${corp.c_name } &nbsp 기 업 장</strong></div>
 		</div>
 	</div>
@@ -100,7 +104,7 @@
 	
 	<div class="container clearfix">
 			<address class="address">
-				<p class="title">오시는 길</p>
+				<p class="title" style="font-size:20px;"><strong>오시는 길</strong></p>
 				 ${corp.c_come }
 			</address>
 		
@@ -124,7 +128,7 @@
 		<div class="container clearfix">
 			<address class="address">
 				<p class="title">기업</p>
-				주소 : ${corp.c_addr1 } ${corp.c_addr2 }/고객센터: ${corp.c_tel } 	사업자등록번호: ${corp.c_code }
+				<p>주소 : ${corp.c_addr1 } ${corp.c_addr2 }/고객센터: ${corp.c_tel } 	사업자등록번호: ${corp.c_code }</p>
 			</address>
 			<p class="copyright">Copyright &copy ${corp.c_name }. All rights reserved.</p>
 		</div>

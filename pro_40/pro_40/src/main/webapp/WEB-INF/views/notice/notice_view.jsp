@@ -45,8 +45,10 @@
 				</form>				
 					<tr>
 						<td colspan="2">
+						  <c:if test="${user.userid=='admin' }">
 							<a href="notice_modify?idx=${notice.idx }"><input type="button" value="수정하기" class="btn-write"></a>
-							<a href="noticedelete?idx=${notice.idx }"><input type="button" value="삭제하기" class="btn-write"></a>
+							<a href="noticedelete?idx=${notice.idx }"><input type="button" value="삭제하기" class="btn-reset" style="background-color:green"></a>
+						  </c:if>
 							<a href="javascript:home()">"<input type="button" value="뒤로가기" class="btn-reset"></a>
 						</td>
 					</tr>

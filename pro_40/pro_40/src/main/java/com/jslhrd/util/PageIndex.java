@@ -16,9 +16,9 @@ public class PageIndex {
 		// Prev 표시 부분
 		if (idx_pre > 0) {
 			s_pre = "<a href='" + url + "?idx="+idx+"&page=" + (idx_pre * 10) + addtag + "'>"
-					+ "<img src=/img/i_prev.gif width=30 height=7></a>";
+					+ "<img src=/images/i_prev.gif width=30 height=7></a>";
 		} else {
-			s_pre = "<img src=/img/i_prev.gif width=30 height=7> ";
+			s_pre = "<img src=/images/i_prev.gif width=30 height=7> ";
 		}
 
 		// 번호 표시부분
@@ -35,9 +35,9 @@ public class PageIndex {
 		// Next 표시부분
 		if (idx_start <= totpage) {
 			s_next = "<a href='" + url + "?idx="+idx+"&page=" + idx_start + addtag + "'>"
-					+ "<img src=/img/i_next.gif width=30 height=7></a>";
+					+ "<img src=/images/i_next.gif width=30 height=7></a>";
 		} else {
-			s_next = " <img src=/img/i_next.gif width=30 height=7>";
+			s_next = " <img src=/images/i_next.gif width=30 height=7>";
 		}
 
 		String outHtml = s_pre + s_idx + s_next; // Html 문 조합
@@ -58,9 +58,9 @@ public class PageIndex {
 		// Prev 표시 부분
 		if (idx_pre > 0) {
 			s_pre = "<a href='" + url + "?idx="+idx+"&page=" + (idx_pre * 10) + "&search=" + search + "&key="
-					+ URLEncoder.encode(key) + "'>" + "<img src=/img/i_prev.gif width=30 height=7></a>";
+					+ URLEncoder.encode(key) + "'>" + "<img src=/images/i_prev.gif width=30 height=7></a>";
 		} else {
-			s_pre = "<img src=/img/i_prev.gif width=30 height=7> ";
+			s_pre = "<img src=/images/i_prev.gif width=30 height=7> ";
 		}
 
 		// 번호 표시부분
@@ -79,17 +79,15 @@ public class PageIndex {
 		if (idx_start <= totpage) {
 			s_next = "<a href='" + url + "?idx="+idx+"&page=" + idx_start +  "&search=" + search + "&key="
 					+ URLEncoder.encode(key)  + "'>"
-					+ "<img src=/img/i_next.gif width=30 height=7></a>";
+					+ "<img src=/images/i_next.gif width=30 height=7></a>";
 		} else {
-			s_next = " <img src=/img/i_next.gif width=30 height=7>";
+			s_next = " <img src=/images/i_next.gif width=30 height=7>";
 		}
 
 		String outHtml = s_pre + s_idx + s_next; // Html 문 조합
 		return outHtml;
 	}
-	
-	
-	
+
 	public static String pageList(int page, int totpage, String url, String addtag) {
 		int idx_pre, idx_start;
 
@@ -103,9 +101,9 @@ public class PageIndex {
 		// Prev 표시 부분
 		if (idx_pre > 0) {
 			s_pre = "<a href='" + url + "?page=" + (idx_pre * 10) + addtag + "'>"
-					+ "<img src=/img/i_prev.gif width=30 height=7></a>";
+					+ "<img src=/images/i_prev.gif width=30 height=7></a>";
 		} else {
-			s_pre = "<img src=/img/i_prev.gif width=30 height=7> ";
+			s_pre = "<img src=/images/i_prev.gif width=30 height=7> ";
 		}
 
 		// 번호 표시부분
@@ -122,9 +120,9 @@ public class PageIndex {
 		// Next 표시부분
 		if (idx_start <= totpage) {
 			s_next = "<a href='" + url + "?page=" + idx_start + addtag + "'>"
-					+ "<img src=/img/i_next.gif width=30 height=7></a>";
+					+ "<img src=/images/i_next.gif width=30 height=7></a>";
 		} else {
-			s_next = " <img src=/img/i_next.gif width=30 height=7>";
+			s_next = " <img src=/images/i_next.gif width=30 height=7>";
 		}
 
 		String outHtml = s_pre + s_idx + s_next; // Html 문 조합
@@ -145,9 +143,9 @@ public class PageIndex {
 		// Prev 표시 부분
 		if (idx_pre > 0) {
 			s_pre = "<a href='" + url + "?page=" + (idx_pre * 10) + "&search=" + search + "&key="
-					+ URLEncoder.encode(key) + "'>" + "<img src=/img/i_prev.gif width=30 height=7></a>";
+					+ URLEncoder.encode(key) + "'>" + "<img src=/images/i_prev.gif width=30 height=7></a>";
 		} else {
-			s_pre = "<img src=/img/i_prev.gif width=30 height=7> ";
+			s_pre = "<img src=/images/i_prev.gif width=30 height=7> ";
 		}
 
 		// 번호 표시부분
@@ -166,9 +164,9 @@ public class PageIndex {
 		if (idx_start <= totpage) {
 			s_next = "<a href='" + url + "?page=" + idx_start +  "&search=" + search + "&key="
 					+ URLEncoder.encode(key)  + "'>"
-					+ "<img src=/img/i_next.gif width=30 height=7></a>";
+					+ "<img src=/images/i_next.gif width=30 height=7></a>";
 		} else {
-			s_next = " <img src=/img/i_next.gif width=30 height=7>";
+			s_next = " <img src=/images/i_next.gif width=30 height=7>";
 		}
 
 		String outHtml = s_pre + s_idx + s_next; // Html 문 조합

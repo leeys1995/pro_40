@@ -14,7 +14,7 @@
   	</div>
 
 	<div class="bbs_wrap">
-		<div class="bbs_left">
+		<div class="bbs_left" style="height:300px;">
 			<h2 class="title">공지시항</h2>
 			<ul>
 			
@@ -33,7 +33,7 @@
 			
 			
 		</div>		
-		<div class="bbs_center">
+		<div class="bbs_center" style="height:300px;">
 			<h2 class="title">병원</h2>
 			<ul>
 			
@@ -50,7 +50,7 @@
 			<a href="/hospital/hospital?page=1"><span class="fa fa-plus plus"></span></a>
 		</div>		
 		
-		<div class="bbs_right">
+		<div class="bbs_right" style="height:300px;">
 			<h2 class="title">기업</h2>
 			<ul>
 			 <c:if test="${!empty list2 }">

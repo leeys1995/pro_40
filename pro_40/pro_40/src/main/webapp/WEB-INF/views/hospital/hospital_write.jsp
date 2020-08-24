@@ -14,7 +14,7 @@
 		
 			document.getElementById("image_container").style.width = "300px";
 			document.getElementById("image_container").style.height = "300px";
-		
+			
 		};
 		reader.readAsDataURL(event.target.files[0]);
 	}
@@ -54,7 +54,7 @@
 
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">장수하늘소 갤러리</h2>
+		<h2 class="sub-title">병원 등록 폼</h2>
 	</div>
 	
 	<div class="write-form">
@@ -66,6 +66,14 @@
 			</colgroup>
 			<tbody>
 			<form name="input" method="post" action="hospital_write" enctype="multipart/form-data">
+			
+			      
+			       <input type="hidden" name= "idx" value="${user.idx }">
+			       
+			        <tr>
+						<th>※ 홈페이지 비밀번호</th>
+						<td><input type="password" name="h_pass"  placeholder="홈페이지 수정과 삭제시 필요합니다."></td>
+					</tr>
 					<tr>
 						<th>병원 배너</th>
 						<td><input type="file" name="h_banner" accept="image/*"
@@ -79,6 +87,7 @@
 					<tr>
 						<th>병원이름</th>
 						<td><input type="text" name="h_name"></td>
+						
 					</tr>
 					<tr>
 						<th>사업자등록</th>
@@ -88,9 +97,19 @@
 						<th>병원 전화번호</th>
 						<td><input type="text" name="h_tel"></td>
 					</tr>	
-					<tr>
+					<tr> 
 						<th>지역</th>
-						<td><input type="text" name="h_addr1"></td>
+						<td>
+							<select name="h_addr1">
+								<option value="">지역선택</option>
+								<option value="서울특별시">서울특별시</option>
+								<option value="부산광역시">부산광역시</option>
+								<option value="대전광역시">대전광역시</option>
+								<option value="광주광역시">광주광역시</option>
+								<option value="대구광역시">대구광역시</option>
+							</select>
+						
+						</td>
 					</tr>
 					<tr>
 						<th>상세주소</th>
@@ -103,7 +122,10 @@
 					<tr>
 						<th>병원 배경사진</th>
 						<td><input type="file" name="h_photo"  accept="image/*" onchange="setThumbnail1(event);">
-						<div id="image_container1"></div></td>
+						
+						<div id="image_container1"></div>
+						
+						</td>
 					</tr>
 					<tr>
 						<th>사진</th>
@@ -112,11 +134,11 @@
 						
 					</tr>
 					<tr>
-						<th>진료과목</th>
-						<td><textarea name="d_mager"></textarea></td>
+						<th>병원 소개 제목</th>
+						<td><input type="text" name="d_mager"></td>
 					</tr>
 					<tr>
-						<th>연역</th>
+						<th>병원 소개 내용</th>
 						<td><textarea name="h_history"></textarea></td>
 					</tr>
 					<tr>

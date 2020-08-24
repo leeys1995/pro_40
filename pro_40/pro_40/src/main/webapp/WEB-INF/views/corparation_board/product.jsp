@@ -4,25 +4,29 @@
 <%
 	int idx = Integer.parseInt(request.getParameter("idx"));
 %>
-
+<head>
 <link href="../css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link href="../css/common.css" rel="stylesheet">
 <link href="../css/mystyle.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="header">
 <header>
 	<div class="topnav">
 		<ul>
 			<li><a href="../member/login">로그인</a></li>
 			<li><a href="../member/insert">회원가입</a></li>
-			<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+			<li><a href="/" ">홈으로</a>
 		</ul>
 	</div>
 	<div class="navigation">
-		<h1 class="logo">
+		<div  style="height:100px; width:200px;">
 			<a href="../corparation/corparation_view?idx=<%=idx%>"><img height="100px"
-				src="/resources/upload/corp/banner/${c_banner }" alt="모집사진"></a>
-		</h1>
+				src="/resources/upload/corp/banner/${corp.c_banner }" alt="모집사진"></a>
+		</div>
 		<div class="nav">
 			<nav>
 				<ul class="navi">
@@ -30,7 +34,10 @@
 					<li><a href="../corparation/corparation_guidance?idx=<%=idx%>">제품소개</a></li>
 					<li><a href="corparation_board?idx=<%=idx%>&page=1">공지</a></li>
 					<li><a href="/corparation_board/product?idx=<%=idx%>&page=1">제품문의</a></li>		
-					<li><a href="../corparation/corparation_modify?idx=<%=idx%>">홈페이지 <br> 수정</a></li>	
+					<li><a href="../corparation/corparation_controller?idx=<%=idx%>">홈페이지 <br>
+									관리
+							</a></li>
+						
 
 
 				</ul>
@@ -38,9 +45,12 @@
 		</div>
 	</div>
 </header>
+</div>
+
+<div class="line"></div>
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">장수하늘소 공지사항</h2>
+		<h2 class="sub-title">제품 문의</h2>
 		<div class="sub-search">
 			<form name="my" method="post" action="product?page=1">
 				<select name="search" class="sel">
@@ -120,13 +130,18 @@
 		
 		<div class="paging">
 			<ul>
-				<li><a href="#">${listpage }</a></li>
+			
+				<li style="padding: 0 30px;"><a href="${prev }"><img
+					src="/images/i_prev.gif"></a></li>
+			<li><a href="#">${page }</a></li>
+			<li style="padding: 0 30px;"><a href="${next }"><img
+					src="/images/i_next.gif"></a></li>
 			</ul>
 			<a href="product_write?idx=<%=idx %>" class="btn-write">글쓰기</a>
 		</div>
 
 </div>
-
+</body>
 <script>
 	function p_search() {
 		
@@ -140,15 +155,15 @@
 	}
 </script>
 
-<div class="footer">
-	<footer>
-		<p>&copy; JANGSU. All &nbsp;&nbsp;&nbsp;Rights Reserved.</p>
-	</footer>
-	<!-- &copy; &nbsp; &gt; > &lt;< -->
-</div>
-
-
-
+<footer class="footer">
+		<div class="container clearfix">
+			<address class="address">
+				<p class="title">기업</p>
+				<p>주소 : ${corp.c_addr1 } ${corp.c_addr2 }/고객센터: ${corp.c_tel } 	사업자등록번호: ${corp.c_code }</p><br>
+			</address>
+			<p class="copyright">Copyright &copy ${corp.c_name }. All rights reserved.</p>
+		</div>
+</footer>
 
 
 

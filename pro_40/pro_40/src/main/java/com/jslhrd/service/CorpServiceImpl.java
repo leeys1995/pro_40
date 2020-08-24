@@ -89,16 +89,58 @@ public class CorpServiceImpl implements CorpService {
 			return mapper.corpView(idx);
 		}
 
+		//기업 게시판 리스트 가져오기
 		@Override
 		public List<CorpBoardVO> corpboardList(int idx) {
 			// TODO Auto-generated method stub
 			return mapper.corpboardList(idx);
 		}
 		
+		
+		//수정
 		@Override
 		public void corpModify(CorpVO vo) {
 		
 			mapper.corpModify(vo);
 			
+		}
+		
+		//기업 홈페이지 삭제
+		@Override
+		public void corpDelete(int idx) {
+			
+			mapper.corpDelete(idx);
+			
+		}
+		
+		@Override
+		public String corpBanner(int idx) {
+			// TODO Auto-generated method stub
+			return mapper.corpBanner(idx);
+		}
+		
+		@Override
+		public String corpCphoto(int idx) {
+			// TODO Auto-generated method stub
+			return mapper.corpCphoto(idx);
+		}
+		
+		@Override
+		public String corpPphoto(int idx) {
+			// TODO Auto-generated method stub
+			return mapper.corpPphoto(idx);
+		}
+		
+		@Override
+		public String corpCvideo(int idx) {
+			// TODO Auto-generated method stub
+			return mapper.corpCvideo(idx);
+		}
+		
+		//홈페이지 관리 패스워드 가져오기
+		@Override
+		public String corparationPass(int idx) {
+			
+			return mapper.corparationPass(idx);
 		}
 }

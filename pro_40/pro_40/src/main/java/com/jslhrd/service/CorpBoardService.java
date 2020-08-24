@@ -78,4 +78,9 @@ public interface CorpBoardService {
 	// 답글달기
 	public void productReply(ProductVO vo);
 
+	// 전체 목록 검색
+	public List<ProductVO> productDirectList(PageVO vo);
+
+	// 조건에 맞는 게시물 불러오기
+	public List<ProductVO> productDirectListSearch(PageVO vo);
 }

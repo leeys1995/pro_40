@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.jslhrd.mapper.SearchMapper">
+<!-- 전체 검색 -->
+	<select id="all_Search" resultType="com.jslhrd.domain.SearchVO">
+	select hosp.idx,hosp.h_name,hosp.h_photo,hosp.h_readcnt,'hosp' as tblname from hosp where hosp.h_name like '%' || #{search} || '%'
+		union
+			select corp.idx,corp.c_name,corp.c_photo,corp.c_readcnt,'corp' as tblname from corp where corp.c_name like '%' || #{search} || '%'
+	</select>
+
+</mapper>
