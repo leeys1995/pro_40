@@ -65,25 +65,25 @@
 				<c:if test="${empty user}">
 					<ul>
 
-						<li><a href="../member/login">로그인</a></li>
-						<li><a href="../member/insert">회원가입</a></li>
-						<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
-
+						<li><a href="../member/login">ログイン</a></li>
+						<li><a href="../member/insert">新規取得</a></li>
+						<li><a href="javascript:void(0)" class="sitemap">サイトマップ</a></li>
+						
 					</ul>
 				</c:if>
 				<c:if test="${!empty user}">
 					<c:if test="${user.userid eq 'admin' }">
 						<ul>
 							
-							<li><a href="javascript:logout()">로그아웃</a></li>
-							<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+							<li><a href="javascript:logout()">ログアウト</a></li>
+							<li><a href="javascript:void(0)" class="sitemap">サイトマップ</a></li>
 
 						</ul>
 					</c:if>
 					<c:if test="${ user.userid != 'admin'}">
 						<ul>
-							<li><a href="../member/modify">개인전보 수정</a></li>
-							<li><a href="javascript:logout()">로그아웃</a></li>
+							<li><a href="../member/modify">個人情報修正</a></li>
+							<li><a href="javascript:logout()">ログアウト</a></li>
 
 						</ul>
 					</c:if>
@@ -100,12 +100,12 @@
 				<div class="nav">
 					<nav>
 						<ul class="navi">
-							<li><a href="hospital_about?idx=${hosp.idx }">병원소개</a></li>
-							<li><a href="hospital_guidance?idx=${hosp.idx }">진료안내</a></li>
+							<li><a href="hospital_about?idx=${hosp.idx }">病院紹介</a></li>
+							<li><a href="hospital_guidance?idx=${hosp.idx }">診療案内</a></li>
 							<li><a
-								href="/hospital_board/hospital_board?idx=${hosp.idx }&page=1">공지</a></li>
-							<li><a href="hospital_reservation?idx=${hosp.idx }">예약</a></li>
-							<li><a href="hospital_controller?idx=${hosp.idx }">홈페이지 <br> 관리</a></li>
+								href="/hospital_board/hospital_board?idx=${hosp.idx }&page=1">お知らせ</a></li>
+							<li><a href="hospital_reservation?idx=${hosp.idx }">予約</a></li>
+							<li><a href="hospital_controller?idx=${hosp.idx }">ホームページ <br> 管理</a></li>
 
 						</ul>
 					</nav>
@@ -122,15 +122,15 @@
 		<span class="fa fa-close" id="close" style="cursor: pointer"></span>
 		<div class="inner">
 			<span class="map"><a href="hospital_about?idx=${hosp.idx }"
-				style="color: white;">병원소개</a></span> <span class="map"><a
-				href="hospital_guidance?idx=${hosp.idx }" style="color: white;">진료안내</a></span>
+				style="color: white;">病院紹介</a></span> <span class="map"><a
+				href="hospital_guidance?idx=${hosp.idx }" style="color: white;">診療案内</a></span>
 			<span class="map"><a
 				href="/hospital_board/hospital_board?idx=${hosp.idx }&page=1"
-				style="color: white;">공지</a></span> <span class="map"><a
+				style="color: white;">お知らせ</a></span> <span class="map"><a
 				href="hospital_reservation?idx=${hosp.idx }"
-				style="color: white;">예약</a></span> <span class="map"><a
-				href="hospital_controller?idx=${hosp.idx }" style="color: white;">홈페이지<br>
-					관리</a></span> <span class="map">
+				style="color: white;">予約</a></span> <span class="map"><a
+				href="hospital_controller?idx=${hosp.idx }" style="color: white;">ホームページ<br>
+					管理</a></span> <span class="map">
 		</div>
 	</div>
 
@@ -199,7 +199,7 @@
 
 	<div class="aaa_wrap">
 		<div class="aaa_left" style="height: 300px;">
-			<h2 class="title">공지시항</h2>
+			<h2 class="title">お知らせ</h2>
 			<ul>
 
 				<c:if test="${!empty list }">
@@ -212,7 +212,7 @@
 
 				<c:if test="${empty list }">
 
-					<li>아직 데이터가 존재하지 않습니다.</li>
+					<li>まだデータが存在できません。</li>
 				</c:if>
 			</ul>
 			<a href="../hospital_board/hospital_board?page=1&idx=${hosp.idx }"><span
@@ -220,17 +220,14 @@
 		</div>
 
 		<div class="aaa_right" style="height: 300px;">
-			<h2 class="title">병원 홍보 동영상</h2>
+			<h2 class="title">病院広報動画</h2>
 
 			<table>
 				<ul>
 					<li><video controls
 							src="/resources/upload/hosp/video/${hosp.h_video }"
 							autoplay="autoplay" width=500 height=200></video></li>
-
-
 				</ul>
-
 			</table>
 		</div>
 
@@ -242,9 +239,9 @@
 	<footer class="footer">
 		<div class="container clearfix">
 			<address class="address">
-				<p class="title">병원</p>
-				<p>주소 : ${hosp.h_addr1 } ${hosp.h_addr2 }/고객센터: ${hosp.h_tel }
-					사업자등록번호: ${hosp.h_code }</p>
+				<p class="title">病院</p>
+				<p>주소 : ${hosp.h_addr1 } ${hosp.h_addr2 }/お客様案内センター : ${hosp.h_tel }
+					事業者番号: ${hosp.h_code }</p>
 				<br>
 			</address>
 			<p class="copyright">Copyright &copy ${hosp.h_name }. All rights
@@ -303,13 +300,13 @@
 <script type="text/javascript">
 function logout() 
 {
-	if(confirm("로그아웃 하시겠습니까?")== true)
+	if(confirm("ログアウトしますか。?")== true)
 	{
-		alert("로그아웃 되었습니다.");
+		alert("ログアウトしました。");
 		location.href="/member/logout";
 	}else
 	{
-		alert("취소 되었습니다.");
+		alert("キャンセルします。");
 		location.href="";
 	}
 }

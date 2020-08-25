@@ -5,7 +5,7 @@
 
 <script>
 
-    alert("패스워드가 틀립니다.");
+    alert("パスワードが違います。 ");
     
     history.back();
     

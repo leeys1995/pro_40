@@ -136,10 +136,10 @@
 		select count(*) from product where idx2=#{idx2} and
 		<choose>
 			<when test="search=='subject'">
-				subject like '%' || #{key} || '%'
+				p_subject like '%' || #{key} || '%'
 			</when>
 			<when test="search=='contents'">
-				contents like '%' || #{key} || '%'
+				p_contents like '%' || #{key} || '%'
 			</when>
 		</choose>
 
@@ -162,12 +162,12 @@
 		where idx2=#{idx2} order by idx desc) A where
 		<choose>
 			<when test="search=='subject'">
-				subject like '%' || #{key} || '%'
+				p_subject like '%' || #{key} || '%'
 			</when>
 		</choose>
 		<choose>
 			<when test="search=='contents'">
-				contents like '%' || #{key} || '%'
+				p_contents like '%' || #{key} || '%'
 			</when>
 		</choose>
 		<trim prefix="AND">
@@ -177,12 +177,12 @@
 		</trim>
 		<choose>
 			<when test="search=='subject'">
-				subject like '%' || #{key} || '%'
+				p_subject like '%' || #{key} || '%'
 			</when>
 		</choose>
 		<choose>
 			<when test="search=='contents'">
-				contents like '%' || #{key} || '%'
+				p_contents like '%' || #{key} || '%'
 			</when>
 		</choose>
 		<trim prefix="AND">
@@ -239,12 +239,12 @@
 		where idx2=#{idx2} order by idx desc) A where
 		<choose>
 			<when test="search=='subject'">
-				subject like '%' || #{key} || '%'
+				p_subject like '%' || #{key} || '%'
 			</when>
 		</choose>
 		<choose>
 			<when test="search=='contents'">
-				contents like '%' || #{key} || '%'
+				p_contents like '%' || #{key} || '%'
 			</when>
 		</choose>
 		<trim prefix="AND">
@@ -254,12 +254,12 @@
 		</trim>
 		<choose>
 			<when test="search=='subject'">
-				subject like '%' || #{key} || '%'
+				p_subject like '%' || #{key} || '%'
 			</when>
 		</choose>
 		<choose>
 			<when test="search=='contents'">
-				contents like '%' || #{key} || '%'
+				p_contents like '%' || #{key} || '%'
 			</when>
 		</choose>
 		<trim prefix="AND">

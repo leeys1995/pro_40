@@ -11,8 +11,8 @@
 	</select>
 	
 	<!-- 검색조건에 맞는 게시물 카운트 -->
-	<select id="noticeSearchCount" resultType="int">
-		select count(*) from usertbl
+	<select id="memSearchCount" resultType="int">
+		select count(*) from usertbl where
 		<choose>
 			<when test="search=='name'">
 				name like '%' || #{key} || '%'  
@@ -65,15 +65,20 @@
 		</trim>
 			
 		<choose>
-			<when test="search=='subject'">
-				subject like '%' || #{key} || '%'  
+			<when test="search=='name'">
+				name like '%' || #{key} || '%'  
 			</when>			
 		</choose>
 		<choose>
-			<when test="search=='contents'">
-				contents like '%' || #{key} || '%'  
+			<when test="search=='userid'">
+				userid like '%' || #{key} || '%'  
 			</when>			
 		</choose>	
+		<choose>
+			<when test="search=='c_code'">
+				c_code like '%' || #{key} || '%'  
+			</when>			
+		</choose>		
 			<trim prefix="AND">
 			<![CDATA[
 				rnum >= #{startpage} 

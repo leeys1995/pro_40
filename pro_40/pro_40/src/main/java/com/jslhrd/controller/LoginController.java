@@ -95,12 +95,17 @@ public class LoginController {
 		return "member/login";
 	}
 	
-	//2020/08/11 수정 -------------------------------새로 추가됨
-	@RequestMapping(value = "member/kakao", method = { RequestMethod.GET, RequestMethod.POST })
-	public String kakao_logout(HttpSession session) throws IOException {
-		System.out.println("kakao logout");
-		session.invalidate();
-		return "member/login";
+	
+	@RequestMapping(value = "member/kakao_login", method = { RequestMethod.GET, RequestMethod.POST })
+	public String kakao_logout(HttpSession session,MemberVO vo,HttpServletRequest request) throws IOException {
+		System.out.println("kakao login");
+		
+		MemberVO user = new MemberVO();
+		user.setName(vo.getName());
+		user.setUserid(vo.getUserid());
+		request.getSession().setAttribute("user", user);
+		request.getSession().setMaxInactiveInterval(1800);
+		
+		return "redirect:/";
 	}
-
 }

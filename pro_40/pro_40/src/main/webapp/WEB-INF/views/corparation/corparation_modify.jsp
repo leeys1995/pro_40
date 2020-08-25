@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>장수하늘소</title>
+<title>企業</title>
 <link href="../css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
@@ -42,9 +42,31 @@
 		<header>
 			<div class="topnav">
 				<ul>
-					<li><a href="../member/login">로그인</a></li>
-					<li><a href="../member/insert">회원가입</a></li>
-					<li><a href="/" ">홈으로</a>
+					<c:if test="${empty user}">
+						<ul>
+							<li><a href="/member/login">ログイン</a></li>
+							<li><a href="/member/insert">新規取得</a></li>
+							<li><a href="/">ホーム</a></li>
+							
+						</ul>
+					</c:if>
+					<c:if test="${!empty user}">
+						<c:if test="${user.userid eq 'admin' }">
+							<ul>
+								<li><a href="/member/list?page=1">会員管理</a></li>
+								<li><a href="javascript:logout()">ログアウト</a></li>
+								<li><a href="/">ホーム</a></li>
+							</ul>
+						</c:if>
+						<c:if test="${ user.userid != 'admin'}">
+							<ul>
+								<li><a href="/member/modify">個人情報修正</a></li>
+								<li><a href="javascript:logout()">ログアウト</a></li>
+								<li><a href="/">ホーム</a></li>
+							</ul>
+						</c:if>
+
+					</c:if>
 				</ul>
 			</div>
 			<div class="navigation">
@@ -55,14 +77,14 @@
 				<div class="nav">
 					<nav>
 						<ul class="navi">
-							<li><a href="corparation_about?idx=${corp.idx }">기업소개</a></li>
-							<li><a href="corparation_guidance?idx=${corp.idx }">제품소개</a></li>
+							<li><a href="corparation_about?idx=${corp.idx }">企業紹介</a></li>
+							<li><a href="corparation_guidance?idx=${corp.idx }">製品紹介</a></li>
 							<li><a
-								href="/corparation_board/corparation_board?idx=${corp.idx }&page=1">공지</a></li>
+								href="/corparation_board/corparation_board?idx=${corp.idx }&page=1">お知らせ</a></li>
 							<li><a
-								href="/corparation_board/product?idx=${corp.idx }&page=1">제품문의</a></li>
-							<li><a href="corparation_modify?idx=${corp.idx }">홈페이지 <br>
-									수정
+								href="/corparation_board/product?idx=${corp.idx }&page=1">製品の問い合わせ</a></li>
+							<li><a href="corparation_modify?idx=${corp.idx }">ホームページ
+									<br> 修正
 							</a></li>
 
 						</ul>
@@ -124,17 +146,15 @@
 	width: 100px;
 	height: 100px;
 }
-
-
 </style>
 	<div class="contain">
 		<div class="sub-topcontent">
-			<h2 class="sub-title">장수하늘소 갤러리</h2>
+			<h2 class="sub-title">企業管理</h2>
 		</div>
 
 		<div class="write-form">
 			<table summery="갤러리 글쓰기 테이블 입니다">
-				<caption class="readonly">갤러리 입력폼</caption>
+				<caption class="readonly">フォーム</caption>
 				<colgroup>
 					<col width="20%">
 					<col width="80%">
@@ -145,13 +165,13 @@
 
 						<input type="hidden" name="idx" value="${idx }">
 						<tr>
-							<th>1.기존 기업 배너</th>
+							<th>1.既存入力企業バーナー</th>
 							<td><img class="img2"
 								src="/resources/upload/corp/banner/${corp.c_banner }" alt="모집사진">
 							</td>
 						</tr>
 						<tr>
-							<th>1.기업 배너</th>
+							<th>1.企業バーナー</th>
 							<td><input type="file" name="c_banner" accept="image/*"
 								onchange="setThumbnail(event);">
 								<div id="image_container"></div></td>
@@ -159,80 +179,96 @@
 
 
 						<tr>
-							<th>기업이름</th>
+							<th>企業名</th>
 							<td><input type="text" name="c_name" value="${corp.c_name }"
 								readonly></td>
 						</tr>
 						<tr>
-							<th>사업자등록</th>
-							<td><input type="text" name="c_code" value="${corp.c_code }"
-								readonly></td>
+							<th>事業者登録</th>
+							<td><input type="text" name="c_code1" id="c_code1"
+								maxlength="3" style="width: 17.3%" placeholder="c_code1"
+								value="${corp.c_code.substring(0,3) }" readonly>- <input
+								type="text" name="c_code2" id="c_code2" maxlength="2"
+								style="width: 11.3%" placeholder="c_code2"
+								value="${corp.c_code.substring(4,6) }" readonly>- <input
+								type="text" name="c_code3" id="c_code3" maxlength="5"
+								style="width: 29.3%" placeholder="c_code3"
+								value="${corp.c_code.substring(7) }" readonly></td>
 						</tr>
 						<tr>
-							<th>기업 전화번호</th>
-							<td><input type="text" name="c_tel" value="${corp.c_tel }"></td>
+							<th>企業電話番号</th>
+							<td><input type="text" name="c_tel1" id="c_tel1"
+								style="width: 19.3%" placeholder="c_tel1" maxlength="3"
+								value="${corp.c_tel.substring(0,3) }">- <input
+								type="text" name="c_tel2" id="c_tel2" style="width: 19.3%"
+								placeholder="c_tel2" maxlength="4"
+								value="${corp.c_tel.substring(4,8) }">- <input
+								type="text" name="c_tel3" id="c_tel3" style="width: 19.3%"
+								placeholder="c_tel3" maxlength="4"
+								value="${corp.c_tel.substring(9) }"></td>
 						</tr>
 						<tr>
-							<th>지역</th>
+							<th>地域</th>
 							<td><input type="text" name="c_addr1"
 								value="${corp.c_addr1 }"></td>
 						</tr>
 						<tr>
-							<th>상세주소</th>
+							<th>住所</th>
 							<td><input type="text" name="c_addr2"
 								value="${corp.c_addr2 }"></td>
 						</tr>
 						<tr>
-							<th>제품소개</th>
+							<th>製品紹介</th>
 							<td><textarea name="p_intro"> ${corp.p_intro }</textarea></td>
 						</tr>
 						<tr>
-							<th>2.기존기업 배경사진</th>
+							<th>2.既存企業背景写真</th>
 							<td><img class="img2"
 								src="/resources/upload/corp/corparation_photo/${corp.c_photo }"
 								alt="모집사진"></td>
 						</tr>
 						<tr>
-							<th>2.기업 배경사진</th>
+							<th>2.企業拝啓写真</th>
 							<td><input type="file" name="c_photo" accept="image/*"
 								onchange="setThumbnail1(event);">
 								<div id="image_container1"></div></td>
 						</tr>
 						<tr>
-							<th>3.기존 사진</th>
+							<th>3.既存写真</th>
 							<td><img class="img2"
 								src="/resources/upload/corp/product_photo/${corp.p_photo }"
 								alt="모집사진"></td>
 
 						</tr>
 						<tr>
-							<th>3.사진</th>
+							<th>3.写真</th>
 							<td><input type="file" name="p_photo" accept="image/*"
 								onchange="setThumbnail2(event);">
 								<div id="image_container2"></div></td>
 
 						</tr>
 						<tr>
-							<th>기업 소개 제목</th>
-							<td><input type="text" name="p_mager" value="${corp.p_mager }"></td>
+							<th>企業紹介題目</th>
+							<td><input type="text" name="p_mager"
+								value="${corp.p_mager }"></td>
 						</tr>
 						<tr>
-							<th>기업 소개 내용</th>
+							<th>企業紹介題目</th>
 							<td><textarea name="c_history">${corp.c_history }</textarea></td>
 						</tr>
 
 						<tr>
-							<th>4.기존 기업홍보영상</th>
+							<th>4.既存企業広報動画</th>
 							<td><video controls
 									src="/resources/upload/corp/video/${corp.c_video }" width=500
 									height=200></video></td>
 						</tr>
 						<tr>
-							<th>4.기업홍보영상</th>
+							<th>4.企業広報動画</th>
 							<td><input type="file" name="c_video"></td>
 						</tr>
 						<tr>
-							<th>기업오시는길</th>
+							<th>企業住所</th>
 							<td><textarea name="c_come">${corp.c_come }</textarea></td>
 						</tr>
 
@@ -240,10 +276,10 @@
 
 						<tr>
 							<td colspan="2"><a href="javascript:send()"><input
-									type="button" value="수정" class="btn-write"></a> <a
-								href="javascript:home()"><input type="button" value="뒤로가기"
+									type="button" value="修正する" class="btn-write"></a> <a
+								href="javascript:home()"><input type="button" value="キャンセル"
 									class="btn-reset"></a> <a href="javascript:del()"><input
-									type="button" value="삭제" class="btn-reset"
+									type="button" value="削除する" class="btn-reset"
 									style="background-color: green"></a></td>
 						</tr>
 					</form>
@@ -257,38 +293,44 @@
 		function send() {
 
 			if (input.c_banner.value == "") {
-				alert("배너를 넣어주세요");
+				alert("バーナーを入れてください。");
 				input.c_banner.focus();
 				return;
 			}
 			if (input.c_name.value == "") {
-				alert("기업이름을 입력해주세요");
+				alert("企業名を入れてください。");
 				input.c_name.focus();
 				return;
 			}
-			if (input.c_code.value == "") {
-				alert("사업자번호를 입력해주세요");
-				input.c_code.focus();
+
+			if (input.c_tel1.value == "") {
+				alert("電話番号1をご入力ください。");
+				input.c_tel1.focus();
+				return;
+			}
+			if (input.c_tel2.value == "") {
+				alert("電話番号2をご入力ください。");
+				input.c_tel2.focus();
+				return;
+			}
+			if (input.c_tel3.value == "") {
+				alert("電話番号3をご入力ください。");
+				input.c_tel3.focus();
 				return;
 			}
 
-			if (input.c_tel.value == "") {
-				alert("전화번호를 입력해주세요");
-				input.c_tel.focus();
-				return;
-			}
 			if (input.c_addr1.value == "") {
-				alert("주소를 입력해주세요");
+				alert("住所1をご入力ください。");
 				input.c_addr1.focus();
 				return;
 			}
 			if (input.c_addr2.value == "") {
-				alert("상세주소를 입력해주세요");
+				alert("住所2をご入力ください。");
 				input.c_addr2.focus();
 				return;
 			}
 			if (input.p_intro.value == "") {
-				alert("제품소개를 입력해주세요");
+				alert("製品紹介をご入力ください。");
 				input.p_intro.focus();
 				return;
 			}
@@ -298,32 +340,32 @@
 				return;
 			}
 			if (input.p_photo.value == "") {
-				alert("배경사진2입력해주세요");
+				alert("背景写真2を入れてください。");
 				input.p_photo.focus();
 				return;
 			}
 			if (input.p_mager.value == "") {
-				alert("제품종류을 입력해주세요");
+				alert("製品種類を入れてください。");
 				input.p_mager.focus();
 				return;
 			}
 			if (input.c_history.value == "") {
-				alert("연역을 입력해주세요");
+				alert("沿革を入れてください。");
 				input.c_history.focus();
 				return;
 			}
 			if (input.c_video.value == "") {
-				alert("기업 홍보영상을 올려주세요");
+				alert("企業広報動画を入れてください。");
 				input.c_video.focus();
 				return;
 			}
 			if (input.c_come.value == "") {
-				alert("오시는길을 입력해주세요");
+				alert("住所を入れてください。");
 				input.c_come.focus();
 				return;
 			}
 
-			alert("수정합니다.");
+			alert("修正します。");
 
 			input.action = "corparation_modify";
 			input.submit();
@@ -336,7 +378,7 @@
 
 		function del() {
 
-			alert("홈페이지를 삭제합니다.");
+			alert("ホームページを削除します。");
 			input.action = "corparation_delete";
 			input.submit();
 
@@ -346,9 +388,9 @@
 	<footer class="footer">
 		<div class="container clearfix">
 			<address class="address">
-				<p class="title">기업</p>
-				<p>주소 : ${corp.c_addr1 } ${corp.c_addr2 }/고객센터: ${corp.c_tel }
-					사업자등록번호: ${corp.c_code }</p>
+				<p class="title">企業</p>
+				<p>住所 : ${corp.c_addr1 } ${corp.c_addr2 }/お客様案内センター:
+					${corp.c_tel } 事業者番号: ${corp.c_code }</p>
 				<br>
 			</address>
 			<p class="copyright">Copyright &copy ${corp.c_name }. All rights

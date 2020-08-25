@@ -18,8 +18,12 @@
     $(function(){
     	
       $('.slider').bxSlider({
-    	  mode: 'fade',
-    	  captions: true
+    	  mode : 'fade',
+		  auto: true,
+		  pause: 3000,
+		  stopAutoOnClick: true,
+		  //slideWidth: 1100,
+		  captions : true
       });
       
       $(".sitemap").click(function() {
@@ -45,9 +49,9 @@
 			<div class="topnav">
 <c:if test="${empty user}">			
 				<ul>
-					<li><a href="/member/login">로그인</a></li>
-					<li><a href="/member/insert">회원가입</a></li>
-					<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+					<li><a href="/member/login">ログイン</a></li>
+					<li><a href="/member/insert">新規取得</a></li>
+					<li><a href="javascript:void(0)" class="sitemap">サイトマップ</a></li>
 				<!--	2020/08/19 전체검색	-->
 					<li>
 						<div id="wrap">
@@ -61,16 +65,30 @@
 <c:if test="${!empty user}">	
 <c:if test="${user.userid eq 'admin' }">	
 				<ul>
-					<li><a href="/member/list?page=1">회원관리</a></li>
-					<li><a href="javascript:logout()">로그아웃</a></li>
-					<li><a href="" class="sitemap">사이트맵</a></li>
+					<li><a href="/member/list?page=1">会員管理</a></li>
+					<li><a href="javascript:logout()">ログアウト</a></li>
+					<li><a href="" class="sitemap">サイトマップ</a></li>
+					<li>
+						<div id="wrap">
+  							<form action="/about/search_page" autocomplete="on" id="main_search_form">
+								<input id="search" name="search" type="text" placeholder="検索ワードを入力してください"><input id="search_submit" value="Rechercher" type="submit">
+							</form>
+						</div>
+					</li>
 				</ul>
 </c:if>
 <c:if test="${ user.userid != 'admin'}">
 				<ul>
-					<li><a href="/member/modify">개인전보 수정</a></li>
-					<li><a href="javascript:logout()">로그아웃</a></li>
-					<li><a href="" class="sitemap">사이트맵</a></li>
+					<li><a href="/member/modify">個人情報修正</a></li>
+					<li><a href="javascript:logout()">ログアウト</a></li>
+					<li><a href="" class="sitemap">サイトマップ</a></li>
+					<li>
+						<div id="wrap">
+  							<form action="/about/search_page" autocomplete="on" id="main_search_form">
+								<input id="search" name="search" type="text" placeholder="検索ワードを入力してください"><input id="search_submit" value="Rechercher" type="submit">
+							</form>
+						</div>
+					</li>
 				</ul>	
 </c:if>
 
@@ -82,12 +100,10 @@
 				<div class="nav">
 					<nav>
 						<ul class="navi">
-							<li><a href="/about/about">사이트소개</a></li>
-							<li><a href="/notice/notice?page=1">공지사항</a></li>
-							<li><a href="/hospital/hospital?page=1">병원</a></li>
-							<li><a href="/corparation/corparation?page=1">기업</a></li>
-										
-			
+							<li><a href="/about/about">サイト紹介</a></li>
+							<li><a href="/notice/notice?page=1">お知らせ</a></li>
+							<li><a href="/hospital/hospital?page=1">病院</a></li>
+							<li><a href="/corparation/corparation?page=1">企業</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -100,13 +116,13 @@
 	<div class="sitewrap">
 		<span class="fa fa-close" id="close" style="cursor: pointer"></span>
 		<div class="inner">
-			 <span class="map"> <a href="/about/about" style="color:white;">홈페이지소개</a></span>
-			 <span class="map"> <a href="/notice/notice?page=1" style="color:white;">공지사항</a></span>
-			 <span class="map"> <a href="/hospital/hospital?page=1" style="color:white;">병원</a></span> 
-			 <span class="map"> <a href="/corparation/corparation?page=1" style="color:white;">기업</a></span> 
-			 <span class="map"> <a href="#" style="color:white;">검색</a></span>
-			 <span class="map"> <a href="/member/login" style="color:white;">회원가입</a></span>
-			 <span class="map"> <a href="/member/insert" style="color:white;">로그인</a></span>
+			 <span class="map"> <a href="/about/about" style="color:white;">サイト紹介</a></span>
+			 <span class="map"> <a href="/notice/notice?page=1" style="color:white;">お知らせ</a></span>
+			 <span class="map"> <a href="/hospital/hospital?page=1" style="color:white;">病院</a></span> 
+			 <span class="map"> <a href="/corparation/corparation?page=1" style="color:white;">企業</a></span> 
+			 <span class="map"> <a href="#" style="color:white;">検索</a></span>
+			 <span class="map"> <a href="/member/login" style="color:white;">新規取得</a></span>
+			 <span class="map"> <a href="/member/insert" style="color:white;">ログイン</a></span>
 		</div>
 	</div>
 	
@@ -114,13 +130,13 @@
 <script type="text/javascript">
 function logout() 
 {
-	if(confirm("로그아웃 하시겠습니까?")== true)
+	if(confirm("ログアウトしますか？")== true)
 	{
-		alert("로그아웃 되었습니다.");
+		alert("ログアウトされました。");
 		location.href="/member/logout";
 	}else
 	{
-		alert("취소 되었습니다.");
+		alert("キャンセルしました。");
 		location.href="";
 	}
 }

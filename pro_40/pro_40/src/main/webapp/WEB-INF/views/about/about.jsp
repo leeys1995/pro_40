@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<jsp:include page="../header.jsp" />
+
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <!-- Ajax 스크립트 추가			
@@ -83,6 +83,7 @@ $(document).ready(function(){
 
 </head>
 <body>
+<%@ include file="../header.jsp"%>
 <br><br>
 	<h1 style="text-align: center;">サイト紹介</h1><br><br>
 	<!-- 기본 View 부분

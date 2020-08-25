@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>장수하늘소</title>
+<title>企業</title>
 <link href="../css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
@@ -62,20 +62,29 @@
 	<div class="header">
 		<header>
 			<div class="topnav">
-				<c:if test="${empty user }">
+				<c:if test="${empty user}">
 					<ul>
-						<li><a href="../member/login">로그인</a></li>
-						<li><a href="../member/insert">회원가입</a></li>
-						<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
-						<li><a href="/" ">홈으로</a>
+						<li><a href="/member/login">ログイン</a></li>
+						<li><a href="/member/insert">新規取得</a></li>
+						<li><a href="javascript:void(0)" class="sitemap">サイトマップ</a></li>
+						
 					</ul>
 				</c:if>
 				<c:if test="${!empty user}">
-					
+					<c:if test="${user.userid eq 'admin' }">
 						<ul>
-							<li><a href="javascript:logout()">로그아웃</a></li>
-							<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+							<li><a href="/member/list?page=1">会員管理</a></li>
+							<li><a href="javascript:logout()">ログアウト</a></li>
+							<li><a href="" class="sitemap">サイトマップ</a></li>
 						</ul>
+					</c:if>
+					<c:if test="${ user.userid != 'admin'}">
+						<ul>
+							<li><a href="/member/modify">個人情報修正</a></li>
+							<li><a href="javascript:logout()">ログアウト</a></li>
+							<li><a href="" class="sitemap">サイトマップ</a></li>
+						</ul>
+					</c:if>
 					</c:if>
 			</div>
 			<div class="navigation">
@@ -90,17 +99,17 @@
 				<div class="nav">
 					<nav>
 						<ul class="navi">
-							<li><a href="corparation_about?idx=${corp.idx }">기업소개</a></li>
-							<li><a href="corparation_guidance?idx=${corp.idx }">제품소개</a></li>
+							<li><a href="corparation_about?idx=${corp.idx }">企業紹介</a></li>
+							<li><a href="corparation_guidance?idx=${corp.idx }">製品紹介</a></li>
 							<li><a
-								href="/corparation_board/corparation_board?idx=${corp.idx }&page=1">공지</a></li>
+								href="/corparation_board/corparation_board?idx=${corp.idx }&page=1">お知らせ</a></li>
 							<li><a
-								href="/corparation_board/product?idx=${corp.idx }&page=1">제품문의</a></li>
-								
-							<li><a href="corparation_controller?idx=${corp.idx }">홈페이지 <br>
-									관리
+								href="/corparation_board/product?idx=${corp.idx }&page=1">製品の問い合わせ</a></li>
+
+							<li><a href="corparation_controller?idx=${corp.idx }">ホームページ
+									<br> 管理
 							</a></li>
-						
+
 
 						</ul>
 					</nav>
@@ -115,17 +124,17 @@
 		<span class="fa fa-close" id="close" style="cursor: pointer"></span>
 		<div class="inner">
 			<span class="map"><a href="corparation_about?idx=${corp.idx }"
-				style="color: white;">기업소개</a></span> <span class="map"><a
-				href="corparation_guidance?idx=${corp.idx }" style="color: white;">제품소개</a></span>
+				style="color: white;">企業紹介</a></span> <span class="map"><a
+				href="corparation_guidance?idx=${corp.idx }" style="color: white;">製品紹介</a></span>
 			<span class="map"><a
 				href="/corparation_board/corparation_board?idx=${corp.idx }&page=1"
-				style="color: white;">공지</a></span> <span class="map"><a
+				style="color: white;">お知らせ</a></span> <span class="map"><a
 				href="/corparation_board/product?idx=${corp.idx }&page=1"
-				style="color: white;">제품문의</a></span> <span class="map"><a
-				href="corparation_modify?idx=${corp.idx }" style="color: white;">홈페이지
-					수정</a></span> <span class="map"><a href="/member/login"
-				style="color: white;">회원가입</a></span> <span class="map"> <a
-				href="/member/insert" style="color: white;">로그인</a></span>
+				style="color: white;">製品の問い合わせ</a></span> <span class="map"><a
+				href="corparation_modify?idx=${corp.idx }" style="color: white;">ホームページ
+					修正</a></span> <span class="map"><a href="/member/login"
+				style="color: white;">新規取得</a></span> <span class="map"> <a
+				href="/member/insert" style="color: white;">ログイン</a></span>
 		</div>
 	</div>
 
@@ -187,7 +196,7 @@
 		<div>
 			<img height="500px"
 				src="/resources/upload/corp/corparation_photo/${corp.c_photo }"
-				alt="" title="기업 메인 사진">
+				alt="" title="企業メイン写真">
 		</div>
 
 	</div>
@@ -196,7 +205,7 @@
 	<br>
 	<div class="aaa_wrap">
 		<div class="aaa_left" style="height: 300px;">
-			<h2 class="title">공지시항</h2>
+			<h2 class="title">お知らせ</h2>
 			<ul>
 
 				<c:if test="${!empty list }">
@@ -209,7 +218,7 @@
 
 				<c:if test="${empty list }">
 
-					<li>아직 데이터가 존재하지 않습니다.</li>
+					<li>まだデータが存在できません。</li>
 				</c:if>
 			</ul>
 			<a
@@ -218,13 +227,11 @@
 		</div>
 
 		<div class="aaa_right" style="height: 300px;">
-			<h2 class="title">병원 홍보 동영상</h2>
+			<h2 class="title">病院広報動画</h2>
 			<ul>
 				<li><video controls
 						src="/resources/upload/corp/video/${corp.c_video }"
 						autoplay="autoplay" width=500 height=200></video></li>
-
-
 			</ul>
 		</div>
 
@@ -237,9 +244,9 @@
 	<footer class="footer">
 		<div class="container clearfix">
 			<address class="address">
-				<p class="title">기업</p>
-				<p>주소 : ${corp.c_addr1 } ${corp.c_addr2 }/고객센터: ${corp.c_tel }
-					사업자등록번호: ${corp.c_code }</p>
+				<p class="title">企業</p>
+				<p>住所 : ${corp.c_addr1 } ${corp.c_addr2 }/お客様案内センター:
+					${corp.c_tel } 事業者番号: ${corp.c_code }</p>
 				<br>
 			</address>
 			<p class="copyright">Copyright &copy ${corp.c_name }. All rights

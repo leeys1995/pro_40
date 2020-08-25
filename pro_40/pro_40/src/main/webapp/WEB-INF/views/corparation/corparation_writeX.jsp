@@ -5,7 +5,7 @@
 
 <script>
 
-    alert("자신의 기업 홈페이지가 존재합니다. 삭제 후 작성해주세요!");
+    alert("自分の企業ホームページが存在します。削除後作成してください。");
     
     location.href="/corparation/corparation?page=1";
     

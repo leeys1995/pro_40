@@ -15,9 +15,31 @@
 <header>
 	<div class="topnav">
 		<ul>
-			<li><a href="../member/login">로그인</a></li>
-			<li><a href="../member/insert">회원가입</a></li>
-			<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+			<c:if test="${empty user}">
+						<ul>
+							<li><a href="/member/login">ログイン</a></li>
+							<li><a href="/member/insert">新規取得</a></li>
+							<li><a href="javascript:void(0)" class="sitemap">サイトマップ</a></li>
+							
+						</ul>
+					</c:if>
+					<c:if test="${!empty user}">
+						<c:if test="${user.userid eq 'admin' }">
+							<ul>
+								<li><a href="/member/list?page=1">会員管理</a></li>
+								<li><a href="javascript:logout()">ログアウト</a></li>
+								<li><a href="" class="sitemap">サイトマップ</a></li>
+							</ul>
+						</c:if>
+						<c:if test="${ user.userid != 'admin'}">
+							<ul>
+								<li><a href="/member/modify">個人情報修正</a></li>
+								<li><a href="javascript:logout()">ログアウト</a></li>
+								<li><a href="" class="sitemap">サイトマップ</a></li>
+							</ul>
+						</c:if>
+
+					</c:if>
 		</ul>
 	</div>
 	<div class="navigation">
@@ -28,12 +50,12 @@
 		<div class="nav">
 			<nav>
 				<ul class="navi">
-					<li><a href="../hospital/hospital_about?idx=${idx2 }">병원소개</a></li>
-					<li><a href="../hospital/hospital_guidance?idx=${idx2 }">진료안내</a></li>
-					<li><a href="hospital_board?idx=${idx2 }&page=1">공지</a></li>
-					<li><a href="../hospital/hospital_reservation?idx=${idx2 }">예약</a></li>				
-					<li><a href="../hospital/hospital_modify?idx=${idx2 }">홈페이지 <br> 수정</a></li>
-					<li><a href="../hospital/reservation?idx=${idx2 }">예약관리</a></li>
+					<li><a href="../hospital/hospital_about?idx=${idx2 }">病院紹介</a></li>
+					<li><a href="../hospital/hospital_guidance?idx=${idx2 }">診療案内</a></li>
+					<li><a href="hospital_board?idx=${idx2 }&page=1">お知らせ</a></li>
+					<li><a href="../hospital/hospital_reservation?idx=${idx2 }">予約</a></li>				
+					<li><a href="../hospital/hospital_modify?idx=${idx2 }">ホームページ <br> 　修正</a></li>
+					<li><a href="../hospital/reservation?idx=${idx2 }">予約管理</a></li>
 
 				</ul>
 			</nav>
@@ -45,12 +67,12 @@
 
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">장수하늘소 갤러리</h2>
+		<h2 class="sub-title">病院修正</h2>
 	</div>
 	
 	<div class="write-form">
 		<table summery="갤러리 글쓰기 테이블 입니다">
-			<caption class="readonly">갤러리 입력폼</caption>			
+			<caption class="readonly">フォーム</caption>			
 			<colgroup>
 				<col width="20%">
 				<col width="80%">
@@ -71,18 +93,18 @@
 					</tr>	
 						
 					<tr>
-						<th>파일첨부</th>
+						<th>ファイル添付</th>
 						<td><input type="file" name="filename">
 						<c:if test="${!empty board.filename }">
-							※기존파일이 존재해요
+							※既存のファイルがあります。
 						</c:if>
 						</td>
 					</tr>	
 				</form>				
 					<tr>
 						<td colspan="2">
-							<a href="javascript:send()"><input type="button" value="수정" class="btn-write"></a>
-							<a href="javascript:home()">"<input type="button" value="뒤로가기" class="btn-reset"></a>
+							<a href="javascript:send()"><input type="button" value="修正する" class="btn-write"></a>
+							<a href="javascript:home()">"<input type="button" value="キャンセル" class="btn-reset"></a>
 						</td>
 					</tr>
 				
@@ -96,19 +118,19 @@
 	function send() {
 		
 		if(input.subject.value=="") {
-			alert("제목을 입력해주세요");
+			alert("題目をご入力ください。");
 			input.subject.focus();
 			return;
 		}
 		if(input.contents.value=="") {
-			alert("내용을 입력해주세요");
+			alert("内容をご入力ください。");
 			input.contents.focus();
 			return;
 		}
 		
 	
 	
-		alert("수정합니다.");
+		alert("修正します。.");
 		input.submit();
 	}
 	
@@ -121,8 +143,8 @@
 <footer class="footer">
 		<div class="container clearfix">
 			<address class="address">
-				<p class="title">병원</p>
-				<p>주소 : ${hosp.h_addr1 } ${hosp.h_addr2 }/고객센터: ${hosp.h_tel } 	사업자등록번호: ${hosp.h_code }</p><br>
+				<p class="title">病院</p>
+				<p>住所 : ${hosp.h_addr1 } ${hosp.h_addr2 }/お客様案内センター : ${hosp.h_tel } 	事業者番号: ${hosp.h_code }</p><br>
 			</address>
 			<p class="copyright">Copyright &copy ${hosp.h_name }. All rights reserved.</p>
 		</div>

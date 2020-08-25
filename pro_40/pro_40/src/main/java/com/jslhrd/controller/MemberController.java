@@ -272,14 +272,111 @@ public class MemberController {
 			model.addAttribute("list", service.memListSearch(vo1));
 		}
 
+		if (vo1.getKey() == null) {
+			//다음 페이지
+			String nextpage="/member/list?page="+totpage;
+			if(nowpage<totpage) {
+				nextpage="/member/list?page="+(nowpage+1);
+			}
+			//이전페이지
+			String prevPage="/member/list?page="+1;
+			if(nowpage>1) {
+				prevPage="/member/list?page="+(nowpage-1);
+			}
+			
+			model.addAttribute("prev",prevPage);
+			model.addAttribute("next",nextpage);
+			model.addAttribute("page",PageIndex.pageList(nowpage, totpage, url, "").substring(46,PageIndex.pageList(nowpage, totpage, url, "").length()-46));
+			
+			//model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url, ""));
+		} else {
+			//model.addAttribute("listpage", PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()));
+			//다음 페이지
+			String nextpage="/member/list?page="+totpage+"&search=" + vo1.getSearch() + "&key=" +vo1.getKey();;
+			if(nowpage<totpage) {
+				nextpage="/member/list?page="+(nowpage+1)+"&search=" + vo1.getSearch() + "&key=" +vo1.getKey();;
+			}
+			//이전페이지
+			String prevPage="/member/list?page="+1+"&search=" + vo1.getSearch() + "&key=" +vo1.getKey();;
+			if(nowpage>1) {
+				prevPage="/member/list?page="+(nowpage-1)+"&search=" + vo1.getSearch() + "&key=" +vo1.getKey();;
+			}
+			
+			model.addAttribute("prev",prevPage);
+			model.addAttribute("next",nextpage);
+			
+			model.addAttribute("page",PageIndex.pageListHan(nowpage, totpage, url, vo1.getSearch(), vo1.getKey()).substring(46,PageIndex.pageListHan(nowpage, totpage, url, vo1.getSearch(), vo1.getKey()).length()-46));
+		}
+   }
+   
+   @PostMapping("list")
+   public void memlistP(MemberVO vo, PageVO vo1, Model model,@RequestParam("page") int page)
+   {
+	   String url = "list";
+		int nowpage = 1; // 시작페이지
+		int maxlist = 10; // 페이지당 최대 자료수
+		int totpage = 1; // 총 페이지 개수
+
+		int totcount = 0;
 		if(vo1.getKey() == null) 
 		{
-			model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url, ""));
-
+			totcount = service.memCount();
 		} else 
 		{
-			model.addAttribute("listpage", PageIndex.pageListHan(nowpage, totpage, url, vo1.getSearch(), vo1.getKey()));
+
+			totcount = service.memSearchCount(vo1);
 		}
+
+		// 총페이지수 계산
+		if(totcount % maxlist == 0) 
+		{
+			totpage = totcount / maxlist;
+		} else {
+			totpage = totcount / maxlist + 1;
+		}
+		if(totpage == 0) 
+		{
+			totpage = 1;
+		}
+		if(page != 0) 
+		{
+			nowpage = page;
+		}
+		if(nowpage > totpage) 
+		{ // 현재페이지가 총페이지보다크면 마지막페이지를 현제페이지로
+			nowpage = totpage;
+		}
+		int startpage = (nowpage - 1) * maxlist + 1;// 현재 페이지 시작번호
+		int endpage = nowpage * maxlist;
+		int listcount = totcount - ((nowpage - 1) * maxlist);
+
+		// PageVO vo = new PageVO();
+		vo1.setStartpage(startpage);
+		vo1.setEndpage(endpage);
+
+		model.addAttribute("page", nowpage);
+		model.addAttribute("totpage", totpage);
+		model.addAttribute("listcount", listcount);
+		model.addAttribute("totcount", totcount);
+
+		model.addAttribute("list", service.memListSearch(vo1));
+		
+		String nextpage="/member/list?page="+totpage+"&search="+vo1.getSearch()+"&key="+vo1.getKey();
+		if(nowpage<totpage) {
+			nextpage="/member/list?page="+(nowpage+1)+"&search="+vo1.getSearch()+"&key="+vo1.getKey();
+		}
+		//이전페이지
+		String prevPage="/member/list?page="+1+"&search="+vo1.getSearch()+"&key="+vo1.getKey();
+		if(nowpage>1) {
+			prevPage="/member/list?page="+(nowpage-1)+"&search="+vo1.getSearch()+"&key="+vo1.getKey();
+		}
+		
+		
+		model.addAttribute("prev",prevPage);
+		model.addAttribute("next",nextpage);
+		
+		model.addAttribute("page",PageIndex.pageListHan(nowpage, totpage, url, vo1.getSearch(), vo1.getKey()).substring(46,PageIndex.pageListHan(nowpage, totpage, url, vo1.getSearch(), vo1.getKey()).length()-46));
+
    }
 	
    @GetMapping("idsearch")

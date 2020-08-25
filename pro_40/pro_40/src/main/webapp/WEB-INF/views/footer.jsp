@@ -3,7 +3,7 @@
     
 <div class="footer">
 		<footer>
-			<p>&copy; HOMEPAGE 제작소 &nbsp;&nbsp;&nbsp;Rights Reserved.</p>
+			<p>&copy; お疲れ  &nbsp;&nbsp;&nbsp;ありがとうございました。</p>
 		</footer>
 		<!-- &copy; &nbsp; &gt; > &lt;< -->
 	</div>

@@ -5,12 +5,12 @@
 
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">장수하늘소 회원정보 수정</h2>
+		<h2 class="sub-title">会員情報修正</h2>
 	</div>
 	
 	<div class="write-form">
 		<table summery="회원가입 글쓰기 테이블 입니다">
-			<caption class="readonly">회원정보 수정폼</caption>			
+			<caption class="readonly">会員情報修正フォーム</caption>			
 			<colgroup>
 				<col width="20%">
 				<col width="80%">
@@ -18,10 +18,10 @@
 			<tbody>
 			<form name="my" method="post" action="admo"" enctype="multipart/form-data" onsubmit="return formcheck();">
 				<fieldset>
-					<legend class="readonly">입력폼</legend>
+					<legend class="readonly">入力フォーム</legend>
 					<tr>
 						<th scope="row">
-							<label for="id">아이디</label>
+							<label for="id">ＩＤ</label>
 						</th>
 						<td>
 							<input type="text" name="userid" id="userid" class="minput" value="${vo.userid }" readonly> 
@@ -29,7 +29,7 @@
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="name">상호명</label>
+							<label for="name">ブランド名</label>
 						</th>
 						<td>
 							<input type="text" name="name" id="name" class="minput" value="${vo.name }">
@@ -37,7 +37,7 @@
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="name">사업자 번호</label>
+							<label for="name">事業者番号</label>
 						</th>
 
 						<td>
@@ -50,7 +50,7 @@
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="name">전화번호</label>
+							<label for="name">電話番号</label>
 						</th>
 <c:if test="${user.tel.length()==12}">						
 						<td>
@@ -75,29 +75,29 @@
 </c:if>						
 					</tr>
 					<tr>
-						<th scope="row">이메일</th>
+						<th scope="row">メール</th>
 						<td>
 							<input type="text" name="email1" class="email" value="${vo.email.split('@')[0]}"> @
 							<input type="text" name="email2"  class="email" value="${vo.email.split('@')[1]}">  수정가능
 						</td>
 					</tr>
 					<tr>
-						<th scope="row">등급</th>
+						<th scope="row">等級</th>
 						<td>
 							<select name="rank">
-								<option value=""<c:if test="${vo.rank eq '' }">selected</c:if>>등급 선택</option>
-								<option value="A"<c:if test="${vo.rank eq 'A' }">selected</c:if>>병원관리자</option>
-								<option value="B"<c:if test="${vo.rank eq 'B' }">selected</c:if>>기업관리자</option>
-								<option value="C"<c:if test="${vo.rank eq 'C' }">selected</c:if>>일반</option>
-								<option value="V"<c:if test="${vo.rank eq 'V' }">selected</c:if>>총관리자</option>
+								<option value=""<c:if test="${vo.rank eq '' }">selected</c:if>>等級選択</option>
+								<option value="A"<c:if test="${vo.rank eq 'A' }">selected</c:if>>病院管理者</option>
+								<option value="B"<c:if test="${vo.rank eq 'B' }">selected</c:if>>企業管理者</option>
+								<option value="C"<c:if test="${vo.rank eq 'C' }">selected</c:if>>一般</option>
+								<option value="V"<c:if test="${vo.rank eq 'V' }">selected</c:if>>全体管理者</option>
 							</select> 
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2">
-							<input type="submit" value="수정하기" class="btn-write">
-							<input type="button" value="홈"  class="btn-reset" onclick="javascript:cl()">
-							<input type="button" value="뒤로가기"  class="btn-reset" onclick="history.back()">
+							<input type="submit" value="修正する" class="btn-write">
+							<input type="button" value="ホーム"  class="btn-reset" onclick="javascript:cl()">
+							<input type="button" value="以前ページへ"  class="btn-reset" onclick="history.back()">
 						</td>
 					</tr>
 					</fieldset>
@@ -115,75 +115,60 @@
 
 		if(my.userid.value=="") 
 		{
-			alert("아이디를을 입력하세요");
+			alert("IDをご入力ください。");
 			my.userid.focus();
 			return false;
 		}
 		if(my.name.value=="") 
 		{
-			alert("상호명을 입력하세요");
+			alert("ブランド名をご入力ください。");
 			my.name.focus();
 			return false;
 		}
 		if(my.tel1.value=="") 
 		{
-			alert("tel1를 입력하세요");
+			alert("tel1をご入力ください。");
 			my.tel1.focus();
 			return false;
 		}
 		if(my.tel2.value=="") 
 		{
-			alert("tel2를 입력하세요");
+			alert("tel2をご入力ください。");
 			my.tel2.focus();
 			return false;
 		}
 		if(my.tel3.value=="") 
 		{
-			alert("tel3를 입력하세요");
+			alert("tel3をご入力ください。");
 			my.tel3.focus();
 			return false;
 		}
 		if(my.email1.value=="") 
 		{
-			alert("email1을 입력하세요");
+			alert("email1をご入力ください。");
 			my.email1.focus();
 			return false;
 		}
 		if(my.email2.value=="") 
 		{
-			alert("email2을 입력하세요");
+			alert("email2をご入力ください。");
 			my.email2.focus();
 			return false;
 		}
 		if(my.rank.value=="")
 		{
-			alert("등급을 선택하세요");
+			alert("等級をご選択ください。");
 			my.rank.focus();
 			return false;
 		}
-		alert("회원정보 수정을 진행합니다.");
+		alert("会員情報修正を進めます。");
 		return true;
 	}
 	function cl() 
 	{
-		alert("취소하고 홈으로 돌아 갑니다.");
+		alert("キャンセルしてホームに戻ります。");
 		location.href="";
 	}
 </script>
 
 <%@ include file="../footer.jsp"%>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jslhrd.domain.CorpVO;
-import com.jslhrd.domain.HospVO;
+
 import com.jslhrd.domain.PageVO;
 import com.jslhrd.service.CorpService;
 import com.jslhrd.util.PageIndex;
@@ -210,8 +210,23 @@ public class CorpController {
 		vo.setC_pass(request.getParameter("c_pass"));
 		vo.setIdx(Integer.parseInt(request.getParameter("idx")));
 		vo.setC_name(request.getParameter("c_name"));
-		vo.setC_code(request.getParameter("c_code"));
-		vo.setC_tel(request.getParameter("c_tel"));
+		
+		String c_code1= request.getParameter("c_code1");
+		String c_code2= request.getParameter("c_code2");
+		String c_code3= request.getParameter("c_code3");
+		
+		String c_code = c_code1+"-"+c_code2+"-"+c_code3;
+		
+		vo.setC_code(c_code);
+		
+		String c_tel1 = request.getParameter("c_tel1");
+		String c_tel2 = request.getParameter("c_tel2");
+		String c_tel3 = request.getParameter("c_tel3");
+		
+		String c_tel = c_tel1+"-"+c_tel2+"-"+c_tel3;
+		
+		vo.setC_tel(c_tel);
+		
 		vo.setC_addr1(request.getParameter("c_addr1"));
 		vo.setC_addr2(request.getParameter("c_addr2"));
 		vo.setP_intro(request.getParameter("p_intro"));
@@ -333,8 +348,23 @@ public class CorpController {
 		
 		vo.setIdx(Integer.parseInt(request.getParameter("idx")));
 		vo.setC_name(request.getParameter("c_name"));
-		vo.setC_code(request.getParameter("c_code"));
-		vo.setC_tel(request.getParameter("c_tel"));
+		
+		String c_code1= request.getParameter("c_code1");
+		String c_code2= request.getParameter("c_code2");
+		String c_code3= request.getParameter("c_code3");
+		
+		String c_code = c_code1+"-"+c_code2+"-"+c_code3;
+		
+		vo.setC_code(c_code);
+		
+		String c_tel1 = request.getParameter("c_tel1");
+		String c_tel2 = request.getParameter("c_tel2");
+		String c_tel3 = request.getParameter("c_tel3");
+		
+		String c_tel = c_tel1+"-"+c_tel2+"-"+c_tel3;
+		
+		vo.setC_tel(c_tel);
+		
 		vo.setC_addr1(request.getParameter("c_addr1"));
 		vo.setC_addr2(request.getParameter("c_addr2"));
 		vo.setP_intro(request.getParameter("p_intro"));

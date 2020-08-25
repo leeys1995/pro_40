@@ -15,7 +15,7 @@
 
 	<div class="bbs_wrap">
 		<div class="bbs_left" style="height:300px;">
-			<h2 class="title">공지시항</h2>
+			<h2 class="title">お知らせ</h2>
 			<ul>
 			
 			<c:if test="${!empty list }">
@@ -25,7 +25,7 @@
 			</c:forEach>
 			</c:if>
 			<c:if test="${empty list }">
-				<li>공지사항이 없습니다.</li>
+				<li>お知らせがありません。</li>
 			</c:if>
 				
 			</ul>	
@@ -34,7 +34,7 @@
 			
 		</div>		
 		<div class="bbs_center" style="height:300px;">
-			<h2 class="title">병원</h2>
+			<h2 class="title">病院</h2>
 			<ul>
 			
 			<c:if test="${!empty list1}">
@@ -43,7 +43,7 @@
 			</c:forEach>
 			</c:if>
 				<c:if test="${empty list1 }">
-				<li>등록된 병원이 없습니다.</li>
+				<li>登録された病院がありません。</li>
 			</c:if>
 			
 			</ul>
@@ -51,7 +51,7 @@
 		</div>		
 		
 		<div class="bbs_right" style="height:300px;">
-			<h2 class="title">기업</h2>
+			<h2 class="title">企業</h2>
 			<ul>
 			 <c:if test="${!empty list2 }">
 			 <c:forEach var="list2" items="${list2 }" begin="0" end="4">
@@ -59,7 +59,7 @@
 			</c:forEach>
 			</c:if>	
 			<c:if test="${empty list2 }">
-				<li>등록된 기업이 없습니다.</li>
+				<li>登録された企業がありません。</li>
 			</c:if>
 			
 			

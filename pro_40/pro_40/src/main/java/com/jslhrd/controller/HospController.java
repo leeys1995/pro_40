@@ -210,8 +210,23 @@ public class HospController {
 		vo.setH_pass(request.getParameter("h_pass"));
 		vo.setIdx(Integer.parseInt(request.getParameter("idx")));
 		vo.setH_name(request.getParameter("h_name"));
-		vo.setH_code(request.getParameter("h_code"));
-		vo.setH_tel(request.getParameter("h_tel"));
+		
+		String h_code1= request.getParameter("h_code1");
+		String h_code2= request.getParameter("h_code2");
+		String h_code3= request.getParameter("h_code3");
+		
+		String h_code = h_code1+"-"+h_code2+"-"+h_code3;
+		
+		vo.setH_code(h_code);
+		
+		String h_tel1 = request.getParameter("h_tel1");
+		String h_tel2 = request.getParameter("h_tel2");
+		String h_tel3 = request.getParameter("h_tel3");
+		
+		String h_tel = h_tel1+"-"+h_tel2+"-"+h_tel3;
+		
+		vo.setH_tel(h_tel);
+		
 		vo.setH_addr1(request.getParameter("h_addr1"));
 		vo.setH_addr2(request.getParameter("h_addr2"));
 		vo.setD_medical(request.getParameter("d_medical"));
@@ -335,8 +350,23 @@ public class HospController {
 
 		vo.setIdx(Integer.parseInt(request.getParameter("idx")));
 		vo.setH_name(request.getParameter("h_name"));
-		vo.setH_code(request.getParameter("h_code"));
-		vo.setH_tel(request.getParameter("h_tel"));
+		
+		String h_code1= request.getParameter("h_code1");
+		String h_code2= request.getParameter("h_code2");
+		String h_code3= request.getParameter("h_code3");
+		
+		String h_code = h_code1+"-"+h_code2+"-"+h_code3;
+		
+		vo.setH_code(h_code);
+		
+		String h_tel1 = request.getParameter("h_tel1");
+		String h_tel2 = request.getParameter("h_tel2");
+		String h_tel3 = request.getParameter("h_tel3");
+		
+		String h_tel = h_tel1+"-"+h_tel2+"-"+h_tel3;
+		
+		vo.setH_tel(h_tel);
+		
 		vo.setH_addr1(request.getParameter("h_addr1"));
 		vo.setH_addr2(request.getParameter("h_addr2"));
 		vo.setD_medical(request.getParameter("d_medical"));

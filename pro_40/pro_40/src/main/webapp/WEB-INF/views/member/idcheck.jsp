@@ -3,7 +3,7 @@
 
 <HTML>
 <HEAD>
-<TITLE>사용자의 아이디를 체크합니다.</TITLE>
+<TITLE>IDチェック</TITLE>
 <meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
 <STYLE TYPE="text/css">
 <!--
@@ -33,24 +33,24 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
         <form name="input" method="post" action="idcheck">
 
  	<c:if test="${row==0 }">
-        	<FONT FACE="굴림"><B>아이디를 입력해주세요.</B></FONT><br>
+        	<FONT FACE="굴림"><B>IDをご入力ください。</B></FONT><br>
           <br> <INPUT NAME=userid type=text size=16 maxlength=16><br>
       	  <br><input type=image src="/images/u_bt08.gif" border=0 vspace=0 onclick="javascript:chk()">    	       
  	</c:if>      	
  	
 	<c:if test="${row!=0 }">
 		<c:if test="${empty vo1 }">
-          <br><FONT FACE="굴림">${userid }<B>사용 가능합니다.</B></FONT><br>
-         <BR><FONT COLOR="#483cae"><b>${userid }</b></FONT>는 아직 사용되지 않은 아이디입니다.<br>
-         <BR><FONT COLOR="#483cae"><b>${userid }</b></FONT>로 등록하셔도 됩니다.<br>
+          <br><FONT FACE="굴림">${userid }<B>使用できます。</B></FONT><br>
+         <BR><FONT COLOR="#483cae"><b>${userid }</b></FONT>はまだ使用できないIDです。<br>
+         <BR><FONT COLOR="#483cae"><b>${userid }</b></FONT>に登録してもよろしいです。<br>
  		 <INPUT NAME=userid1 type="hidden" size=16 maxlength=16 value="${userid }">
    		 <input type=image src="/images/u_bt13.gif" border=0 vspace=5 onclick="javascript:cl()">	
 
   		 </c:if>      
  		<c:if test="${!empty vo1 }">        
-         <br><font face="굴림"><b>죄송합니다</b></font><br>
-    	<BR><FONT COLOR="#483cae"><b>${vo1.getUserid()}</b></FONT>는 이미 사용 중인 아이디입니다<br>
-    	<br>다른 아이디를 사용하여 주십시오.<br>
+         <br><font face="굴림"><b>申し訳ございません。</b></font><br>
+    	<BR><FONT COLOR="#483cae"><b>${vo1.getUserid()}</b></FONT>はもう使用中のIDです。<br>
+    	<br>ほかのIDを書いてください。<br>
     	<br> <INPUT NAME=userid type=text size=16 maxlength=16>
       	  <br><input type=image src="/images/u_bt08.gif" border=0 vspace=0>
 		</c:if>
@@ -83,7 +83,7 @@ function chk()
 {
 	if(input.userid.value=="")
 	{
-		alert("아이디를 입력해주세요.");
+		alert("IDをご入力ください。");
 		input.userid.focus();
 		return;
 	}

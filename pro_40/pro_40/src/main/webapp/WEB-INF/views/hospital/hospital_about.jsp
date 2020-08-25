@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,58 +12,127 @@
 <link href="../css/common.css" rel="stylesheet">
 <link href="../css/mystyle.css" rel="stylesheet" type="text/css">
 <style>
-	.container {width:1100px; margin:0 auto;}
+.container {
+	width: 1100px;
+	margin: 0 auto;
+}
 
-.text_center {text-align:center; margin-top:100px;} 
-.text_center p {font-size:40px; color:#000; line-height:1.4;}
-.text_center .support_text {color:#0067b3; font-size:25px;}
+.text_center {
+	text-align: center;
+	margin-top: 100px;
+}
 
+.text_center p {
+	font-size: 40px;
+	color: #000;
+	line-height: 1.4;
+}
 
-.greeting_cont {overflow:hidden;}
-.greeting_cont .text_wrap {line-height:1.8; letter-spacing:-1px;}
-.greeting_cont .text_wrap p {margin-bottom:27px;}
-.greeting_cont .text_wrap .sign {font-size:18px; padding-top:72px;}
-.footer {clear:both;background:#42464d; padding-top:80px; padding-bottom:65px; margin-top:60px;}
-.footer .address {font-style:normal; color:#ababb1; margin-bottom:20px;}
-.footer .address .title {font-size:14px; margin-bottom:8px; color:#fff;}
-.footer  .copyright {color:#fff;}
+.text_center .support_text {
+	color: #0067b3;
+	font-size: 25px;
+}
 
+.greeting_cont {
+	overflow: hidden;
+}
+
+.greeting_cont .text_wrap {
+	line-height: 1.8;
+	letter-spacing: -1px;
+}
+
+.greeting_cont .text_wrap p {
+	margin-bottom: 27px;
+}
+
+.greeting_cont .text_wrap .sign {
+	font-size: 18px;
+	padding-top: 72px;
+}
+
+.footer {
+	clear: both;
+	background: #42464d;
+	padding-top: 80px;
+	padding-bottom: 65px;
+	margin-top: 60px;
+}
+
+.footer .address {
+	font-style: normal;
+	color: #ababb1;
+	margin-bottom: 20px;
+}
+
+.footer .address .title {
+	font-size: 14px;
+	margin-bottom: 8px;
+	color: #fff;
+}
+
+.footer  .copyright {
+	color: #fff;
+}
 </style>
-  
-<title>Insert title here</title>
+
+<title>病院</title>
 </head>
 <body>
- <!-- 
+	<!-- 
  웹문서 만들기 기본 공식
  1. 요소를 어떻게 묶을 것인가? 그룹만들기
  2. 그룹안에 적절한 태그 사용
  3. class 이름 붙이고 css 적용
  -->
-	
-<div class="header">
+
+	<div class="header">
 		<header>
 			<div class="topnav">
-				<ul>
-					<li><a href="../member/login">로그인</a></li>
-					<li><a href="../member/insert">회원가입</a></li>
-					<li><a href="/" ">홈으로</a>
-				</ul>
+				<c:if test="${empty user}">
+					<ul>
+						<li><a href="/member/login">ログイン</a></li>
+						<li><a href="/member/insert">新規取得</a></li>
+						<li><a href="/">ホーム</a>
+					
+					</ul>
+				</c:if>
+				<c:if test="${!empty user}">
+					<c:if test="${user.userid eq 'admin' }">
+						<ul>
+							<li><a href="/member/list?page=1">会員管理</a></li>
+							<li><a href="javascript:logout()">ログアウト</a></li>
+							<li><a href="/">ホーム</a>
+						</ul>
+					</c:if>
+					<c:if test="${ user.userid != 'admin'}">
+						<ul>
+							<li><a href="/member/modify">個人情報修正</a></li>
+							<li><a href="javascript:logout()">ログアウト</a></li>
+							<li><a href="/">ホーム</a>
+						</ul>
+					</c:if>
+
+				</c:if>
 			</div>
 			<div class="navigation">
-			
-				<div style="height:100px; width:200px;">
-				<a href="hospital_view?idx=${hosp.idx }"><img
+
+				<div style="height: 100px; width: 200px;">
+					<a href="hospital_view?idx=${hosp.idx }"><img
 						src="/resources/upload/hosp/banner/${hosp.h_banner }" alt="모집사진"></a>
 				</div>
-				
+
 				<div class="nav">
 					<nav>
 						<ul class="navi">
-							<li><a href="hospital_about?idx=${hosp.idx }">병원소개</a></li>
-							<li><a href="hospital_guidance?idx=${hosp.idx }">진료안내</a></li>
-							<li><a href="/hospital_board/hospital_board?idx=${hosp.idx }&page=1">공지</a></li>
-							<li><a href="hospital_reservation?idx=${hosp.idx }">예약</a></li>							
-							<li><a href="hospital_controller?idx=${hosp.idx }">홈페이지 <br> 관리</a></li>
+							<li><a href="hospital_about?idx=${hosp.idx }">病院紹介</a></li>
+							<li><a href="hospital_guidance?idx=${hosp.idx }">診療案内</a></li>
+							<li><a
+								href="/hospital_board/hospital_board?idx=${hosp.idx }&page=1">お知らせ</a></li>
+							<li><a href="hospital_reservation?idx=${hosp.idx }">予約</a></li>
+							<li><a href="hospital_controller?idx=${hosp.idx }">ホームページ
+									<br> 管理
+							</a></li>
 
 						</ul>
 					</nav>
@@ -75,42 +146,48 @@
 	<div class="sitewrap">
 		<span class="fa fa-close" id="close" style="cursor: pointer"></span>
 		<div class="inner">
-			<span class="map">홈페이지소개</span> <span class="map">공지사항</span> <span
-				class="map">병원</span> <span class="map">기업</span> <span class="map">검색</span>
-			<span class="map">회원가입</span> <span class="map">로그인</span>
+			<span class="map">ホームページ紹介</span> <span class="map">お知らせ</span> <span
+				class="map">病院</span> <span class="map">企業</span> <span class="map">検索</span>
+			<span class="map">新規取得</span> <span class="map">ログイン</span>
 		</div>
 	</div>
 
 	<div class="container">
 		<div class="text_center">
-				<p><span class="support_text">${hosp.h_name }은</span><br/>
-<strong>${hosp.d_mager }</strong></p>
-				<span class="col_bar"></span>
+			<p>
+				<span class="support_text">${hosp.h_name }은</span><br /> <strong>${hosp.d_mager }</strong>
+			</p>
+			<span class="col_bar"></span>
 		</div>
 		<div class="greeting_cont">
-			<img src="/resources/upload/hosp/hospital_photo/${hosp.h_photo }" alt="" style="float:left; padding:0px 40px; width:500px; height:500px;">
-			<div class="text_wrap"><p>
-				${hosp.h_history }
-			</p><strong class="sign">${hosp.h_name } &nbsp 병 원 장</strong></div>
+			<img src="/resources/upload/hosp/hospital_photo/${hosp.h_photo }"
+				alt=""
+				style="float: left; padding: 0px 40px; width: 500px; height: 500px;">
+			<div class="text_wrap">
+				<p>${hosp.h_history }</p>
+				<strong class="sign">${hosp.h_name } &nbsp 病院長</strong>
+			</div>
 		</div>
 	</div>
 	<!-- end contents -->
 	<br>
 	<br>
-	
-	
+
+
 	<div class="container clearfix">
-			<address class="address">
-				<p class="title" style="font-size:20px;"><strong>오시는 길</strong></p>
-				 ${hosp.h_come }
-			</address>
-		
-		</div>
+		<address class="address">
+			<p class="title" style="font-size: 20px;">
+				<strong>住所</strong>
+			</p>
+			${hosp.h_come }
+		</address>
+
+	</div>
 	<script>
 		$(function() {
-			$(".location  .dropdown > a").on("click",function(e) {
+			$(".location  .dropdown > a").on("click", function(e) {
 				e.preventDefault();
-				if($(this).next().is(":visible")) {
+				if ($(this).next().is(":visible")) {
 					$(".location  .dropdown > a").next().hide();
 				} else {
 					$(".location  .dropdown > a").next().hide();
@@ -119,16 +196,18 @@
 			});
 		});
 	</script>
-	
 
-<footer class="footer">
+
+	<footer class="footer">
 		<div class="container clearfix">
 			<address class="address">
-				<p class="title">병원</p>
-				<p>주소 : ${hosp.h_addr1 } ${hosp.h_addr2 }/고객센터: ${hosp.h_tel } 	사업자등록번호: ${hosp.h_code }</p>
+				<p class="title">病院</p>
+				<p>住所 : ${hosp.h_addr1 } ${hosp.h_addr2 }/お客様案内センター:
+					${hosp.h_tel } 事業者番号: ${hosp.h_code }</p>
 			</address>
-			<p class="copyright">Copyright &copy ${hosp.h_name }. All rights reserved.</p>
+			<p class="copyright">Copyright &copy ${hosp.h_name }. All rights
+				reserved.</p>
 		</div>
-</footer>
+	</footer>
 </body>
 </html>

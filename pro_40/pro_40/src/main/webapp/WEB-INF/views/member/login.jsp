@@ -77,11 +77,11 @@
 	
 		<form name="my" method="post" action="login" onsubmit="return formcheck();">
 			<fieldset>
-				<legend class="readonly">로그인그룹</legend>
+				<legend class="readonly">ログイン</legend>
 				<div style="width:70%; float:left;">
-					<label for="userid" class="readonly">아이디</label>
+					<label for="userid" class="readonly">ID</label>
 					<input type="text" name="userid" id="userid" placeholder="ログインID">
-					<label for="pw" class="readonly">패스워드</label>
+					<label for="pw" class="readonly">パスワード</label>
 					<input type="password" name="passwd" id="passwd" placeholder="パスワード">
 				</div>
 				<div style="width:28%; float:right;padding:15px;
@@ -118,12 +118,12 @@
 <script>
 	function formcheck() {
 		if(my.title.value=="") {
-			alert("제목입력하세요");
+			alert("題目をご入力ください。");
 			my.title.focus();
 			return;
 		}
 		if(my.content.value=="") {
-			alert("내용입력하세요");
+			alert("内容をご入力ください。");
 			my.contnet.focus();
 			return;
 		}
@@ -147,12 +147,12 @@ function logout() {
 <script>
 	function formcheck() {
 		if(my.userid.value=="") {
-			alert("아이디를 입력하세요");
+			alert("IDをご入力ください。");
 			my.userid.focus();
 			return false;
 		}
 		if(my.passwd.value=="") {
-			alert("비밀번호를 입력하세요");
+			alert("パスワードをご入力ください。");
 			my.passwd.focus();
 			return false;
 		}

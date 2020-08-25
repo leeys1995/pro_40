@@ -13,14 +13,14 @@
 		<c:when test="${row==1 }">
 
 			<script>
-					alert("변경되었습니다. 로그인해주세요");
+					alert("変更しました. ログインしてください。");
 					location.replace("/");
 				</script>
 		</c:when>
 
 		<c:when test="${row==0 }">
 			<script>
-					alert("등록실패 \n 다음에.....");
+					alert("登録失敗 \n もう一度.....");
 					history.back();
 				</script>
 		</c:when>

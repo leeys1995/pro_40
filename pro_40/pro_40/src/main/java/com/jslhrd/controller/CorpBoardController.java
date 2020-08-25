@@ -507,6 +507,10 @@ public class CorpBoardController {
 			log.info("productListSearch()....");
 			String url = "product";
 
+			CorpVO vo1 = service1.corpView(idx);
+			model.addAttribute("corp", vo1);
+			
+			
 			int nowpage = 1; // 시작페이지
 			int maxlist = 10; // 페이지당 최대 자료수
 			int totpage = 1; // 총 페이지 개수
@@ -776,6 +780,9 @@ public class CorpBoardController {
 					log.info("productDirectListSearch()....");
 					String url = "productDirect";
 
+					CorpVO vo1 = service1.corpView(idx);
+					model.addAttribute("corp", vo1);
+					
 					int nowpage = 1; // 시작페이지
 					int maxlist = 10; // 페이지당 최대 자료수
 					int totpage = 1; // 총 페이지 개수

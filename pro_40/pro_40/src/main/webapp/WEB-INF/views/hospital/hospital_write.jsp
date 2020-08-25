@@ -54,12 +54,12 @@
 
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">병원 등록 폼</h2>
+		<h2 class="sub-title">病院登録フォーム</h2>
 	</div>
 	
 	<div class="write-form">
 		<table summery="갤러리 글쓰기 테이블 입니다">
-			<caption class="readonly">갤러리 입력폼</caption>			
+			<caption class="readonly">フォーム</caption>			
 			<colgroup>
 				<col width="20%">
 				<col width="80%">
@@ -71,11 +71,11 @@
 			       <input type="hidden" name= "idx" value="${user.idx }">
 			       
 			        <tr>
-						<th>※ 홈페이지 비밀번호</th>
-						<td><input type="password" name="h_pass"  placeholder="홈페이지 수정과 삭제시 필요합니다."></td>
+						<th>※ ホームページ暗証番号</th>
+						<td><input type="password" name="h_pass"  placeholder="ほーむ修正と削除の時必要です。"></td>
 					</tr>
 					<tr>
-						<th>병원 배너</th>
+						<th>病院バーナー</th>
 						<td><input type="file" name="h_banner" accept="image/*"
 						onchange="setThumbnail(event);">
 						
@@ -85,23 +85,33 @@
 						</td>
 					</tr>
 					<tr>
-						<th>병원이름</th>
+						<th>病院名</th>
 						<td><input type="text" name="h_name"></td>
 						
 					</tr>
 					<tr>
-						<th>사업자등록</th>
-						<td><input type="text" name="h_code"></td>
+						<th>事業者登録</th>
+						<td><input type="text" name="h_code1" id="h_code1"
+							maxlength="3" style="width: 17.3%" placeholder="h_code1">-
+							<input type="text" name="h_code2" id="h_code2" maxlength="2"
+							style="width: 11.3%" placeholder="h_code2">- <input
+							type="text" name="h_code3" id="h_code3" maxlength="5"
+							style="width: 29.3%" placeholder="h_code3"></td>
 					</tr>
 					<tr>
-						<th>병원 전화번호</th>
-						<td><input type="text" name="h_tel"></td>
+						<th>病院電話番号</th>
+						<td><input type="text" name="h_tel1" id="h_tel1"
+							style="width: 19.3%" placeholder="h_tel1" maxlength="3">- <input
+							type="text" name="h_tel2" id="h_tel2" style="width: 19.3%"
+							placeholder="h_tel2" maxlength="4">- <input type="text"
+							name="h_tel3" id="h_tel3" style="width: 19.3%" placeholder="h_tel3"
+							maxlength="4"></td>
 					</tr>	
 					<tr> 
-						<th>지역</th>
+						<th>地域</th>
 						<td>
 							<select name="h_addr1">
-								<option value="">지역선택</option>
+								<option value="">地域選択</option>
 								<option value="서울특별시">서울특별시</option>
 								<option value="부산광역시">부산광역시</option>
 								<option value="대전광역시">대전광역시</option>
@@ -112,15 +122,15 @@
 						</td>
 					</tr>
 					<tr>
-						<th>상세주소</th>
+						<th>住所</th>
 						<td><input type="text" name="h_addr2"></td>
 					</tr>		
 					<tr>
-						<th>진료안내</th>
+						<th>診療案内</th>
 						<td><textarea name="d_medical"></textarea></td>
 					</tr>	
 					<tr>
-						<th>병원 배경사진</th>
+						<th>病院拝啓写真</th>
 						<td><input type="file" name="h_photo"  accept="image/*" onchange="setThumbnail1(event);">
 						
 						<div id="image_container1"></div>
@@ -128,25 +138,25 @@
 						</td>
 					</tr>
 					<tr>
-						<th>사진</th>
+						<th>写真</th>
 						<td><input type="file" name="d_photo" accept="image/*" onchange="setThumbnail2(event);">
 						<div id="image_container2"></div></td>
 						
 					</tr>
 					<tr>
-						<th>병원 소개 제목</th>
+						<th>病院紹介題目</th>
 						<td><input type="text" name="d_mager"></td>
 					</tr>
 					<tr>
-						<th>병원 소개 내용</th>
+						<th>病院紹介内容</th>
 						<td><textarea name="h_history"></textarea></td>
 					</tr>
 					<tr>
-						<th>병원홍보영상</th>
+						<th>病院広報動画</th>
 						<td><input type="file" name="h_video"></td>
 					</tr>
 					<tr>
-						<th>병원오시는길</th>
+						<th>病院住所</th>
 						<td><textarea name="h_come"></textarea></td>
 					</tr>
 					
@@ -154,8 +164,8 @@
 					
 					<tr>
 						<td colspan="2">
-							<a href="javascript:send()"><input type="button" value="등록" class="btn-write"></a>
-							<a href="javascript:home()">"<input type="button" value="뒤로가기" class="btn-reset"></a>
+							<a href="javascript:send()"><input type="button" value="登録する" class="btn-write"></a>
+							<a href="javascript:home()">"<input type="button" value="キャンセル" class="btn-reset"></a>
 						</td>
 					</tr>
 				</form>
@@ -169,68 +179,90 @@
 	function send() {
 		
 		if(input.h_banner.value=="") {
-			alert("배너를 넣어주세요");
+			alert("バーナーを入れてください。");
 			input.h_banner.focus();
 			return;
 		}
 		if(input.h_name.value=="") {
-			alert("병원이름을 입력해주세요");
+			alert("病院名を入れてください。");
 			input.h_name.focus();
 			return;
 		}
-		if(input.h_code.value=="") {
-			alert("사업자번호를 입력해주세요");
-			input.h_code.focus();
-			return;
-		}
 		
-		if(input.h_tel.value=="") {
-			alert("전화번호를 입력해주세요");
-			input.h_tel.focus();
+		if (input.h_code1.value == "") {
+			alert("事業者番号1を入れてください。");
+			input.h_code1.focus();
 			return;
 		}
+		if (input.h_code2.value == "") {
+			alert("事業者番号2を入れてください。");
+			input.h_code2.focus();
+			return;
+		}
+		if (input.h_code3.value == "") {
+			alert("事業者番号3を入れてください。");
+			input.h_code3.focus();
+			return;
+		}
+
+		if (input.h_tel1.value == "") {
+			alert("電話番号1を入れてください。");
+			input.h_tel1.focus();
+			return;
+		}
+		if (input.h_tel2.value == "") {
+			alert("電話番号2を入れてください。");
+			input.h_tel2.focus();
+			return;
+		}
+		if (input.h_tel3.value == "") {
+			alert("電話番号3を入れてください。");
+			input.h_tel3.focus();
+			return;
+		}
+	
 		if(input.h_addr1.value=="") {
-			alert("주소를 입력해주세요");
+			alert("住所1を入れてください。");
 			input.h_addr1.focus();
 			return;
 		}
 		if(input.h_addr2.value=="") {
-			alert("상세주소를 입력해주세요");
+			alert("住所2を入れてください。");
 			input.h_addr2.focus();
 			return;
 		}
 		if(input.d_medical.value=="") {
-			alert("진료안내를 입력해주세요");
+			alert("診療案内をご入力ください。");
 			input.d_medical.focus();
 			return;
 		}
 		if(input.h_photo.value=="") {
-			alert("배경사진을 입력해주세요");
+			alert("背景写真をいれてください。");
 			input.h_photo.focus();
 			return;
 		}
 		if(input.d_photo.value=="") {
-			alert("배경사진2입력해주세요");
+			alert("背景写真2を入れてください。");
 			input.d_photo.focus();
 			return;
 		}
 		if(input.d_mager.value=="") {
-			alert("진료과목을 입력해주세요");
+			alert("診療科目をご入力ください。");
 			input.d_mager.focus();
 			return;
 		}
 		if(input.h_history.value=="") {
-			alert("연역을 입력해주세요");
+			alert("沿革をご入力ください。");
 			input.h_history.focus(); 
 			return;
 		}
 		if(input.h_video.value=="") {
-			alert("병원 홍보영상을 올려주세요");
+			alert("病院広報動画を入れてください。");
 			input.h_video.focus();
 			return;
 		}
 		if(input.h_come.value=="") {
-			alert("오시는길을 입력해주세요");
+			alert("病院住所をご入力ください。");
 			input.h_come.focus();
 			return;
 		}
@@ -238,7 +270,7 @@
 		
 		
 		
-		alert("등록합니다.");
+		alert("登録します。");
 		input.submit();
 	}
 	
@@ -249,18 +281,4 @@
 </script>
 
 <%@ include file="../footer.jsp" %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

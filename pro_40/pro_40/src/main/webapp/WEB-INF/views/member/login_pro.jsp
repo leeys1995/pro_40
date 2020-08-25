@@ -13,14 +13,14 @@
 		<c:when test="${row==1 }">
 
 			<script>
-					alert("로그인 성공했습니다.${user.userid}님 환형합니다.");
+					alert("ログインに成功 しました。${user.userid}様");
 					location.replace("/");
 				</script>
 		</c:when>
 
 		<c:when test="${row==0 }">
 			<script>
-					alert("ID 또는 PW를 확인하고, \n 다시 로그인 해주세요.");
+					alert("IDまたはPWを確認して, \n もう一度ログインしてください。");
 					history.back();
 				</script>
 		</c:when>
