@@ -24,16 +24,16 @@
 </style>
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">병원</h2>
+		<h2 class="sub-title">病院</h2>
 		<div class="sub-search">
 			<form name="input" method="post" action="hospital?page=1">
 				<select name="search" class="sel">
 					<option value="h_name"
-						<c:if test="${pageVO.search=='h_name'}">selected</c:if>>병원이름</option>
+						<c:if test="${pageVO.search=='h_name'}">selected</c:if>>病院名</option>
 					<option value="h_addr1"
-						<c:if test="${pageVO.search=='h_addr1'}">selected</c:if>>지역</option>
+						<c:if test="${pageVO.search=='h_addr1'}">selected</c:if>>地域</option>
 					<option value="d_mager"
-						<c:if test="${pageVO.search=='d_mager'}">selected</c:if>>진료과목</option>
+						<c:if test="${pageVO.search=='d_mager'}">selected</c:if>>診療科目</option>
 				</select>
 				<c:if test="${empty pageVO.key }">
 					<input type="text" name="key" class="text">
@@ -41,7 +41,7 @@
 				<c:if test="${!empty pageVO.key }">
 					<input type="text" name="key" class="text" value="${pageVO.key }">
 				</c:if>
-				<a href="javascript:send()"><input type="button" value="검색"
+				<a href="javascript:send()"><input type="button" value="検索"
 					class="btn"></a>
 			</form>
 		</div>
@@ -66,19 +66,22 @@
 		<ul class="sub-content1">
 
 			<li class="li2"> <img src="/resources/images/littledeep_hospital_file_style1.png">
-				데이터가 존재하지않아요
+				データが存在できません。
 			</li>
 		</ul>
 	</c:if>
 
 	<div class="paging">
 		<ul>
-
-			<li><a href="#">${listpage }</a></li>
-
-
+			<li style="padding: 0 30px;"><a href="${prev }"><img
+					src="/images/i_prev.gif"></a></li>
+			<li><a href="#">${page }</a></li>
+			<li style="padding: 0 30px;"><a href="${next }"><img
+					src="/images/i_next.gif"></a></li>
 		</ul>
-		<a href="hospital_write" class="btn-write">글쓰기</a>
+		<c:if test="${!empty user }">
+		<a href="hospital_write" class="btn-write">書く</a>
+		</c:if>
 	</div>
 
 </div>
@@ -86,7 +89,7 @@
 <script>
 	function send() {
 		if (input.key.value == "") {
-			alert("검색단어입력하세요");
+			alert("検索する単語を入力してください。");
 			input.cont.focus;
 			return;
 		}
@@ -96,6 +99,18 @@
 </script>
 
 <%@ include file="../footer.jsp"%>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

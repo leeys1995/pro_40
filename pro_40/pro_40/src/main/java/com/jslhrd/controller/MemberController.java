@@ -1,11 +1,21 @@
 package com.jslhrd.controller;
 
+import java.util.Properties;
+import java.util.Random;
 
-
+import javax.inject.Inject;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +29,6 @@ import com.jslhrd.domain.MemberVO;
 import com.jslhrd.domain.PageVO;
 import com.jslhrd.service.MemberService;
 import com.jslhrd.util.PageIndex;
-import com.jslhrd.util.SHA256Util;
 
 import lombok.AllArgsConstructor;
 
@@ -32,18 +41,8 @@ public class MemberController {
 	
 	private MemberService service;
 	
-	//kakao login
-	@PostMapping("kakao_login")
-	public String kakao_login(MemberVO vo,HttpServletRequest request) {
-		log.info("kakao login....");
-		log.info("name===>" + vo);
-		
-		request.getSession().setAttribute("user", vo);
-		request.getSession().setMaxInactiveInterval(1800);
-		
-		return "redirect:/";
-	}
-	
+	@Inject
+	BCryptPasswordEncoder pwdEncoder;
 	
 	//회원가입 페이지
 	@GetMapping("/insert")
@@ -62,9 +61,10 @@ public class MemberController {
 		vo.setTel(tel);
 		String c_code=vo.getC_code1()+"-"+vo.getC_code2()+"-"+vo.getC_code3();
 		vo.setC_code(c_code);
-		String salt = SHA256Util.generateSalt();
-		String newPassword = SHA256Util.getEncrypt(vo.getPasswd(), salt);
+
+		String newPassword = pwdEncoder.encode(vo.getPasswd());
 		vo.setPasswd(newPassword);
+
 		int row = service.memInsert(vo);
 		model.addAttribute("row", row);
 		log.info("postmeminsert()*****");
@@ -117,23 +117,17 @@ public class MemberController {
 		log.info("getmemlogin()*****");
 	}
 	
-	
 	@PostMapping("/login")
 	public String memlogin(Model model, HttpServletRequest request,MemberVO vo,RedirectAttributes rttr)
 	{
 		log.info("postmemlogin()*****");
-		
-		
-		
 		MemberVO vo1= service.memIdchk(vo);//BD값
 		log.info("vo1:"+vo1);
+
 		log.info(vo.getPasswd());
-		String salt = SHA256Util.generateSalt();
-		String newPassword = SHA256Util.getEncrypt(vo.getPasswd(), salt);
-		vo.setPasswd(newPassword);
-		log.info(newPassword);//여기부터 수정 DB값이랑 안맞음
+
 		int row=0;
-		if(vo1==null)
+		if(vo1==null )
 		{
 			log.info("postmemlogin(1)*****");
 			row = 0;
@@ -141,14 +135,20 @@ public class MemberController {
 			return "/member/login_pro";
 		}else
 		{
-			if(vo1.getUserpw().equals(vo.getPasswd()))
+			boolean pwMatch = pwdEncoder.matches(vo.getPasswd(),vo1.getUserpw());
+			log.info(""+pwMatch);
+			if(pwMatch)
 			{
+				log.info(vo.getPasswd());
+				vo.setPasswd(vo1.getUserpw());
 				log.info("postmemlogin(2)*****");
+				
 				service.lastTimeUpdate(vo);
 				row = 1;
 				request.getSession().setAttribute("user", service.memLogin(vo));
 				request.getSession().setMaxInactiveInterval(1800);
 				model.addAttribute("row", row);
+				log.info(""+service.memLogin(vo));
 				return "/member/login_pro";
 			}else
 			{
@@ -343,77 +343,85 @@ public class MemberController {
 			log.info("1");
 
 			//
-			return "/member/sendEmail.do?userid="+vo.getUserid();
+			return "redirect:/member/sendEmail.do?userid="+vo.getUserid();
 		}else
 		{ 
 			log.info("2");
 			//rttr.addAttribute("userid",1);
 			model.addAttribute("userid",1);
-			return "/member/idsearch";
+			return "/member/pwchange";
 		}
 	   
    }
    
-//   @RequestMapping("/sendEmail.do")
-//   public String sendEmail(HttpServletRequest req, HttpServletResponse res, @RequestParam("userid") String userid, MemberVO vo) throws Exception
-//   {
-//	   //메일관련 정보 
-//	  String host = "smtp.naver.com";
-//	  final String emailid = "tjr0315"; 
-//	  final String pass = "tkfkdgo1!2@3#";
-//	  int port = 456;
-//	  
-//	  //메일내용 
-//	  String recipient = "tjr0315@naver.com";
-//	  String subject = "비밀번호 변경을 위한 인증 코드";
-//	 
-//		final char[] random = 
-//			{
-//				'1','2','3','4','5','6','7','8','9','0',
-//				'A','B','C','D','E','F','G','H','I','J',
-//				'K','L','M','N','O','P','Q','R','S','T',
-//				'U','V','W','X','Y','Z'
-//			};
-//		final int randomcnt = random.length;
-//		Random rnd = new Random();
-//		StringBuffer buf = new StringBuffer();
-//		for(int x=0; x<6; x++)
-//		{
-//			buf.append(random[rnd.nextInt(randomcnt)]);
-//		}
-//		vo.setPw_code(buf.toString());
-//		service.pwcodeupdate(vo);
-//		log.info(buf.toString());
-//		String body = "인증코드는"+buf.toString()+"입니다.";
-//	  Properties props = System.getProperties();
-//	  
-//	  props.put("mail.smtp.host", host);
-//	  props.put("mail.smtp.port", port);
-//	  props.put("mail.smtp.auth", "true");
-//	  props.put("mail.smtp.ssl.enable", "trun");
-//	  props.put("mail.smtp.ssl.trust", host);
-//	  
-//	  Session se = Session.getDefaultInstance(props, new javax.mail.Authenticator()
-//			  {
-//		  		String un = emailid;
-//		  		String pw = pass;
-//		  		protected PasswordAuthentication getPasswordAuthentication()
-//		  		{
-//		  			return new PasswordAuthentication(un, pw);
-//		  		}
-//			  });
-//	  se.setDebug(true);
-//	  
-//	  Message mimeMessage = new MimeMessage(se);
-//	  mimeMessage.setFrom(new InternetAddress(emailid+"@naver.com"));
-//	  mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-//	  mimeMessage.setSubject(subject);
-//	  mimeMessage.setText(body);
-//	  Transport.send(mimeMessage);
-//	
-//	  return "redirect:/member/pwchange_pro";
-//   }
+   @RequestMapping("/sendEmail.do")
+   public String sendEmail(HttpServletRequest req, HttpServletResponse res, @RequestParam("userid") String userid, MemberVO vo,Model model) throws Exception
+   {
+	   //메일관련 정보 
+	  String host = "smtp.naver.com";
+	  final String emailid = "tjr0315"; 
+	  final String pass = "tkfkdgo1!2@";
+	  int port = 587;
+	  
+	  //메일내용 
+	  String recipient = "tjr0315@naver.com";
+	  String subject = "비밀번호 변경을 위한 인증 코드";
+	 
+		final char[] random = 
+			{
+				'1','2','3','4','5','6','7','8','9','0',
+				'A','B','C','D','E','F','G','H','I','J',
+				'K','L','M','N','O','P','Q','R','S','T',
+				'U','V','W','X','Y','Z'
+			};
+		final int randomcnt = random.length;
+		Random rnd = new Random();
+		StringBuffer buf = new StringBuffer();
+		for(int x=0; x<6; x++)
+		{
+			buf.append(random[rnd.nextInt(randomcnt)]);
+		}
+		vo.setPw_code(buf.toString());
+		service.pwcodeupdate(vo);
+		log.info(buf.toString());
+		String body = "인증코드는"+buf.toString()+"입니다.";
+	  Properties props = System.getProperties();
+	  
+	  props.put("mail.smtp.host", host);
+	  props.put("mail.smtp.port", port);
+	  props.put("mail.smtp.auth", "true");
+	  props.put("mail.smtp.ssl.enable", "trun");
+	  props.put("mail.smtp.ssl.trust", host);
+	  
+	  Session se = Session.getDefaultInstance(props, new javax.mail.Authenticator()
+			  {
+		  		String un = emailid;
+		  		String pw = pass;
+		  		protected PasswordAuthentication getPasswordAuthentication()
+		  		{
+		  			return new PasswordAuthentication(un, pw);
+		  		}
+			  });
+	  se.setDebug(true);
+	  
+	  Message mimeMessage = new MimeMessage(se);
+	  mimeMessage.setFrom(new InternetAddress(emailid+"@naver.com"));
+	  mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+	  mimeMessage.setSubject(subject);
+	  mimeMessage.setText(body);
+	  Transport.send(mimeMessage);
+	  
+	  model.addAttribute("userid",vo.getUserid());
+	  return "/member/pwchange_pro";
+   }
 
-  
-   
+  @PostMapping("pwupdate")
+  public String pwupdate(MemberVO vo,Model model)
+  {
+	  String newPassword = pwdEncoder.encode(vo.getPasswd());
+	  vo.setPasswd(newPassword);
+	  int row = service.pwupdate(vo);
+	   model.addAttribute("row", row);
+	  return "/member/pwupdate_pro";
+  }
 }

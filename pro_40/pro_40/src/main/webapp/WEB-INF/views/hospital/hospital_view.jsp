@@ -4,7 +4,8 @@
 <%
 	int idx2 = Integer.parseInt(request.getParameter("idx"));
 %>
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=YOUR_CLIENT_ID&submodules=geocoder"></script>
+<script type="text/javascript"
+	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=YOUR_CLIENT_ID&submodules=geocoder"></script>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -15,14 +16,14 @@
 <link href="../css/common.css" rel="stylesheet">
 <link href="../css/mystyle.css" rel="stylesheet" type="text/css">
 <style>
-	.aaa_right {
-		padding:15px;
-		height: 200px;
-		}
-		
+.aaa_right {
+	padding: 15px;
+	height: 200px;
+}
 </style>
 <!-- 카카오톡 맵 좌표 찍기 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=831d3575fb87dc0f7e2e0d4494eb90f6&libraries=services"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=831d3575fb87dc0f7e2e0d4494eb90f6&libraries=services"></script>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -30,7 +31,6 @@
 	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
 <script>
-
 	$(function() {
 
 		$('.slider').bxSlider({
@@ -62,26 +62,50 @@
 	<div class="header">
 		<header>
 			<div class="topnav">
-				<ul>
-					<li><a href="../member/login">로그인</a></li>
-					<li><a href="../member/insert">회원가입</a></li>
-					<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
-				</ul>
+				<c:if test="${empty user}">
+					<ul>
+
+						<li><a href="../member/login">ログイン</a></li>
+						<li><a href="../member/insert">新規取得</a></li>
+						<li><a href="javascript:void(0)" class="sitemap">サイトマップ</a></li>
+
+					</ul>
+				</c:if>
+				<c:if test="${!empty user}">
+					<c:if test="${user.userid eq 'admin' }">
+						<ul>
+							
+							<li><a href="javascript:logout()">ログアウト</a></li>
+							<li><a href="javascript:void(0)" class="sitemap">サイトマップ</a></li>
+
+						</ul>
+					</c:if>
+					<c:if test="${ user.userid != 'admin'}">
+						<ul>
+							<li><a href="../member/modify">個人情報修正</a></li>
+							<li><a href="javascript:logout()">ログアウト</a></li>
+
+						</ul>
+					</c:if>
+				</c:if>
+
 			</div>
 			<div class="navigation">
-				<h1 class="logo">
-					<a href="hospital_view?idx=${hosp.idx }"><img height="100px"
+
+				<div style="height: 100px; width: 200px;">
+					<a href="hospital_view?idx=${hosp.idx }"><img
 						src="/resources/upload/hosp/banner/${hosp.h_banner }" alt="모집사진"></a>
-				</h1>
+				</div>
+
 				<div class="nav">
 					<nav>
 						<ul class="navi">
-							<li><a href="hospital_about?idx=${hosp.idx }">병원소개</a></li>
-							<li><a href="hospital_guidance?idx=${hosp.idx }">진료안내</a></li>
-							<li><a href="/hospital_board/hospital_board?idx=${hosp.idx }&page=1">공지</a></li>
-							<li><a href="hospital_reservation?idx=${hosp.idx }">예약</a></li>							
-							<li><a href="hospital_modify?idx=${hosp.idx }">홈페이지 <br> 수정</a></li>
-							<li><a href="reservation?idx=${hosp.idx }">예약관리</a></li>
+							<li><a href="hospital_about?idx=${hosp.idx }">病院紹介</a></li>
+							<li><a href="hospital_guidance?idx=${hosp.idx }">診療案内</a></li>
+							<li><a
+								href="/hospital_board/hospital_board?idx=${hosp.idx }&page=1">お知らせ</a></li>
+							<li><a href="hospital_reservation?idx=${hosp.idx }">予約</a></li>
+							<li><a href="hospital_controller?idx=${hosp.idx }">ホームページ <br> 管理</a></li>
 
 						</ul>
 					</nav>
@@ -92,12 +116,21 @@
 
 	<div class="line"></div>
 
+<div class="line"></div>
+
 	<div class="sitewrap">
 		<span class="fa fa-close" id="close" style="cursor: pointer"></span>
 		<div class="inner">
-			<span class="map">홈페이지소개</span> <span class="map">공지사항</span> <span
-				class="map">병원</span> <span class="map">기업</span> <span class="map">검색</span>
-			<span class="map">회원가입</span> <span class="map">로그인</span>
+			<span class="map"><a href="hospital_about?idx=${hosp.idx }"
+				style="color: white;">病院紹介</a></span> <span class="map"><a
+				href="hospital_guidance?idx=${hosp.idx }" style="color: white;">診療案内</a></span>
+			<span class="map"><a
+				href="/hospital_board/hospital_board?idx=${hosp.idx }&page=1"
+				style="color: white;">お知らせ</a></span> <span class="map"><a
+				href="hospital_reservation?idx=${hosp.idx }"
+				style="color: white;">予約</a></span> <span class="map"><a
+				href="hospital_controller?idx=${hosp.idx }" style="color: white;">ホームページ<br>
+					관리</a></span> <span class="map">
 		</div>
 	</div>
 
@@ -157,7 +190,7 @@
 	<div class="slider">
 
 		<div>
-			<img height="1000px"
+			<img height="500px"
 				src="/resources/upload/hosp/hospital_photo/${hosp.h_photo }" alt=""
 				title="병원 메인 사진">
 		</div>
@@ -165,91 +198,120 @@
 	</div>
 
 	<div class="aaa_wrap">
-		<div class="aaa_left">
-			<h2 class="title">공지시항</h2>
+		<div class="aaa_left" style="height: 300px;">
+			<h2 class="title">お知らせ</h2>
 			<ul>
-			
-			 <c:if test="${!empty list }">
-			    <c:forEach items="${list }" var="hosp_board" begin="0" end="4">
-				<li><a href="../hospital_board/hospboardHits?idx=${hosp_board.idx }&idx2=<%=idx2%>">${hosp_board.subject }</a> </li>
-				</c:forEach>
-			</c:if>
-		
-			<c:if test="${empty list }">
-			
-			<li>아직 데이터가 존재하지 않습니다.</li>
-			</c:if>
+
+				<c:if test="${!empty list }">
+					<c:forEach items="${list }" var="hosp_board" begin="0" end="4">
+						<li><a
+							href="../hospital_board/hospboardHits?idx=${hosp_board.idx }&idx2=<%=idx2%>">${hosp_board.subject }</a>
+						</li>
+					</c:forEach>
+				</c:if>
+
+				<c:if test="${empty list }">
+
+					<li>まだデータが存在できません。</li>
+				</c:if>
 			</ul>
-			<a href="../hospital_board/hospital_board?page=1&idx=${hosp.idx }"><span class="fa fa-plus plus"></span></a>
+			<a href="../hospital_board/hospital_board?page=1&idx=${hosp.idx }"><span
+				class="fa fa-plus plus"></span></a>
 		</div>
 
-		<div class="aaa_right">
-			<h2 class="title">병원 홍보 동영상</h2>
+		<div class="aaa_right" style="height: 300px;">
+			<h2 class="title">病院広報動画</h2>
+
+			<table>
 				<ul>
-				<li><video controls
-						src="/resources/upload/hosp/video/${hosp.h_video }"	
-						autoplay="autoplay" width=500 height=200></video></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				 
-				</ul>		
+					<li><video controls
+							src="/resources/upload/hosp/video/${hosp.h_video }"
+							autoplay="autoplay" width=500 height=200></video></li>
+				</ul>
+			</table>
 		</div>
 
 	</div>
-
-		<div id="map" style="width:100%;height:350px;"></div>
-	<div class="footer">
-		<footer>
-			<p>&copy; JANGSU. All &nbsp;&nbsp;&nbsp;Rights Reserved.</p>
-		</footer>
-		<!-- &copy; &nbsp; &gt; > &lt;< -->
-	</div>
+	<br>
+	<br>
+	<br>
+	<div id="map" style="width: 100%; height: 350px;"></div>
+	<footer class="footer">
+		<div class="container clearfix">
+			<address class="address">
+				<p class="title">病院</p>
+				<p>주소 : ${hosp.h_addr1 } ${hosp.h_addr2 }/お客様案内センター : ${hosp.h_tel }
+					事業者番号: ${hosp.h_code }</p>
+				<br>
+			</address>
+			<p class="copyright">Copyright &copy ${hosp.h_name }. All rights
+				reserved.</p>
+		</div>
+	</footer>
 </body>
 </html>
 
 <script>
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };  
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = {
+		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		level : 3
+	// 지도의 확대 레벨
+	};
 
-// 지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption);
 
-// 주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
 
-// 주소로 좌표를 검색합니다
-geocoder.addressSearch('${hosp.h_addr1}'+'${hosp.h_addr2}', function(result, status) {
+	// 주소로 좌표를 검색합니다
+	geocoder
+			.addressSearch(
+					'${hosp.h_addr1}' + '${hosp.h_addr2}',
+					function(result, status) {
 
-    // 정상적으로 검색이 완료됐으면 
-     if (status === kakao.maps.services.Status.OK) {
+						// 정상적으로 검색이 완료됐으면 
+						if (status === kakao.maps.services.Status.OK) {
 
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+							var coords = new kakao.maps.LatLng(result[0].y,
+									result[0].x);
 
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
+							// 결과값으로 받은 위치를 마커로 표시합니다
+							var marker = new kakao.maps.Marker({
+								map : map,
+								position : coords
+							});
 
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">${hosp.h_name}</div>'
-        });
-        infowindow.open(map, marker);
+							// 인포윈도우로 장소에 대한 설명을 표시합니다
+							var infowindow = new kakao.maps.InfoWindow(
+									{
+										content : '<div style="width:150px;text-align:center;padding:6px 0;">${hosp.h_name}</div>'
+									});
+							infowindow.open(map, marker);
 
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-    } 
-});    
+							// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+							map.setCenter(coords);
+						}
+					});
 </script>
 
 
+<script type="text/javascript">
+function logout() 
+{
+	if(confirm("ログアウトしますか。?")== true)
+	{
+		alert("ログアウトしました。");
+		location.href="/member/logout";
+	}else
+	{
+		alert("キャンセルします。");
+		location.href="";
+	}
+}
 
+</script>	
 
 
 

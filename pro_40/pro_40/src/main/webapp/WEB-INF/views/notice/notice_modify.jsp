@@ -7,7 +7,7 @@
 
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">장수하늘소 갤러리</h2>
+		<h2 class="sub-title">お知らせ</h2>
 	</div>
 	
 	<div class="write-form">
@@ -23,28 +23,28 @@
 					 <input type="hidden" name="idx" value="${notice.idx}">
 					 
 					<tr>
-						<th>제목</th>
+						<th>題目</th>
 						<td><input type="text" name="subject" value="${ notice.subject }">				
 						</td>
 					</tr>
 					<tr>
-						<th>내용</th>
+						<th>内容</th>
 						<td><textarea name="contents">${notice.contents }</textarea></td>
 					</tr>	
 						
 					<tr>
-						<th>파일첨부</th>
+						<th>ファイル添付</th>
 						<td><input type="file" name="filename">
 						<c:if test="${!empty notice.filename }">
-							※기존파일이 존재해요
+							※既存ファイルがあります。
 						</c:if>
 						</td>
 					</tr>	
 				</form>				
 					<tr>
 						<td colspan="2">
-							<a href="javascript:send()"><input type="button" value="수정" class="btn-write"></a>
-							<a href="javascript:home()">"<input type="button" value="뒤로가기" class="btn-reset"></a>
+							<a href="javascript:send()"><input type="button" value="修正する" class="btn-write"></a>
+							<a href="javascript:home()">"<input type="button" value="キャンセル" class="btn-reset"></a>
 						</td>
 					</tr>
 				
@@ -58,19 +58,19 @@
 	function send() {
 		
 		if(input.subject.value=="") {
-			alert("제목을 입력해주세요");
+			alert("題目を入力してください。");
 			input.subject.focus();
 			return;
 		}
 		if(input.contents.value=="") {
-			alert("내용을 입력해주세요");
+			alert("内容を入力してください。");
 			input.contents.focus();
 			return;
 		}
 		
 	
 	
-		alert("수정합니다.");
+		alert("修正します。");
 		input.submit();
 	}
 	
@@ -81,17 +81,4 @@
 </script>
 
 <%@ include file="../footer.jsp" %>
-
-
-
-
-
-
-
-
-
-
-
-
-
 

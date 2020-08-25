@@ -10,9 +10,9 @@
 <header>
 	<div class="topnav">
 		<ul>
-			<li><a href="../member/login">로그인</a></li>
-			<li><a href="../member/insert">회원가입</a></li>
-			<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+			<li><a href="../member/login">ログイン</a></li>
+			<li><a href="../member/insert">新規取得</a></li>
+			<li><a href="javascript:void(0)" class="sitemap">サイトマップ</a></li>
 		</ul>
 	</div>
 	<div class="navigation">
@@ -23,11 +23,11 @@
 		<div class="nav">
 			<nav>
 				<ul class="navi">
-					<li><a href="../corparation/corparation_about?idx=${corp.idx }">기업소개</a></li>
-					<li><a href="../corparation/corparation_guidance?idx=${corp.idx }">제품소개</a></li>
-					<li><a href="corparation_board?idx=${idx2 }&page=1">공지</a></li>
-					<li><a href="/corparation_board/product?idx=${corp.idx }&page=1">제품문의</a></li>		
-					<li><a href="../corparation/corparation_modify?idx=${corp.idx }">홈페이지 <br> 수정</a></li>
+					<li><a href="../corparation/corparation_about?idx=${corp.idx }">企業紹介</a></li>
+					<li><a href="../corparation/corparation_guidance?idx=${corp.idx }">製品紹介</a></li>
+					<li><a href="corparation_board?idx=${idx2 }&page=1">お知らせ</a></li>
+					<li><a href="/corparation_board/product?idx=${corp.idx }&page=1">製品の問い合わせ</a></li>		
+					<li><a href="../corparation/corparation_modify?idx=${corp.idx }">ホームページ <br>　修正</a></li>
 
 				</ul>
 			</nav>
@@ -39,12 +39,12 @@
 
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">장수하늘소 갤러리</h2>
+		<h2 class="sub-title">企業</h2>
 	</div>
 	
 	<div class="write-form">
 		<table summery="갤러리 글쓰기 테이블 입니다">
-			<caption class="readonly">갤러리 입력폼</caption>			
+			<caption class="readonly">フォーム</caption>			
 			<colgroup>
 				<col width="20%">
 				<col width="80%">
@@ -52,32 +52,32 @@
 			<tbody>
 					 		
 					<tr>
-						<th>제목</th>
+						<th>題目</th>
 						<td><input type="text" name="subject" value="${board.subject }" readonly>				
 						</td>
 					</tr>
 					<tr>
-						<th>내용</th>
+						<th>内容</th>
 						<td><textarea name="contents" readonly>${board.contents }</textarea></td>
 					</tr>	
 						
 					<tr>
-						<th>파일첨부</th>
+						<th>ファイル添付</th>
 						<c:if test="${!empty board.filename }">
 						<td><a href="/resources/upload/corp_board/file/${board.filename }">${board.filename }</a>
 						</td>
 						</c:if>
 						
 						<c:if test="${empty board.filename }">
-						<td>파일이 존재하지 않아요
+						<td>ファイルが存在できません。
 						</td>
 						</c:if>
 					</tr>	
 				</form>				
 					<tr>
 						<td colspan="2">
-							<a href="corparation_board_modify?idx=${board.idx }&idx2=${idx2}"><input type="button" value="수정하기" class="btn-write"></a>
-							<a href="javascript:home()">"<input type="button" value="뒤로가기" class="btn-reset"></a>
+							<a href="corparation_board_modify?idx=${board.idx }&idx2=${idx2}"><input type="button" value="修正する" class="btn-write"></a>
+							<a href="javascript:home()">"<input type="button" value="キャンセル" class="btn-reset"></a>
 						</td>
 					</tr>
 				
@@ -102,18 +102,5 @@
 	</footer>
 	<!-- &copy; &nbsp; &gt; > &lt;< -->
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

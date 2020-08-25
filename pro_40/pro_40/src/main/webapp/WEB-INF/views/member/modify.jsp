@@ -13,12 +13,12 @@ if(userid==null)
 %>
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">장수하늘소 회원정보 수정</h2>
+		<h2 class="sub-title">会員情報修正</h2>
 	</div>
 	
 	<div class="write-form">
 		<table summery="회원가입 글쓰기 테이블 입니다">
-			<caption class="readonly">회원정보 수정폼</caption>			
+			<caption class="readonly">会員情報修正フォーム</caption>			
 			<colgroup>
 				<col width="20%">
 				<col width="80%">
@@ -26,26 +26,26 @@ if(userid==null)
 			<tbody>
 			<form name="my" method="post" action="modify"" enctype="multipart/form-data" onsubmit="return formcheck();">
 				<fieldset>
-					<legend class="readonly">입력폼</legend>
+					<legend class="readonly">入力フォーム</legend>
 					<tr>
 						<th scope="row">
-							<label for="id">아이디</label>
+							<label for="id">ID</label>
 						</th>
 						<td>
 							<input type="text" name="userid" id="userid" class="minput" readonly value="${user.userid }"> 
 						</td>
 					</tr>
 					<tr>
-						<th scope="row"><lavel for="pass1">패스워드</lavel></th>
+						<th scope="row"><lavel for="pass1">パスワード</lavel></th>
 						<td><input type="password" name="passwd" id="passwd"  class="minput"></td>
 					</tr>
 					<tr>
-						<th scope="row">패스워드 확인</th>
+						<th scope="row">パスワード確認</th>
 						<td><input type="password" name="pass2"  class="minput"></td>
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="name">상호명</label>
+							<label for="name">ブレンド名</label>
 						</th>
 						<td>
 							<input type="text" name="name" id="name" class="minput" value="${user.name }"> 수정가능
@@ -53,7 +53,7 @@ if(userid==null)
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="name">사업자 번호</label>
+							<label for="name">事業者番号</label>
 						</th>
 
 						<td>
@@ -66,41 +66,41 @@ if(userid==null)
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="name">전화번호</label>
+							<label for="name">電話番号</label>
 						</th>
 <c:if test="${user.tel.length()==12}">						
 						<td>
 							<input type="text" name="tel1" id="tel1"   style="width: 19.3%" value="${user.tel.substring(0,3)}">-
 							<input type="text" name="tel2" id="tel2"   style="width: 19.3%" value="${user.tel.substring(4,7)}">-
-							<input type="text" name="tel3" id="tel3"   style="width: 19.3%" value="${user.tel.substring(8,12)}"> 수정가능
+							<input type="text" name="tel3" id="tel3"   style="width: 19.3%" value="${user.tel.substring(8,12)}"> 修正可能
 						</td>
 </c:if>
 <c:if test="${user.tel.length()==13}">
 						<td>
 							<input type="text" name="tel1" id="tel1"   style="width: 19.3%" value="${user.tel.substring(0,3)}">-
 							<input type="text" name="tel2" id="tel2"   style="width: 19.3%" value="${user.tel.substring(4,8)}">-
-							<input type="text" name="tel3" id="tel3"   style="width: 19.3%" value="${user.tel.substring(9,13)}"> 수정가능
+							<input type="text" name="tel3" id="tel3"   style="width: 19.3%" value="${user.tel.substring(9,13)}"> 修正可能
 						</td>
 </c:if>						
 <c:if test="${user.tel.length()==14}">
 						<td>
 							<input type="text" name="tel1" id="tel1"   style="width: 19.3%" value="${user.tel.substring(0,4)}">-
 							<input type="text" name="tel2" id="tel2"   style="width: 19.3%" value="${user.tel.substring(5,9)}">-
-							<input type="text" name="tel3" id="tel3"   style="width: 19.3%" value="${user.tel.substring(10,14)}"> 수정가능
+							<input type="text" name="tel3" id="tel3"   style="width: 19.3%" value="${user.tel.substring(10,14)}"> 修正可能
 						</td>
 </c:if>						
 					</tr>
 					<tr>
-						<th scope="row">이메일</th>
+						<th scope="row">メール</th>
 						<td>
 							<input type="text" name="email1" class="email" value="${user.email.split('@')[0]}"> @
-							<input type="text" name="email2"  class="email" value="${user.email.split('@')[1]}">  수정가능
+							<input type="text" name="email2"  class="email" value="${user.email.split('@')[1]}">  修正可能
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2">
-							<input type="submit" value="수정하기" class="btn-write">
-							<input type="button" value="홈"  class="btn-reset" onclick="javascript:cl()">
+							<input type="submit" value="修正する" class="btn-write">
+							<input type="button" value="ホーム"  class="btn-reset" onclick="javascript:cl()">
 						</td>
 					</tr>
 					</fieldset>
@@ -117,58 +117,58 @@ if(userid==null)
 	{
 		if(my.passwd.value=="") 
 		{
-			alert("패스워드를 입력하세요");
+			alert("パスワードをご入力ください。");
 			my.passwd.focus();
 			return false;
 		}
 		if(my.passwd.value != my.pass2.value) 
 		{
-			alert("패스워드를 확인하세요");
+			alert("パスワードをご確認ください。");
 			my.pass2.focus();
 			return false;
 		}
 		if(my.name.value=="") 
 		{
-			alert("상호명을 입력하세요");
+			alert("ブレンド名をご入力ください。");
 			my.name.focus();
 			return false;
 		}
 		if(my.tel1.value=="") 
 		{
-			alert("tel1를 입력하세요");
+			alert("tel1をご入力ください。");
 			my.tel1.focus();
 			return false;
 		}
 		if(my.tel2.value=="") 
 		{
-			alert("tel2를 입력하세요");
+			alert("tel2をご入力ください。");
 			my.tel2.focus();
 			return false;
 		}
 		if(my.tel3.value=="") 
 		{
-			alert("tel3를 입력하세요");
+			alert("tel3をご入力ください。");
 			my.tel3.focus();
 			return false;
 		}
 		if(my.email1.value=="") 
 		{
-			alert("email1을 입력하세요");
+			alert("email1をご入力ください。");
 			my.email1.focus();
 			return false;
 		}
 		if(my.email2.value=="") 
 		{
-			alert("email2을 입력하세요");
+			alert("email2をご入力ください。");
 			my.email2.focus();
 			return false;
 		}
-		alert("회원정보 수정을 진행합니다.");
+		alert("会員情報修正を進めます。");
 		return true;
 	}
 	function cl() 
 	{
-		alert("취소하고 홈으로 돌아 갑니다.");
+		alert("キャンセルしてホームに戻ります。");
 		location.href="";
 	}
 </script>

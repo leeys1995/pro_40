@@ -93,10 +93,39 @@ public class NoticeController {
 				}
 
 				if (vo.getKey() == null) {
-					model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url, ""));
-
+					//다음 페이지
+					String nextpage="/notice/notice?page="+totpage;
+					if(nowpage<totpage) {
+						nextpage="/notice/notice?page="+(nowpage+1);
+					}
+					//이전페이지
+					String prevPage="/notice/notice?page="+1;
+					if(nowpage>1) {
+						prevPage="/notice/notice?page="+(nowpage-1);
+					}
+					
+					model.addAttribute("prev",prevPage);
+					model.addAttribute("next",nextpage);
+					model.addAttribute("page",PageIndex.pageList(nowpage, totpage, url, "").substring(46,PageIndex.pageList(nowpage, totpage, url, "").length()-46));
+					
+					//model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url, ""));
 				} else {
-					model.addAttribute("listpage", PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()));
+					//model.addAttribute("listpage", PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()));
+					//다음 페이지
+					String nextpage="/notice/notice?page="+totpage+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+					if(nowpage<totpage) {
+						nextpage="/notice/notice?page="+(nowpage+1)+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+					}
+					//이전페이지
+					String prevPage="/notice/notice?page="+1+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+					if(nowpage>1) {
+						prevPage="/notice/notice?page="+(nowpage-1)+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+					}
+					
+					model.addAttribute("prev",prevPage);
+					model.addAttribute("next",nextpage);
+					
+					model.addAttribute("page",PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).substring(46,PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).length()-46));
 				}
 				
 				
@@ -148,11 +177,23 @@ public class NoticeController {
 				model.addAttribute("totcount", totcount);
 				// model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url,
 				// ""));
-
-				model.addAttribute("listpage", PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()));
+				
+				String nextpage="/notice/notice?page="+totpage+"&search="+vo.getSearch()+"&key="+vo.getKey();
+				if(nowpage<totpage) {
+					nextpage="/notice/notice?page="+(nowpage+1)+"&search="+vo.getSearch()+"&key="+vo.getKey();
+				}
+				//이전페이지
+				String prevPage="/notice/notice?page="+1+"&search="+vo.getSearch()+"&key="+vo.getKey();
+				if(nowpage>1) {
+					prevPage="/notice/notice?page="+(nowpage-1)+"&search="+vo.getSearch()+"&key="+vo.getKey();
+				}
 				
 				
-
+				model.addAttribute("prev",prevPage);
+				model.addAttribute("next",nextpage);
+				
+				model.addAttribute("page",PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).substring(46,PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).length()-46));
+	
 			}
 
 			// 병원 등록폼

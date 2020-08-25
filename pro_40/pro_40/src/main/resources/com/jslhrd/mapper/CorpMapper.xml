@@ -80,12 +80,12 @@
 		</trim>
 	</select>
 	
-	<!-- 병원 게시판 글쓰기 -->
+	<!-- 기업 게시판 글쓰기 -->
 	<insert id="corpWrite">
 		insert into
-		corp(idx,c_code,c_name,c_addr1,c_addr2,c_tel,p_intro,p_mager,c_video,c_banner,c_photo,c_history,c_come,p_photo)
-		values(corp_seq_idx.nextval,#{c_code},#{c_name},#{c_addr1},#{c_addr2},#{c_tel},#{p_intro},#{p_mager},#{c_video},
-		#{c_banner},#{c_photo},#{c_history},#{c_come},#{p_photo})
+		corp(idx,c_code,c_name,c_addr1,c_addr2,c_tel,p_intro,p_mager,c_video,c_banner,c_photo,c_history,c_come,p_photo,c_pass)
+		values(#{idx},#{c_code},#{c_name},#{c_addr1},#{c_addr2},#{c_tel},#{p_intro},#{p_mager},#{c_video},
+		#{c_banner},#{c_photo},#{c_history},#{c_come},#{p_photo},#{c_pass})
 	</insert>
 
 	<!-- View -->
@@ -106,11 +106,37 @@
 	</update>
 	
 	<!-- 삭제 -->
+	<delete id="corpDelete" >
+	   delete from corp where idx=#{idx}
+	</delete>
 	
-	<!-- 파일 불러오기 -->
+	<!-- h_banner 불러오기 -->
+	<select id="corpBanner" resultType="String">
+	    select c_banner from corp where idx=#{idx}
+	</select>
+	
+	<!-- h_photo 불러오기 -->
+	<select id="corpCphoto" resultType="String">
+	    select c_photo from corp where idx=#{idx}
+	</select>
+	
+	<!-- d_photo 불러오기 -->
+	<select id="corpPphoto" resultType="String">
+	    select p_photo from corp where idx=#{idx}
+	</select>
+	
+	<!-- h_video 불러오기 -->
+	<select id="corpCvideo" resultType="String">
+	    select c_video from corp where idx=#{idx}
+	</select>
 	
 	<!-- 공지사항 불러오기 -->
 	<select id="corpboardList" resultType="com.jslhrd.domain.CorpBoardVO">
 		select * from corp_bo where idx2 = #{idx}
+	</select>
+	
+	<!-- 홈페이지 관리 패스워드 가져오기 -->
+	<select id="corparationPass" resultType="String">
+		select c_pass from corp where idx=#{idx}
 	</select>
 </mapper>

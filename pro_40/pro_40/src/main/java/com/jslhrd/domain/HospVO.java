@@ -19,6 +19,6 @@ public class HospVO {
 	private String d_mager;
 	private String d_medical;
 	private String h_video;
-	
+	private String h_pass;
 	private int h_readcnt;
 }

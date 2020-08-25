@@ -91,10 +91,39 @@ public class CorpController {
 		}
 
 		if (vo.getKey() == null) {
-			model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url, ""));
-
+			//다음 페이지
+			String nextpage="/corparation/corparation?page="+totpage;
+			if(nowpage<totpage) {
+				nextpage="/corparation/corparation?page="+(nowpage+1);
+			}
+			//이전페이지
+			String prevPage="/corparation/corparation?page="+1;
+			if(nowpage>1) {
+				prevPage="/corparation/corparation?page="+(nowpage-1);
+			}
+			
+			model.addAttribute("prev",prevPage);
+			model.addAttribute("next",nextpage);
+			model.addAttribute("page",PageIndex.pageList(nowpage, totpage, url, "").substring(46,PageIndex.pageList(nowpage, totpage, url, "").length()-46));
+			
+			//model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url, ""));
 		} else {
-			model.addAttribute("listpage", PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()));
+			//model.addAttribute("listpage", PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()));
+			//다음 페이지
+			String nextpage="/corparation/corparation?page="+totpage+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+			if(nowpage<totpage) {
+				nextpage="/corparation/corparation?page="+(nowpage+1)+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+			}
+			//이전페이지
+			String prevPage="/corparation/corparation?page="+1+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+			if(nowpage>1) {
+				prevPage="/corparation/corparation?page="+(nowpage-1)+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+			}
+			
+			model.addAttribute("prev",prevPage);
+			model.addAttribute("next",nextpage);
+			
+			model.addAttribute("page",PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).substring(46,PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).length()-46));
 		}
 	}
 
@@ -141,12 +170,26 @@ public class CorpController {
 		model.addAttribute("totcount", totcount);
 		// model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url,
 		// ""));
+		String nextpage="/corparation/corparation?page="+totpage+"&search="+vo.getSearch()+"&key="+vo.getKey();
+		if(nowpage<totpage) {
+			nextpage="/corparation/corparation?page="+(nowpage+1)+"&search="+vo.getSearch()+"&key="+vo.getKey();
+		}
+		//이전페이지
+		String prevPage="/corparation/corparation?page="+1+"&search="+vo.getSearch()+"&key="+vo.getKey();
+		if(nowpage>1) {
+			prevPage="/corparation/corparation?page="+(nowpage-1)+"&search="+vo.getSearch()+"&key="+vo.getKey();
+		}
+		
+		
+		model.addAttribute("prev",prevPage);
+		model.addAttribute("next",nextpage);
+		
+		model.addAttribute("page",PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).substring(46,PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).length()-46));
 
-		model.addAttribute("listpage", PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()));
 
 	}
 
-	// 병원 등록폼
+	// 기업 등록폼
 	@GetMapping("corparation_write")
 	public void corparationWrite() {
 
@@ -159,6 +202,13 @@ public class CorpController {
 		log.info("corparationWritePro()....");
 		CorpVO vo = new CorpVO();
 
+		CorpVO vo1 = service.corpView(Integer.parseInt(request.getParameter("idx")));
+		
+		if(vo1==null) {
+			
+		
+		vo.setC_pass(request.getParameter("c_pass"));
+		vo.setIdx(Integer.parseInt(request.getParameter("idx")));
 		vo.setC_name(request.getParameter("c_name"));
 		vo.setC_code(request.getParameter("c_code"));
 		vo.setC_tel(request.getParameter("c_tel"));
@@ -198,7 +248,7 @@ public class CorpController {
 
 		vo.setC_photo(c_photo);
 
-		// 의사 사진 저장경로 설정
+		// 제품 사진 저장경로 설정
 		String path3 = request.getRealPath("/resources/upload/corp/product_photo/");
 		String p_photo = mf3.getOriginalFilename();
 		File file3 = new File(path3 + p_photo);
@@ -210,7 +260,7 @@ public class CorpController {
 
 		vo.setP_photo(p_photo);
 
-		// 병원홍보영상 저장경로 설정
+		// 기업홍보영상 저장경로 설정
 		String path4 = request.getRealPath("/resources/upload/corp/video/");
 		String c_video = mf4.getOriginalFilename();
 		File file4 = new File(path4 + c_video);
@@ -226,8 +276,19 @@ public class CorpController {
 		service.corpWrite(vo);
 
 		return "redirect:/corparation/corparation?page=1";
+		}else {
+			
+			return "redirect:/corparation/corparation_writeX";
+			
+		}
 	}
 
+	@GetMapping("corparation_writeX")
+	public void corparation_writeX() {
+		
+		log.info("corpartion_writeX");
+		
+	}
 	// 조회수 증가
 	@GetMapping("corpHits")
 	public String corpHits(@RequestParam("idx") int idx, HttpServletRequest request, HttpServletResponse response) {
@@ -243,7 +304,7 @@ public class CorpController {
 		log.info("corp_view()..........");
 
 		CorpVO vo = service.corpView(idx);
-
+		
 		vo.setP_intro(SqlMark.lineBreak(vo.getP_intro()));
 		vo.setP_mager(SqlMark.lineBreak(vo.getP_mager()));
 		vo.setC_history(SqlMark.lineBreak(vo.getC_history()));
@@ -343,7 +404,29 @@ public class CorpController {
 	}
 	
 	// 삭제
-
+		@PostMapping("corparation_delete")
+		public String corpDelete(MultipartHttpServletRequest request) {
+			
+			
+			int idx = Integer.parseInt(request.getParameter("idx"));
+			
+			
+			String mf1 = service.corpBanner(idx);
+			String mf2 = service.corpCphoto(idx);
+			String mf3 = service.corpPphoto(idx);
+			String mf4 = service.corpCvideo(idx);
+			
+			deleteFiles(mf1);
+			deleteFiles1(mf2);
+			deleteFiles2(mf3);	
+			deleteFiles3(mf4);
+			
+			service.corpDelete(idx);
+			
+			log.info("corp_delete().......");
+			
+			return "redirect:/corparation/corparation?page=1";
+		}
 	
 	
 	// 배너 완전 삭제 메소드
@@ -448,4 +531,59 @@ public class CorpController {
 				model.addAttribute("corp", vo);
 			}
 		
+			// 홈페이지 관리 홈페이지
+			@GetMapping("corparation_controller")
+			public void corparationcontroller(@RequestParam("idx") int idx, Model model) {
+
+				log.info("corparationController().......");
+
+				CorpVO vo = service.corpView(idx);
+				
+				model.addAttribute("corp", vo);
+
+			}
+			
+			// 홈페이지 관리 홈페이지 이동가능
+			@PostMapping("corparation_controller")
+			public String corparationcontrollerPro(HttpServletRequest request, HttpServletResponse response) {
+				
+				String c_pass = request.getParameter("c_pass");
+			    
+				int idx = Integer.parseInt(request.getParameter("idx"));
+				
+				String pass = service.corparationPass(idx);
+				
+				log.info("idx="+idx);
+				log.info("c_pass="+c_pass);
+				log.info("pass="+pass);
+				
+				if(c_pass.contains(pass)) {
+					
+					return "redirect:/corparation/corparation_controllerO?idx="+idx;
+				}else {
+					
+					return "redirect:/corparation/corparation_controllerX";
+				}
+			    
+			}
+			
+			
+			@GetMapping("corparation_controllerO")
+			public void corparationControllerO(@RequestParam("idx") int idx, Model model) {
+				
+				log.info("corparationControllerO().......");
+				
+				CorpVO vo= service.corpView(idx);
+				model.addAttribute("corp", vo);
+				
+			}
+			
+			@GetMapping("corparation_controllerX")
+			public void corparationControllerX() {
+				
+				log.info("corparationControllerX().......");
+				
+				
+			}
+			
 }

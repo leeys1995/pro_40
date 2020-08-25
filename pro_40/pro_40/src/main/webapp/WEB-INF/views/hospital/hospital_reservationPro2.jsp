@@ -5,48 +5,54 @@
 <%
 	int idx = Integer.parseInt(request.getParameter("idx"));
 %>
+<head>
 <link href="../css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link href="../css/common.css" rel="stylesheet">
 <link href="../css/mystyle.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="header">
 <header>
 	<div class="topnav">
 		<ul>
-			<li><a href="../member/login">로그인</a></li>
-			<li><a href="../member/insert">회원가입</a></li>
-			<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+			<li><a href="../member/login">ログイン</a></li>
+			<li><a href="../member/insert">新規取得</a></li>
+			<li><a href="/">ホーム</a>
 		</ul>
 	</div>
 	<div class="navigation">
-		<h1 class="logo">
-			<a href="../hospital/hospital_view?idx=<%=idx%>"><img height="100px"
-				src="/resources/upload/hosp/banner/${h_banner }" alt="모집사진"></a>
-		</h1>
+		<div style="height:100px; width:200px;">
+			<a href="../hospital/hospital_view?idx=${idx }"><img 
+				src="/resources/upload/hosp/banner/${hosp.h_banner }" alt="모집사진"></a>
+		</div>
 		<div class="nav">
 			<nav>
 				<ul class="navi">
-				<li><a href="hospital_about?idx=<%=idx%>">병원소개</a></li>
-							<li><a href="hospital_guidance?idx=<%=idx%>">진료안내</a></li>
-							<li><a href="/hospital_board/hospital_board?idx=<%=idx%>&page=1">공지</a></li>
-							<li><a href="hospital_reservation?idx=<%=idx%>">예약</a></li>							
-							<li><a href="hospital_modify?idx=<%=idx%>">홈페이지 <br> 수정</a></li>
-							<li><a href="reservation?idx=<%=idx%>">예약관리</a></li>
+				<li><a href="hospital_about?idx=<%=idx%>">病院紹介</a></li>
+							<li><a href="hospital_guidance?idx=<%=idx%>">診療案内</a></li>
+							<li><a href="/hospital_board/hospital_board?idx=<%=idx%>&page=1">お知らせ</a></li>
+							<li><a href="hospital_modify?idx=<%=idx%>">ホームページ <br> 修正</a></li>
+							<li><a href="reservation?idx=<%=idx%>">予約管理</a></li>
 
 				</ul>
 			</nav>
 		</div>
 	</div>
 </header>
+</div>
 
+<div class="line"></div>
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">장수하늘소 갤러리</h2>
+		<h2 class="sub-title">病院管理</h2>
 	</div>
 	
 	<div class="write-form">
 		<table summery="갤러리 글쓰기 테이블 입니다">
-			<caption class="readonly">갤러리 입력폼</caption>			
+			<caption class="readonly">フォーム</caption>			
 			<colgroup>
 				<col width="20%">
 				<col width="80%">
@@ -55,30 +61,30 @@
 					
 					
 					<tr>
-						<th>날자</th>
+						<th>日付</th>
 						<td>
-							${res.year }년 ${res.month }월 ${res.day }일
+							${res.year }年 ${res.month }月 ${res.day }日
 						</td>
 					</tr>
 					
 					<tr>
-						<th>시간</th>
+						<th>時間</th>
 						<td>		
 						 ${res.reservation_time }
 						
 						</td>
 					</tr>
 					<tr>
-						<th>이름</th>
+						<th>名前</th>
 						<td>${res.name }</td>
 					</tr>
 					<tr>
-						<th>전화번호</th>
+						<th>電話番号</th>
 						<td>${res.tel }</td>
 					</tr>	
 					
 					<tr>
-						<th>진료희망사항</th>
+						<th>診療希望事項</th>
 						<td><textarea name="disease" readonly >${res.disease }</textarea></td>
 					</tr>	
 					
@@ -87,7 +93,7 @@
 					<tr>
 						<td colspan="2">
 						
-							<a href="javascript:home()"><input type="button" value="뒤로가기" class="btn-reset"></a>
+							<a href="javascript:home()"><input type="button" value="キャンセル" class="btn-reset"></a>
 						</td>
 					</tr>
 					
@@ -97,7 +103,7 @@
 	</div>
 		
 </div>
-
+</body>
 <script>
 	
 	
@@ -107,7 +113,15 @@
 	}
 </script>
 
-<%@ include file="../footer.jsp" %>
+<footer class="footer">
+		<div class="container clearfix">
+			<address class="address">
+				<p class="title">病院</p>
+				<p>住所 : ${hosp.h_addr1 } ${hosp.h_addr2 }/お客様案内センター : ${hosp.h_tel } 	事業者番号: ${hosp.h_code }</p><br>
+			</address>
+			<p class="copyright">Copyright &copy ${hosp.h_name }. All rights reserved.</p>
+		</div>
+</footer>
 
 
 

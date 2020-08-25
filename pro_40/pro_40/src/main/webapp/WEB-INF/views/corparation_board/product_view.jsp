@@ -7,32 +7,37 @@
 	int idx2 = Integer.parseInt(request.getParameter("idx2"));
 
 %>
+<head>
 <link href="../css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link href="../css/common.css" rel="stylesheet">
 <link href="../css/mystyle.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="header">
 <header>
 	<div class="topnav">
 		<ul>
-			<li><a href="../member/login">로그인</a></li>
-			<li><a href="../member/insert">회원가입</a></li>
-			<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+			<li><a href="../member/login">ログイン</a></li>
+			<li><a href="../member/insert">新規取得</a></li>
+			<li><a href="/">ホーム</a>
 		</ul>
 	</div>
 	<div class="navigation">
-		<h1 class="logo">
-			<a href="../corparation/corparation_view?idx=<%=idx%>"><img height="100px"
+		<div style="height: 100px; width: 200px;">
+			<a href="../corparation/corparation_view?idx=<%=idx2%>"><img height="100px"
 				src="/resources/upload/corp/banner/${c_banner }" alt="모집사진"></a>
-		</h1>
+		</div>
 		<div class="nav">
 			<nav>
 				<ul class="navi">
-					<li><a href="../corparation/corparation_about?idx=<%=idx%>">기업소개</a></li>
-					<li><a href="../corparation/corparation_guidance?idx=<%=idx%>">제품소개</a></li>
-					<li><a href="corparation_board?idx=<%=idx%>&page=1">공지</a></li>
-					<li><a href="/corparation_board/product?idx=<%=idx%>&page=1">제품문의</a></li>		
-					<li><a href="../corparation/corparation_modify?idx=<%=idx%>">홈페이지 <br> 수정</a></li>
+					<li><a href="../corparation/corparation_about?idx=<%=idx2%>">企業紹介</a></li>
+					<li><a href="../corparation/corparation_guidance?idx=<%=idx2%>">製品初回</a></li>
+					<li><a href="corparation_board?idx=<%=idx2%>&page=1">お知らせ</a></li>
+					<li><a href="/corparation_board/product?idx=<%=idx2%>&page=1">製品の問い合わせ</a></li>		
+					<li><a href="../corparation/corparation_modify?idx=<%=idx2%>">ホームページ <br> 修正</a></li>
 
 				</ul>
 			</nav>
@@ -40,16 +45,16 @@
 	</div>
 </header>
 
-
-
+</div>
+<div class="line"></div>
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">장수하늘소 갤러리</h2>
+		<h2 class="sub-title">企業</h2>
 	</div>
 
 	<div class="write-form">
 		<table summery="갤러리 글쓰기 테이블 입니다">
-			<caption class="readonly">갤러리 입력폼</caption>
+			<caption class="readonly">フォーム</caption>
 			<colgroup>
 				<col width="20%">
 				<col width="80%">
@@ -57,18 +62,18 @@
 			<tbody>
 
 				<tr>
-					<th>글쓴이</th>
+					<th>名前</th>
 					<td><input type="text" name="p_name"
 						value="${product.p_name }" readonly></td>
 				</tr>
 				<tr>
-					<th>제목</th>
+					<th>題目</th>
 					<td><input type="text" name="p_subject"
 						value="${product.p_subject }"></td>
 				</tr>
 
 				<tr>
-					<th>내용</th>
+					<th>内容</th>
 					<td><textarea name="p_contents" readonly>${product.p_contents }</textarea></td>
 				</tr>
 
@@ -76,8 +81,8 @@
 				</form>
 				<tr>
 					<td colspan="2"><a href="productdelete?idx=${product.idx }"><input
-							type="button" value="삭제하기" class="btn-write"></a> <a
-						href="/corparation_board/product?idx=<%=idx2 %>&page=1"><input type="button" value="뒤로가기"
+							type="button" value="削除する" class="btn-write"></a> <a
+						href="/corparation_board/product?idx=<%=idx2 %>&page=1"><input type="button" value="キャンセル"
 							class="btn-reset"></a></td>
 				</tr>
 
@@ -93,19 +98,19 @@
 	<div class="contain">
 		<div class="write-form">
 			<table summery="갤러리 글쓰기 테이블 입니다">
-				<caption class="readonly">갤러리 입력폼</caption>
+				<caption class="readonly">フォーム</caption>
 				<colgroup>
 					<col width="20%">
 					<col width="80%">
 				</colgroup>
 				<tbody>
 					<tr>
-						<th>답변자</th>
+						<th>答弁者</th>
 						<td><input type="text" name="reply" value="${c_name }" readonly > </td>
 					</tr>
 
 					<tr>
-						<th>답글</th>
+						<th>返事</th>
 						<td><textarea name="reply" readonly>${product.reply }</textarea></td>
 					</tr>
 
@@ -121,7 +126,7 @@
 	<div class="contain">
 		<div class="write-form">
 			<table summery="갤러리 글쓰기 테이블 입니다">
-				<caption class="readonly">갤러리 입력폼</caption>
+				<caption class="readonly">フォーム</caption>
 				<colgroup>
 					<col width="20%">
 					<col width="80%">
@@ -135,7 +140,7 @@
 							type="hidden" name="idx2" value="<%=idx2%>">
 
 						<tr>
-							<th>답글</th>
+							<th>返事</th>
 							<td><textarea name="reply"></textarea></td>
 						</tr>
 
@@ -143,7 +148,7 @@
 					</form>
 					<tr>
 						<td colspan="2"><a href="javascript:send()"> <input
-								type="button" value="답글하기" class="btn-reset">
+								type="button" value="返事する" class="btn-reset">
 						</a></td>
 					</tr>
 
@@ -153,7 +158,17 @@
 	</div>
 
 </c:if>
-<%@ include file="../footer.jsp"%>
+</body>
+<footer class="footer">
+		<div class="container clearfix">
+			<address class="address">
+				<p class="title">企業</p>
+				<p>住所 : ${corp.c_addr1 } ${corp.c_addr2 }/お客様案内センター: ${corp.c_tel } 	事業者番号: ${corp.c_code }</p><br>
+			</address>
+			<p class="copyright">Copyright &copy ${corp.c_name }. All rights reserved.</p>
+		</div>
+</footer>
+
 
 
 <script>
@@ -161,12 +176,12 @@
 
 		if (input.reply.value == "") {
 
-			alert("답글을 입력바랍니다.");
+			alert("返事をご入力ください。");
 			input.reply.focus();
 			return;
 		}
 
-		alert("답글을 입력합니다.");
+		alert("返事を入力します。");
 		input.submit();
 	}
 

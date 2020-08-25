@@ -13,27 +13,27 @@
 	<table border="1" align="center" width="70%">
 		<tr>
 			<td colspan="5" align="right" valign="middle" height="20">
-			<font size="2" face="고딕">전체 회원수: 
-			<b>${totcount }</b>명 - ${page }/ ${totpage } Pages
+			<font size="2" face="고딕">全体会員数: 
+			<b>${totcount }</b>名 - ${page }/ ${totpage } Pages
 			</font></td>
 		</tr>
 		<tr bgcolor="e3e9ff">
 			<td width="10%" align="center" height="20"><font face="돋움"
-				size="2">번 호</font></td>
+				size="2">番号</font></td>
 			<td width="50%" align="center" height="20"><font face="돋움"
-				size="2">사업장 이름</font></td>
+				size="2">ブレンド名</font></td>
 			<td width="15%" align="center" height="20"><font face="돋움"
 				size="2">ID</font></td>
 			<td width="15%" align="center" height="20"><font face="돋움"
-				size="2">전화번호</font></td>
+				size="2">電話番号</font></td>
 			<td width="10%" align="center" height="20"><font face="돋움"
-				size="2">Email</font></td>
+				size="2">メール</font></td>
 			<td width="10%" align="center" height="20"><font face="돋움"
-				size="2">가입일자</font></td>
+				size="2">取得日付</font></td>
 			<td width="10%" align="center" height="20"><font face="돋움"
-				size="2">마지막 로그인 시간</font></td>
+				size="2">最後ログイン時間</font></td>
 			<td width="10%" align="center" height="20"><font face="돋움"
-				size="2">사업자 번호</font></td>
+				size="2">事業者番号</font></td>
 		</tr>
 
 <!--  
@@ -73,7 +73,7 @@
 </c:forEach>		
 </c:if>
 <c:if test="${empty list }">
-	<td align="center" colspan="5" height="25">등록된 자료가 없습니다.</td>
+	<td align="center" colspan="5" height="25">登録された資料がありません。</td>
 </c:if>
 
 					<div align="center">

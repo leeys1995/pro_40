@@ -4,48 +4,56 @@
 <%
 	int idx = Integer.parseInt(request.getParameter("idx"));
 %>
+
+<head>
 <link href="../css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link href="../css/common.css" rel="stylesheet">
 <link href="../css/mystyle.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="header">
 <header>
 	<div class="topnav">
 		<ul>
-			<li><a href="../member/login">로그인</a></li>
-			<li><a href="../member/insert">회원가입</a></li>
-			<li><a href="javascript:void(0)" class="sitemap">사이트맵</a></li>
+			<li><a href="../member/login">ログイン</a></li>
+			<li><a href="../member/insert">新規取得</a></li>
+			<li><a href="/">ホーム</a>
 		</ul>
 	</div>
 	<div class="navigation">
-		<h1 class="logo">
-			<a href="../hospital/hospital_view?idx=<%=idx%>"><img height="100px"
+			<div style="height:100px; width:200px;">
+			<a href="../hospital/hospital_view?idx=<%=idx%>"><img 
 				src="/resources/upload/hosp/banner/${hosp.h_banner }" alt="모집사진"></a>
-		</h1>
+		</div>
 		<div class="nav">
 			<nav>
 				<ul class="navi">
-					<li><a href="hospital_about?idx=<%=idx%>">병원소개</a></li>
-							<li><a href="hospital_guidance?idx=<%=idx%>">진료안내</a></li>
-							<li><a href="/hospital_board/hospital_board?idx=<%=idx%>&page=1">공지</a></li>
-							<li><a href="hospital_reservation?idx=<%=idx%>">예약</a></li>							
-							<li><a href="hospital_modify?idx=<%=idx%>">홈페이지 <br> 수정</a></li>
-							<li><a href="reservation?idx=<%=idx%>">예약관리</a></li>
+					<li><a href="hospital_about?idx=<%=idx%>">病院紹介</a></li>
+							<li><a href="hospital_guidance?idx=<%=idx%>">診療案内</a></li>
+							<li><a href="/hospital_board/hospital_board?idx=<%=idx%>&page=1">お知らせ</a></li>
+										
+							<li><a href="hospital_modify?idx=<%=idx%>">ホームページ <br> 修正</a></li>
+							<li><a href="reservation?idx=<%=idx%>">予約管理</a></li>
 				</ul>
 			</nav>
 		</div>
 	</div>
 </header>
-
+</div>
+	<div class="line"></div>
 <div class="contain">
 	<div class="sub-topcontent">
-		<h2 class="sub-title">예약관리 시스템</h2>
+		<h2 class="sub-title">予約管理システム</h2>
 		
 	</div>
 
 	<div class="content-body">
 		<table class="qatable">
-			<caption class="readonly">공지사항 표</caption>
+			<caption class="readonly">お知らせ表</caption>
 			<colgroup>
 				<col width="6%">
 				<col width="48%">
@@ -56,12 +64,12 @@
 			</colgroup>
 			<tbody>
 				<tr>
-					<th>번호</th>
-					<th>년도</th>
-					<th>월</th>
-					<th>일</th>
-					<th>시간</th>
-					<th>삭제</th>
+					<th>番号</th>
+					<th>年度</th>
+					<th>月</th>
+					<th>日</th>
+					<th>時間</th>
+					<th>削除</th>
 				</tr>
 
 				
@@ -74,7 +82,7 @@
 						<td>${res.day }</td>
 						<td>${res.reservation_time}</td>
 						<td><a href="hospitalReservationDelete?idx=${res.idx }&year=${res.year}&month=${res.month}&
-						day=${res.day}&reservation_time=${res.reservation_time}" class="btn-write">삭제</a></td>
+						day=${res.day}&reservation_time=${res.reservation_time}" class="btn-write">削除</a></td>
 					</tr>
 					<c:set var="listcount" value="${listcount-1}" />
 				</c:forEach>
@@ -83,7 +91,7 @@
 
 				<c:if test="${empty list }">
 						<tr>
-						<td colspan="5">데이터가 존재하지 않습니다.</td>
+						<td colspan="5">データが存在できません。</td>
 					
 					</tr>
 
@@ -102,7 +110,7 @@
 
 
 
-		<a href="hospital_reservation_write?idx=<%=idx %>" class="btn-write">예약시간추가</a>
+		<a href="hospital_reservation_write?idx=<%=idx %>" class="btn-write">予約時間追加</a>
 
 
 
@@ -110,13 +118,16 @@
 
 </div>
 
-<div class="footer">
-	<footer>
-		<p>&copy; JANGSU. All &nbsp;&nbsp;&nbsp;Rights Reserved.</p>
-	</footer>
-	<!-- &copy; &nbsp; &gt; > &lt;< -->
-</div>
-
+</body>
+<footer class="footer">
+		<div class="container clearfix">
+			<address class="address">
+				<p class="title">病院</p>
+				<p>住所 : ${hosp.h_addr1 } ${hosp.h_addr2 }/お客様案内センター : ${hosp.h_tel } 	事業者番号: ${hosp.h_code }</p><br>
+			</address>
+			<p class="copyright">Copyright &copy ${hosp.h_name }. All rights reserved.</p>
+		</div>
+</footer>
 
 
 

@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>病院管理</title>
+	<title>장수하늘소</title>
 	<link href="/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 	<link href="/css/common.css" rel="stylesheet">
@@ -48,8 +48,7 @@
 					<li><a href="/member/login">ログイン</a></li>
 					<li><a href="/member/insert">新規取得</a></li>
 					<li><a href="javascript:void(0)" class="sitemap">サイトマップ</a></li>
-					
-					<!--	2020/08/19 전체검색	-->
+				<!--	2020/08/19 전체검색	-->
 					<li>
 						<div id="wrap">
   							<form action="/about/search_page" autocomplete="on" id="main_search_form">
@@ -77,16 +76,12 @@
 
 </c:if>
 			</div>
+			<a href="/"><img src="/images/mainlogo.jpg" alt="" style="width: 150px; height: 100;"></a>
 			<div class="navigation">
-			<!-- 로고 -->
-			<a  href="/"><img src="/images/logo.jpg" 
-			style="width: 150px; height: auto; margin: 0; padding: 0; 
-			position: relative; right: 150px; top: -60px;"></a>
-			<!-- 로고 끝 -->
+				
 				<div class="nav">
 					<nav>
 						<ul class="navi">
-							<!-- 사이트 소개 링크 -->
 							<li><a href="/about/about">サイト紹介</a></li>
 							<li><a href="/notice/notice?page=1">お知らせ</a></li>
 							<li><a href="/hospital/hospital?page=1">病院</a></li>
@@ -103,9 +98,13 @@
 	<div class="sitewrap">
 		<span class="fa fa-close" id="close" style="cursor: pointer"></span>
 		<div class="inner">
-			<span class="map">ホームーページ紹介</span> <span class="map">お知らせ</span> <span
-				class="map">病院</span> <span class="map">企業</span> <span class="map">検索</span>
-			<span class="map">新規取得</span> <span class="map">ログイン</span>
+			 <span class="map"> <a href="/about/about" style="color:white;">サイト紹介</a></span>
+			 <span class="map"> <a href="/notice/notice?page=1" style="color:white;">お知らせ</a></span>
+			 <span class="map"> <a href="/hospital/hospital?page=1" style="color:white;">病院</a></span> 
+			 <span class="map"> <a href="/corparation/corparation?page=1" style="color:white;">企業</a></span> 
+			 <span class="map"> <a href="#" style="color:white;">検索</a></span>
+			 <span class="map"> <a href="/member/login" style="color:white;">新規取得</a></span>
+			 <span class="map"> <a href="/member/insert" style="color:white;">ログイン</a></span>
 		</div>
 	</div>
 	
@@ -113,13 +112,13 @@
 <script type="text/javascript">
 function logout() 
 {
-	if(confirm("로그아웃 하시겠습니까?")== true)
+	if(confirm("ログアウトしますか？")== true)
 	{
-		alert("로그아웃 되었습니다.");
+		alert("ログアウトされました。");
 		location.href="/member/logout";
 	}else
 	{
-		alert("취소 되었습니다.");
+		alert("キャンセルしました。");
 		location.href="";
 	}
 }

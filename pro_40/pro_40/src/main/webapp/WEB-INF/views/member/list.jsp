@@ -4,7 +4,7 @@
 <%@ include file="../header.jsp"%>
 
 <html>
-<head><title>게시판 읽기</title>
+<head><title>全体会員数</title>
 <link rel="stylesheet" type="text/css" href="/stylesheet.css">
 <style type="text/css">
   a.list {text-decoration:none;color:black;font-size:10pt;}
@@ -20,22 +20,22 @@
     <table border="0" cellspacing="1" width="100%" align="center">
     <tr>
         <td colspan="8" align="center" valign="center" height="20">
-        	<font size="2" face="고딕">전체 회원수: 
-			<b>${totcount }</b>명 - ${page }/ ${totpage } Pages
+        	<font size="2" face="고딕">全体会員数: 
+			<b>${totcount }</b>名 - ${page }/ ${totpage } Pages
 			</font>
 		</td>
 	</tr>
  	   <tr bgcolor="e3e9ff">
  	   	<td width="5%"></td>
- 	      <td width="5%" align="center" height="20"><font face="돋움" size="2">번호</font></td>
- 	      <td width="10%" align="center" height="20"><font face="돋움" size="2">사업장 이름</font></td>
+ 	      <td width="5%" align="center" height="20"><font face="돋움" size="2">番号</font></td>
+ 	      <td width="10%" align="center" height="20"><font face="돋움" size="2">ブレンド名</font></td>
  	      <td width="7%" align="center" height="20"><font face="돋움" size="2">ID</font></td>
- 	      <td width="10%" align="center" height="20"><font face="돋움" size="2">전화번호</font></td>
- 	      <td width="10%" align="center" height="20"><font face="돋움" size="2">Email</font></td>
- 	      <td width="10%" align="center" height="20"><font face="돋움" size="2">가입일자</font></td>
- 	      <td width="10%" align="center" height="20"><font face="돋움" size="2">마지막 로그인 시간</font></td>
- 	      <td width="10%" align="center" height="20"><font face="돋움" size="2">사업자 번호</font></td>
- 	      <td width="10%" align="center" height="20"><font face="돋움" size="2">등급</font></td>
+ 	      <td width="10%" align="center" height="20"><font face="돋움" size="2">電話番号</font></td>
+ 	      <td width="10%" align="center" height="20"><font face="돋움" size="2">メール</font></td>
+ 	      <td width="10%" align="center" height="20"><font face="돋움" size="2">取得日付</font></td>
+ 	      <td width="10%" align="center" height="20"><font face="돋움" size="2">最後のログイン時間</font></td>
+ 	      <td width="10%" align="center" height="20"><font face="돋움" size="2">事業者番号</font></td>
+ 	      <td width="10%" align="center" height="20"><font face="돋움" size="2">等級</font></td>
  	   </tr>
 
 <c:if test="${!empty list }">
@@ -59,7 +59,7 @@
 </c:forEach>		
 </c:if>
 <c:if test="${empty list }">
-	<td align="center" colspan="5" height="25">등록된 자료가 없습니다.</td>
+	<td align="center" colspan="5" height="25">登録されば資料がありません。</td>
 </c:if>	
 
 

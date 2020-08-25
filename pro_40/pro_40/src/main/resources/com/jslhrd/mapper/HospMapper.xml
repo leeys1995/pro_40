@@ -85,8 +85,8 @@
 	<!-- 병원 게시판 글쓰기 -->
 	<insert id="hospWrite">
 		insert into
-		hosp(idx,h_code,h_name,h_addr1,h_addr2,h_tel,d_medical,d_mager,h_video,h_banner,h_photo,h_history,h_come,d_photo)
-		values(hosp_seq_idx.nextval,#{h_code},#{h_name},#{h_addr1},#{h_addr2},#{h_tel},#{d_medical},#{d_mager},#{h_video},#{h_banner},#{h_photo},#{h_history},#{h_come},#{d_photo})
+		hosp(idx,h_code,h_name,h_addr1,h_addr2,h_tel,d_medical,d_mager,h_video,h_banner,h_photo,h_history,h_come,d_photo,h_pass)
+		values(#{idx},#{h_code},#{h_name},#{h_addr1},#{h_addr2},#{h_tel},#{d_medical},#{d_mager},#{h_video},#{h_banner},#{h_photo},#{h_history},#{h_come},#{d_photo},#{h_pass})
 	</insert>
 
 	<!-- View -->
@@ -111,9 +111,31 @@
 	</update>
 
 	<!-- 삭제 -->
-
-	<!-- 파일 불러오기 -->
-
+	<delete id="hospDelete" >
+	   delete from hosp where idx=#{idx}
+	</delete>
+	
+	<!-- h_banner 불러오기 -->
+	<select id="hospBanner" resultType="String">
+	    select h_banner from hosp where idx=#{idx}
+	</select>
+	
+	<!-- h_photo 불러오기 -->
+	<select id="hospHphoto" resultType="String">
+	    select h_photo from hosp where idx=#{idx}
+	</select>
+	
+	<!-- d_photo 불러오기 -->
+	<select id="hospDphoto" resultType="String">
+	    select d_photo from hosp where idx=#{idx}
+	</select>
+	
+	<!-- h_video 불러오기 -->
+	<select id="hospHvideo" resultType="String">
+	    select h_video from hosp where idx=#{idx}
+	</select>
+	
+	
 	<!-- 공지사항 불러오기 -->
 	<select id="hospboardList"
 		resultType="com.jslhrd.domain.HospBoardVO">
@@ -173,4 +195,16 @@
 	    select * from hosp_reservation where idx=#{idx} and year=#{year} and month=#{month} and day=#{day} and reservation_time=#{reservation_time}
 	</select>
 	
+	<select id="reservation_countO" resultType="com.jslhrd.domain.ReservationVO">
+	    select day from hosp_reservation where reservation_ok=1 and idx=#{idx} group by day
+	</select>
+	
+	<select id="reservation_countX" resultType="com.jslhrd.domain.ReservationVO">
+		select day from hosp_reservation where reservation_ok=0 and idx=#{idx} group by day
+	</select>
+	
+	<!-- 홈페이지 관리 패스워드 가져오기 -->
+	<select id="hospitalPass" resultType="String">
+		select h_pass from hosp where idx=#{idx}
+	</select>
 </mapper>

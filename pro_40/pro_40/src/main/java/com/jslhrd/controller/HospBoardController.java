@@ -20,8 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jslhrd.domain.HospBoardVO;
+import com.jslhrd.domain.HospVO;
 import com.jslhrd.domain.PageVO;
 import com.jslhrd.service.HospBoardService;
+import com.jslhrd.service.HospService;
 import com.jslhrd.util.PageIndex;
 import com.jslhrd.util.SqlMark;
 
@@ -35,6 +37,7 @@ public class HospBoardController {
 	private static final Logger log = LoggerFactory.getLogger(HospController.class);
 
 	private HospBoardService service;
+	private HospService service1;
 	
 	//전체 리스트 검색
 		@GetMapping("hospital_board")
@@ -103,13 +106,43 @@ public class HospBoardController {
 			}
 
 			if (vo.getKey() == null) {
-				model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url, "",idx));
-
+				//다음 페이지
+				String nextpage="/hospital_board/hospital_board?idx="+idx+"&page="+totpage;
+				if(nowpage<totpage) {
+					nextpage="/hospital_board/hospital_board?idx="+idx+"&page="+(nowpage+1);
+				}
+				//이전페이지
+				String prevPage="/hospital_board/hospital_board?idx="+idx+"&page="+1;
+				if(nowpage>1) {
+					prevPage="/hospital_board/hospital_board?idx="+idx+"&page="+(nowpage-1);
+				}
+				
+				model.addAttribute("prev",prevPage);
+				model.addAttribute("next",nextpage);
+				model.addAttribute("page",PageIndex.pageList(nowpage, totpage, url, "").substring(46,PageIndex.pageList(nowpage, totpage, url, "").length()-46));
+				
+				//model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url, ""));
 			} else {
-				model.addAttribute("listpage", PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey(),idx));
+				//model.addAttribute("listpage", PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()));
+				//다음 페이지
+				String nextpage="/hospital_board/hospital_board?idx="+idx+"&page="+totpage+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+				if(nowpage<totpage) {
+					nextpage="/hospital_board/hospital_board?idx="+idx+"&page="+(nowpage+1)+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+				}
+				//이전페이지
+				String prevPage="/hospital_board/hospital_board?idx="+idx+"&page="+1+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+				if(nowpage>1) {
+					prevPage="/hospital_board/hospital_board?idx="+idx+"&page="+(nowpage-1)+"&search=" + vo.getSearch() + "&key=" +vo.getKey();;
+				}
+				
+				model.addAttribute("prev",prevPage);
+				model.addAttribute("next",nextpage);
+				
+				model.addAttribute("page",PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).substring(46,PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).length()-46));
 			}
 			
-			
+			HospVO vo1 = service1.hospView(idx);
+			model.addAttribute("hosp",vo1);
 		}
 		
 		//검색된 리스트 가져오기
@@ -158,12 +191,27 @@ public class HospBoardController {
 			model.addAttribute("totcount", totcount);
 			// model.addAttribute("listpage", PageIndex.pageList(nowpage, totpage, url,
 			// ""));
-
-			model.addAttribute("listpage", PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey(),idx));
+			String nextpage="/hospital_board/hospital_board?idx="+idx+"&page="+totpage+"&search="+vo.getSearch()+"&key="+vo.getKey();
+			if(nowpage<totpage) {
+				nextpage="/hospital_board/hospital_board?idx="+idx+"&page="+(nowpage+1)+"&search="+vo.getSearch()+"&key="+vo.getKey();
+			}
+			//이전페이지
+			String prevPage="/hospital_board/hospital_board?idx="+idx+"&page="+1+"&search="+vo.getSearch()+"&key="+vo.getKey();
+			if(nowpage>1) {
+				prevPage="/hospital_board/hospital_board?idx="+idx+"&page="+(nowpage-1)+"&search="+vo.getSearch()+"&key="+vo.getKey();
+			}
+			
+			
+			model.addAttribute("prev",prevPage);
+			model.addAttribute("next",nextpage);
+			
+			model.addAttribute("page",PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).substring(46,PageIndex.pageListHan(nowpage, totpage, url, vo.getSearch(), vo.getKey()).length()-46));
 			
 			String h_name = service.hospName(idx);
 			model.addAttribute("h_name", h_name);
-
+			
+			HospVO vo1 = service1.hospView(idx);
+			model.addAttribute("hosp",vo1);
 		}
 
 		// 병원 등록폼
@@ -172,6 +220,13 @@ public class HospBoardController {
 			
 			
 			model.addAttribute("idx", idx);
+			String h_banner = service.hospBanner(idx);
+			
+			model.addAttribute("h_banner",h_banner);
+			
+			HospVO vo1 = service1.hospView(idx);
+			model.addAttribute("hosp",vo1);
+			
 			log.info("hospitalboardWrite()....");
 		}
 
@@ -237,6 +292,10 @@ public class HospBoardController {
 			model.addAttribute("idx2", idx2);
 			model.addAttribute("idx", idx);
 			model.addAttribute("board", vo);
+			
+			HospVO vo1 = service1.hospView(idx2);
+			model.addAttribute("hosp", vo1);
+			
 		}
 
 		// 수정
@@ -250,6 +309,9 @@ public class HospBoardController {
 			
 			HospBoardVO vo = service.hospboardView(idx);
 			model.addAttribute("board", vo);
+			
+			HospVO vo1 = service1.hospView(idx2);
+			model.addAttribute("hosp",vo1);
 		}
 		
 		@PostMapping("hospital_board_modify")

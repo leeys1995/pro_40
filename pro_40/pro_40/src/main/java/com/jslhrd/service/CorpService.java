@@ -35,10 +35,18 @@ public interface CorpService {
 		// 수정처리
 		public void corpModify(CorpVO vo);
 
-		// 삭제처리
-
-		// 파일찾기
+		//삭제처리
+		public void corpDelete(int idx);
+			
+		//파일찾기( c_banner , c_photo, p_photo, c_video)
+		public String corpBanner(int idx);
+		public String corpCphoto(int idx);
+		public String corpPphoto(int idx);
+		public String corpCvideo(int idx);
 
 		// 공지사항 불러오기
 		public List<CorpBoardVO> corpboardList(int idx);
+		
+		//홈페이지 관리 패스워드 가져오기
+		public String corparationPass(int idx);
 }

@@ -13,14 +13,14 @@
 		<c:when test="${row==1 }">
 
 			<script>
-					alert("정보 수정에 성공 했습니다.");
+					alert("情報修正に成功しました。");
 					location.replace("/");
 				</script>
 		</c:when>
 
 		<c:when test="${row==0 }">
 			<script>
-					alert("수정실패 \n 다시시도해 주세요.....");
+					alert("修正失敗 \n もう一度ご確認ください。.....");
 					history.back();
 				</script>
 		</c:when>

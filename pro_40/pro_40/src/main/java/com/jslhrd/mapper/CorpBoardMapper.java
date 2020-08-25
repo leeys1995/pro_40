@@ -74,10 +74,16 @@ public interface CorpBoardMapper {
 
 	// 삭제처리
 	public void productDelete(int idx);
-	
+
 	// 패스워드 찾기
 	public String productPass(ProductVO vo);
-	
-	//답글달기
+
+	// 답글달기
 	public void productReply(ProductVO vo);
+
+	// 전체 목록 검색
+	public List<ProductVO> productDirectList(PageVO vo);
+
+	// 조건에 맞는 게시물 불러오기
+	public List<ProductVO> productDirectListSearch(PageVO vo);
 }

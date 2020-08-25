@@ -105,12 +105,15 @@ $(document).ready(function(){
 	</div>
 	<!-- 관리자만 보이게 처리하기
 					-2020/08/21 수정- -->
+					
+					
+	<c:if test="${user.userid=='admin' }">				
 	<c:if test="${!empty about_view }">				
 	<div class="re" id="about_modify">
 		<button class="pushy__btn pushy__btn--df pushy__btn--green" id="test">修正する</button>
 	</div>
 	</c:if>
-	
+	</c:if>
 </body>
 </html>
 
